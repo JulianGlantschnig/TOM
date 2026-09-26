@@ -27,6 +27,8 @@ In Settings (gear icon in the menu or at the bottom left of the main window), TO
 
 ## Timer
 
+<img src="screenshots/en/continue.png" alt="Menu offering to continue the last timer" width="260" align="right">
+
 - Only one timer runs at a time. Starting another project ends the running entry.
 - **⌃⌥T** works in any app: it stops the running timer or starts the project you used last.
 - The menu bar shows the running time next to the project's symbol. In Settings → General you choose
@@ -36,7 +38,11 @@ In Settings (gear icon in the menu or at the bottom left of the main window), TO
 - **Stopped by accident?** For an hour after stopping, the menu shows “Continue …”. It reopens the
   entry, and the time since stopping counts too. For a real break, just start the project again.
 
+<br clear="right">
+
 ### Idle time
+
+<img src="screenshots/en/idle.png" alt="Settings, Idle tab with switch and per-project exceptions" width="400" align="right">
 
 If you were away from your Mac for a while (10 minutes by default) or your laptop was closed,
 TOM asks afterwards what to do with that time: subtract it and keep running, subtract it and stop,
@@ -48,6 +54,8 @@ Settings → **Idle**:
 - **Ask for these projects**: turn a project off for work away from the Mac, like teaching or filming.
   Press play, close your laptop, and the time keeps counting without any question.
   The same switch is available when editing a project.
+
+<br clear="right">
 
 ## Projects, symbols and folders
 
@@ -148,6 +156,8 @@ Settings → Data → “Times from Tim” → **Import**.
 ## Settings
 
 Open Settings with the gear icon in the menu. There are five tabs:
+
+![General settings with menu bar display and Dock icon](screenshots/en/settings.png)
 
 | Tab | Setting | Effect |
 | --- | --- | --- |

@@ -27,6 +27,8 @@ In den Einstellungen (Zahnrad im Menü oder unten links im Hauptfenster) lässt 
 
 ## Timer
 
+<img src="screenshots/fortsetzen.png" alt="Menü mit dem Angebot, den letzten Timer fortzusetzen" width="260" align="right">
+
 - Es läuft immer höchstens ein Timer. Startest du ein anderes Projekt, endet der laufende Eintrag automatisch.
 - **⌃⌥T** funktioniert in jeder App: stoppt den laufenden Timer oder startet das zuletzt genutzte Projekt.
 - In der Menüleiste steht die laufende Zeit mit dem Symbol des Projekts. Unter Einstellungen → Allgemein
@@ -35,6 +37,8 @@ In den Einstellungen (Zahnrad im Menü oder unten links im Hauptfenster) lässt 
 - Einträge unter 3 Sekunden werden verworfen, damit versehentliche Klicks nicht zählen.
 - **Versehentlich gestoppt?** Eine Stunde lang zeigt das Menü danach „… fortsetzen“. Das macht den Eintrag
   wieder auf, die Zeit seit dem Stoppen zählt mit. Für eine echte Pause einfach das Projekt neu starten.
+
+<br clear="right">
 
 ### Leerlauf
 
@@ -154,6 +158,8 @@ Einstellungen → Daten → „Zeiten aus Tim“ → **Importieren**.
 ## Einstellungen
 
 Die Einstellungen öffnest du über das Zahnrad im Menü. Sie haben fünf Tabs:
+
+![Allgemeine Einstellungen mit Menüleisten-Anzeige und Dock-Symbol](screenshots/einstellungen.png)
 
 | Tab | Einstellung | Wirkung |
 | --- | --- | --- |

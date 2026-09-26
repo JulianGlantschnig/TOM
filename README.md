@@ -47,6 +47,21 @@ Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks Englis
 
 ![Table of all entries with project, times, duration, tools and note](docs/screenshots/en/entries.png)
 
+![Statistics with hours per day, share per project, amount and tools](docs/screenshots/en/statistics.png)
+
+<table>
+  <tr>
+    <td width="33%"><img src="docs/screenshots/en/continue.png" alt="Menu with the option to continue a timer stopped by accident"></td>
+    <td width="33%"><img src="docs/screenshots/en/project.png" alt="Project settings with color, symbol, folder, hourly rate and archive"></td>
+    <td width="33%"><img src="docs/screenshots/en/settings.png" alt="General settings with menu bar display and Dock icon"></td>
+  </tr>
+  <tr>
+    <td>Continue a timer you stopped by accident</td>
+    <td>Color, symbol, folder and hourly rate per project</td>
+    <td>Choose what the menu bar shows, hide the Dock icon</td>
+  </tr>
+</table>
+
 See the **[guide](docs/GUIDE.md)** for how everything works.
 
 ## Support

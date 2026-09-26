@@ -49,6 +49,21 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 
 ![Tabelle aller Einträge mit Projekt, Zeiten, Dauer, Tools und Notiz](docs/screenshots/eintraege.png)
 
+![Auswertung mit Stunden pro Tag, Anteil pro Projekt, Betrag und Tools](docs/screenshots/auswertung.png)
+
+<table>
+  <tr>
+    <td width="33%"><img src="docs/screenshots/fortsetzen.png" alt="Menü mit der Möglichkeit, einen versehentlich gestoppten Timer fortzusetzen"></td>
+    <td width="33%"><img src="docs/screenshots/projekt.png" alt="Projekteinstellungen mit Farbe, Symbol, Ordner, Stundensatz und Archiv"></td>
+    <td width="33%"><img src="docs/screenshots/einstellungen.png" alt="Allgemeine Einstellungen mit Menüleisten-Anzeige und Dock-Symbol"></td>
+  </tr>
+  <tr>
+    <td>Versehentlich gestoppten Timer fortsetzen</td>
+    <td>Farbe, Symbol, Ordner und Stundensatz pro Projekt</td>
+    <td>Menüleisten-Anzeige wählen, Dock-Symbol ausblenden</td>
+  </tr>
+</table>
+
 Wie alles im Detail funktioniert, steht in der **[Anleitung](docs/ANLEITUNG.md)**.
 
 TOM spricht Deutsch und Englisch und folgt der Systemsprache.
