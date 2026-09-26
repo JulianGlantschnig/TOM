@@ -177,7 +177,7 @@ struct ContentView: View {
         }
         .tag(SidebarItem.project(project))
         .contextMenu {
-            Button(timer.isRunning(project) ? "Timer stoppen" : "Timer starten") {
+            Button(timer.isRunning(project) ? String(localized: "Timer stoppen") : String(localized: "Timer starten")) {
                 timer.isRunning(project) ? timer.stop() : timer.start(project)
             }
             Divider()
@@ -191,7 +191,7 @@ struct ContentView: View {
                 Button("Ohne Ordner") { move(project, to: nil) }
                     .disabled(project.folder == nil)
             }
-            Button(project.isArchived ? "Aus dem Archiv holen" : "Archivieren") {
+            Button(project.isArchived ? String(localized: "Aus dem Archiv holen") : String(localized: "Archivieren")) {
                 if timer.isRunning(project) { timer.stop() }
                 project.isArchived.toggle()
                 try? context.save()

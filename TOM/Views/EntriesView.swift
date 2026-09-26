@@ -67,11 +67,11 @@ struct EntriesView: View {
                     timer.isRunning(project) ? timer.stop() : timer.start(project)
                 } label: {
                     Label(
-                        timer.isRunning(project) ? "Timer stoppen" : "Timer starten",
+                        timer.isRunning(project) ? String(localized: "Timer stoppen") : String(localized: "Timer starten"),
                         systemImage: timer.isRunning(project) ? "stop.fill" : "play.fill"
                     )
                 }
-                .help(timer.isRunning(project) ? "Timer stoppen" : "Timer für dieses Projekt starten")
+                .help(timer.isRunning(project) ? String(localized: "Timer stoppen") : String(localized: "Timer für dieses Projekt starten"))
             }
             Button {
                 creatingEntry = true
@@ -146,17 +146,17 @@ struct EntriesView: View {
 
     private func mergeTitle(ids: Set<PersistentIdentifier>, groups: [[TimeEntry]]) -> String {
         if ids.count == 1, let day = groups.first?.first?.start {
-            return "Alle Zeilen vom \(Fmt.shortDate(day)) zusammenführen …"
+            return String(localized: "Alle Zeilen vom \(Fmt.shortDate(day)) zusammenführen …")
         }
-        return groups.count > 1 ? "Pro Tag zusammenführen …" : "Zusammenführen …"
+        return groups.count > 1 ? String(localized: "Pro Tag zusammenführen …") : String(localized: "Zusammenführen …")
     }
 
     private var mergeQuestion: String {
         let groups = pendingMerge ?? []
         let count = groups.joined().count
         return groups.count == 1
-            ? "\(count) Einträge zu einer Zeile zusammenführen?"
-            : "\(count) Einträge zu \(groups.count) Zeilen zusammenführen?"
+            ? String(localized: "\(count) Einträge zu einer Zeile zusammenführen?")
+            : String(localized: "\(count) Einträge zu \(groups.count) Zeilen zusammenführen?")
     }
 
     private func merge(_ groups: [[TimeEntry]], includeBreaks: Bool) {
@@ -282,7 +282,7 @@ private struct EntriesTable: View {
 }
 
 private extension TimeEntry {
-    var projectName: String { project?.name ?? "Ohne Projekt" }
+    var projectName: String { project?.name ?? String(localized: "Ohne Projekt") }
     var endForSorting: Date { end ?? .distantFuture }
     var toolsSortKey: String { tools.first?.name ?? "" }
     var storedDuration: TimeInterval { duration() }

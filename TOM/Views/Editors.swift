@@ -44,11 +44,11 @@ struct EntryEditor: View {
                 }
                 DatePicker("Beginn", selection: $start)
                 if isRunning {
-                    LabeledContent("Ende", value: "Timer läuft noch")
+                    LabeledContent("Ende") { Text("Timer läuft noch") }
                 } else {
                     DatePicker("Ende", selection: $end)
                     LabeledContent("Dauer") {
-                        Text(end > start ? Fmt.hoursMinutes(end.timeIntervalSince(start)) : "Ende liegt vor dem Beginn")
+                        Text(end > start ? Fmt.hoursMinutes(end.timeIntervalSince(start)) : String(localized: "Ende liegt vor dem Beginn"))
                             .foregroundStyle(end > start ? Color.primary : Color.red)
                     }
                 }
@@ -64,14 +64,14 @@ struct EntryEditor: View {
                 Spacer()
                 Button("Abbrechen", role: .cancel) { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button(entry == nil ? "Zeit hinzufügen" : "Änderungen sichern") { save() }
+                Button(entry == nil ? String(localized: "Zeit hinzufügen") : String(localized: "Änderungen sichern")) { save() }
                     .keyboardShortcut(.defaultAction)
                     .disabled(!isValid)
             }
             .padding()
         }
         .frame(width: 440)
-        .navigationTitle(entry == nil ? "Zeit nachtragen" : "Eintrag bearbeiten")
+        .navigationTitle(entry == nil ? String(localized: "Zeit nachtragen") : String(localized: "Eintrag bearbeiten"))
     }
 
     private func save() {
@@ -145,7 +145,7 @@ struct ProjectEditor: View {
                 Spacer()
                 Button("Abbrechen", role: .cancel) { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button(project == nil ? "Projekt anlegen" : "Änderungen sichern") { save() }
+                Button(project == nil ? String(localized: "Projekt anlegen") : String(localized: "Änderungen sichern")) { save() }
                     .keyboardShortcut(.defaultAction)
                     .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
             }
@@ -204,7 +204,7 @@ struct FolderEditor: View {
                 Spacer()
                 Button("Abbrechen", role: .cancel) { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button(folder == nil ? "Ordner anlegen" : "Änderungen sichern") { save() }
+                Button(folder == nil ? String(localized: "Ordner anlegen") : String(localized: "Änderungen sichern")) { save() }
                     .keyboardShortcut(.defaultAction)
                     .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
             }
@@ -293,6 +293,6 @@ struct IconPicker: View {
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(name ?? "Kein Symbol")
+        .accessibilityLabel(name ?? String(localized: "Kein Symbol"))
     }
 }

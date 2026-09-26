@@ -127,7 +127,7 @@ private struct RunningCard: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 6) {
                 ProjectIcon(project: entry.project, size: 12)
-                Text(entry.project?.name ?? "Ohne Projekt")
+                Text(entry.project?.name ?? String(localized: "Ohne Projekt"))
                     .font(.subheadline.weight(.medium))
                     .lineLimit(1)
                 Spacer()
@@ -177,7 +177,7 @@ private struct ActivityHint: View {
         let names = activity.topAppNames
         HStack(spacing: 6) {
             Image(systemName: "eye")
-            Text(names.isEmpty ? "Erkennt, woran du arbeitest …" : "Erkannt: " + names.joined(separator: ", "))
+            Text(names.isEmpty ? String(localized: "Erkennt, woran du arbeitest …") : String(localized: "Erkannt: \(names.joined(separator: ", "))"))
                 .lineLimit(1)
                 .truncationMode(.tail)
             Spacer(minLength: 6)
@@ -191,8 +191,8 @@ private struct ActivityHint: View {
         .font(.caption)
         .foregroundStyle(.secondary)
         .help(names.isEmpty
-            ? "Beim Stoppen wird daraus eine Notiz, falls du selbst nichts schreibst."
-            : "Vorschlag:\n\(activity.suggestion)\n\nWird beim Stoppen automatisch eingetragen, falls du selbst nichts schreibst.")
+            ? String(localized: "Beim Stoppen wird daraus eine Notiz, falls du selbst nichts schreibst.")
+            : String(localized: "Vorschlag:\n\(activity.suggestion)\n\nWird beim Stoppen automatisch eingetragen, falls du selbst nichts schreibst."))
     }
 }
 

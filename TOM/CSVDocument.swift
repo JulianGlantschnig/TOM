@@ -1,7 +1,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-/// CSV mit Semikolon und Dezimalkomma, damit Excel und Numbers auf Deutsch sie direkt richtig öffnen.
+/// CSV, die Excel und Numbers direkt richtig öffnen: bei Dezimalkomma (z. B. Deutsch) mit Semikolon getrennt, sonst mit Komma.
 struct CSVDocument: FileDocument {
     static var readableContentTypes: [UTType] { [.commaSeparatedText] }
 
@@ -11,7 +11,9 @@ struct CSVDocument: FileDocument {
     init(entries: [TimeEntry]) {
         let rounding = Prefs.rounding
         let now = Date.now
-        var rows = [["Datum", "Beginn", "Ende", "Dauer", "Stunden", "Projekt", "Tools", "Notiz", "Stundensatz", "Betrag"]]
+        var rows = [[
+            String(localized: "Datum"), String(localized: "Beginn"), String(localized: "Ende"), String(localized: "Dauer"), String(localized: "Stunden"), String(localized: "Projekt"), String(localized: "Tools"), String(localized: "Notiz"), String(localized: "Stundensatz"), String(localized: "Betrag"),
+        ]]
 
         for entry in entries.sorted(by: { $0.start < $1.start }) {
             let end = entry.end ?? now
@@ -31,7 +33,8 @@ struct CSVDocument: FileDocument {
             ])
         }
 
-        text = "\u{FEFF}" + rows.map { $0.map(Self.escape).joined(separator: ";") }.joined(separator: "\r\n")
+        let separator = Fmt.locale.decimalSeparator == "," ? ";" : ","
+        text = "\u{FEFF}" + rows.map { $0.map { Self.escape($0, separator: separator) }.joined(separator: separator) }.joined(separator: "\r\n")
     }
 
     init(configuration: ReadConfiguration) throws {
@@ -42,8 +45,8 @@ struct CSVDocument: FileDocument {
         FileWrapper(regularFileWithContents: Data(text.utf8))
     }
 
-    private static func escape(_ field: String) -> String {
-        guard field.contains(where: { ";\"\n\r".contains($0) }) else { return field }
+    private static func escape(_ field: String, separator: String) -> String {
+        guard field.contains(where: { (separator + "\"\n\r").contains($0) }) else { return field }
         return "\"" + field.replacingOccurrences(of: "\"", with: "\"\"") + "\""
     }
 }

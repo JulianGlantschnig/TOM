@@ -136,7 +136,7 @@ enum ToolCatalog {
         let panel = NSOpenPanel()
         panel.directoryURL = URL(filePath: "/Applications")
         panel.allowedContentTypes = [.application]
-        panel.prompt = "Als Tool hinzufügen"
+        panel.prompt = String(localized: "Als Tool hinzufügen")
         guard panel.runModal() == .OK, let url = panel.url, let id = Bundle(url: url)?.bundleIdentifier else { return nil }
         return ToolUsage(bundleID: id, name: displayName(url.deletingPathExtension().lastPathComponent))
     }
@@ -242,12 +242,12 @@ struct ToolsMenu: View {
     private static let faintPlus: NSImage = {
         let config = NSImage.SymbolConfiguration(pointSize: 10, weight: .medium)
             .applying(.init(paletteColors: [.tertiaryLabelColor]))
-        return NSImage(systemSymbolName: "plus", accessibilityDescription: "Tools wählen")?
+        return NSImage(systemSymbolName: "plus", accessibilityDescription: String(localized: "Tools wählen"))?
             .withSymbolConfiguration(config) ?? NSImage()
     }()
 
     private var helpText: String {
-        guard !tools.isEmpty else { return "Tools für diesen Eintrag wählen" }
+        guard !tools.isEmpty else { return String(localized: "Tools für diesen Eintrag wählen") }
         return tools.map { $0.seconds >= 60 ? "\($0.name): \(Fmt.hoursMinutes($0.seconds))" : $0.name }.joined(separator: "\n")
     }
 }

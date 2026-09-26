@@ -36,11 +36,12 @@ private struct SettingsPane<Content: View>: View {
 }
 
 private struct Footnote: View {
-    let text: String
-    init(_ text: String) { self.text = text }
+    let text: Text
+    init(_ key: LocalizedStringKey) { text = Text(key) }
+    init(verbatim string: String) { text = Text(string) }
 
     var body: some View {
-        Text(text)
+        text
             .font(.caption)
             .foregroundStyle(.secondary)
             .fixedSize(horizontal: false, vertical: true)
@@ -67,7 +68,7 @@ private struct GeneralSettings: View {
                             }
                             loginError = nil
                         } catch {
-                            loginError = "Das hat nicht geklappt: \(error.localizedDescription)"
+                            loginError = String(localized: "Das hat nicht geklappt: \(error.localizedDescription)")
                         }
                     }
                 if let loginError {
@@ -201,7 +202,7 @@ private struct DataSettings: View {
                     }
                 }
                 if let importResult {
-                    Footnote(importResult)
+                    Footnote(verbatim: importResult)
                 }
                 LabeledContent("Datenordner") {
                     Button("Im Finder zeigen") {

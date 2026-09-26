@@ -189,11 +189,11 @@ final class TimerController {
         defer { isShowingIdleAlert = false }
 
         let alert = NSAlert()
-        alert.messageText = "Du warst \(Fmt.hoursMinutes(Date.now.timeIntervalSince(since))) nicht am Mac"
-        alert.informativeText = "Der Timer für „\(entry.project?.name ?? "Ohne Projekt")“ ist seit \(Fmt.time(since)) Uhr weitergelaufen. Was soll mit dieser Zeit passieren?"
-        alert.addButton(withTitle: "Abziehen und weiterlaufen")
-        alert.addButton(withTitle: "Abziehen und stoppen")
-        alert.addButton(withTitle: "Zeit behalten")
+        alert.messageText = String(localized: "Du warst \(Fmt.hoursMinutes(Date.now.timeIntervalSince(since))) nicht am Mac")
+        alert.informativeText = String(localized: "Der Timer für „\(entry.project?.name ?? String(localized: "Ohne Projekt"))“ ist seit \(Fmt.time(since)) Uhr weitergelaufen. Was soll mit dieser Zeit passieren?")
+        alert.addButton(withTitle: String(localized: "Abziehen und weiterlaufen"))
+        alert.addButton(withTitle: String(localized: "Abziehen und stoppen"))
+        alert.addButton(withTitle: String(localized: "Zeit behalten"))
         NSApp.activate(ignoringOtherApps: true)
 
         switch alert.runModal() {

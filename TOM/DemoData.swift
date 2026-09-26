@@ -39,7 +39,10 @@ enum DemoData {
         let container = try! ModelContainer(for: Folder.self, Project.self, TimeEntry.self, configurations: config)
         let context = container.mainContext
 
-        let names = ["Recherche & Literatur", "Schreiben", "Analyse & Auswertung", "Betreuung & Besprechungen"]
+        let names = [
+            String(localized: "Recherche & Literatur"), String(localized: "Schreiben"),
+            String(localized: "Analyse & Auswertung"), String(localized: "Betreuung & Besprechungen"),
+        ]
         let projects = names.enumerated().map { index, name in
             Project(name: name, colorHex: ProjectPalette.colors[index].hex, sortIndex: index)
         }
@@ -48,11 +51,15 @@ enum DemoData {
             project.iconName = icon
         }
         projects.forEach(context.insert)
-        let thesis = Folder(name: "Diplomarbeit", colorHex: ProjectPalette.colors[2].hex)
+        let thesis = Folder(name: String(localized: "Diplomarbeit"), colorHex: ProjectPalette.colors[2].hex)
         context.insert(thesis)
         projects[0...2].forEach { $0.folder = thesis }
 
-        let notes = ["Kapitel 2 gegliedert", "Quellen zu Methodik gesichtet", "Interviews transkribiert", "", "Feedback eingearbeitet", "Diagramme erstellt"]
+        let notes = [
+            String(localized: "Kapitel 2 gegliedert"), String(localized: "Quellen zu Methodik gesichtet"),
+            String(localized: "Interviews transkribiert"), "", String(localized: "Feedback eingearbeitet"),
+            String(localized: "Diagramme erstellt"),
+        ]
         let demoTools = ["Figma", "Adobe InDesign", "DaVinci Resolve", "Microsoft Word", "Zen", "Adobe Illustrator"]
             .compactMap { name in ToolCatalog.installed.first { $0.name == name }?.usage }
         let cal = Calendar.current
@@ -77,8 +84,8 @@ enum DemoData {
             }
         }
         let morning = Date.now.addingTimeInterval(-3 * 3600)
-        context.insert(TimeEntry(start: morning, end: morning.addingTimeInterval(5400), note: "Literaturliste ergänzt", project: projects[0]))
-        context.insert(TimeEntry(start: Date.now.addingTimeInterval(-2843), note: ActivityTracker.isEnabled ? "" : "Kapitel 3: Methodik", project: projects[1]))
+        context.insert(TimeEntry(start: morning, end: morning.addingTimeInterval(5400), note: String(localized: "Literaturliste ergänzt"), project: projects[0]))
+        context.insert(TimeEntry(start: Date.now.addingTimeInterval(-2843), note: ActivityTracker.isEnabled ? "" : String(localized: "Kapitel 3: Methodik"), project: projects[1]))
         try? context.save()
         return container
     }

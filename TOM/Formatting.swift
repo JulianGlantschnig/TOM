@@ -32,7 +32,7 @@ enum Prefs {
 }
 
 enum Fmt {
-    static let locale = Locale(identifier: "de_AT")
+    static var locale: Locale { .autoupdatingCurrent }
 
     /// 1:05:09 oder 1:05, mit `padHours` 01:05
     static func clock(_ interval: TimeInterval, seconds: Bool = true, padHours: Bool = false) -> String {
@@ -76,8 +76,8 @@ enum Fmt {
 
     static func day(_ date: Date) -> String {
         let cal = Calendar.current
-        if cal.isDateInToday(date) { return "Heute" }
-        if cal.isDateInYesterday(date) { return "Gestern" }
+        if cal.isDateInToday(date) { return String(localized: "Heute") }
+        if cal.isDateInYesterday(date) { return String(localized: "Gestern") }
         return date.formatted(.dateTime.weekday(.wide).day().month(.wide).year().locale(locale))
     }
 

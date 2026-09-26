@@ -11,6 +11,16 @@ enum StatsRange: String, CaseIterable, Identifiable {
 
     var id: Self { self }
 
+    var title: String {
+        switch self {
+        case .week: String(localized: "Diese Woche")
+        case .last30: String(localized: "Letzte 30 Tage")
+        case .month: String(localized: "Dieser Monat")
+        case .year: String(localized: "Dieses Jahr")
+        case .all: String(localized: "Gesamt")
+        }
+    }
+
     func interval(now: Date, earliest: Date?) -> DateInterval {
         let cal = Calendar.current
         let endOfToday = cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: now))!
@@ -41,7 +51,7 @@ struct StatsView: View {
         let project: Project?
         let duration: TimeInterval
         var id: String { project?.persistentModelID.hashValue.description ?? "none" }
-        var name: String { project?.name ?? "Ohne Projekt" }
+        var name: String { project?.name ?? String(localized: "Ohne Projekt") }
         var amount: Double? { project?.hourlyRate.map { $0 * duration / 3600 } }
     }
 
@@ -111,13 +121,13 @@ struct StatsView: View {
         .navigationTitle("Auswertung")
         .toolbar {
             Picker("Zeitraum", selection: $range) {
-                ForEach(StatsRange.allCases) { Text($0.rawValue).tag($0) }
+                ForEach(StatsRange.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.menu)
         }
     }
 
-    private func figure(_ value: String, _ label: String) -> some View {
+    private func figure(_ value: String, _ label: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(value)
                 .font(.system(size: 26, weight: .semibold, design: .rounded))
@@ -167,7 +177,7 @@ struct StatsView: View {
         var sums: [Date: [String: TimeInterval]] = [:]
         for entry in entries {
             let key = cal.dateInterval(of: unit, for: entry.start)?.start ?? entry.start
-            sums[key, default: [:]][entry.project?.name ?? "Ohne Projekt", default: 0] += entry.duration(now: timer.now)
+            sums[key, default: [:]][entry.project?.name ?? String(localized: "Ohne Projekt"), default: 0] += entry.duration(now: timer.now)
         }
         return sums.flatMap { date, byProject in
             byProject.map { Bucket(date: date, project: $0.key, hours: $0.value / 3600) }

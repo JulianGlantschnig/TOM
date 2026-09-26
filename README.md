@@ -1,61 +1,61 @@
+<p align="center"><img src="docs/icon.png" width="128" alt="TOM app icon"></p>
+
 # TOM
 
-Ein schlanker Zeiterfasser für die macOS-Menüleiste, inspiriert von [Tim](https://tim.neat.software/).
-Entstanden, um die Arbeitszeit an einer Diplomarbeit zu messen.
+**English** · [Deutsch](README.de.md)
 
-*A small menu bar time tracker for macOS. The interface is in German.*
+A free, lightweight time tracker for the macOS menu bar, inspired by [Tim](https://tim.neat.software/).
+Built to track the hours spent on a master's thesis, and useful for any project work: design, film, writing, study.
 
-> Die App hieß früher **Timecounter** (bis 1.1) und **ZeitOpferung** (1.2). Beim ersten Start von TOM werden die bisherigen Daten automatisch übernommen.
+![Folder overview with key figures, tools, project shares and hours per day](docs/screenshots/en/overview.png)
 
-![Übersicht eines Ordners mit Kennzahlen, Tools, Anteilen pro Projekt und Stunden pro Tag](docs/screenshots/uebersicht.png)
-
-## Installation
+## Install
 
 ```sh
 brew install --cask julianglantschnig/tap/tom
 ```
 
-Danach TOM aus dem Programme-Ordner starten. Das Symbol erscheint oben rechts in der Menüleiste.
-Aktualisieren geht mit `brew upgrade --cask tom`.
+Then open TOM from your Applications folder. Its icon appears in the menu bar.
+Update with `brew upgrade --cask tom`.
 
-Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
+Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks English and German and follows your system language.
 
-> TOM ist nicht von Apple notarisiert (dafür braucht es ein kostenpflichtiges Entwicklerkonto).
-> Die Homebrew-Installation entfernt deshalb die Quarantäne-Markierung, damit macOS die App öffnet.
-> Wer die ZIP-Datei direkt von den [Releases](https://github.com/JulianGlantschnig/TOM/releases) lädt,
-> öffnet die App beim ersten Mal mit Rechtsklick → „Öffnen“.
+> TOM is not notarized by Apple (that requires a paid developer account).
+> The Homebrew install removes the quarantine flag so macOS opens the app.
+> If you download the ZIP from [Releases](https://github.com/JulianGlantschnig/TOM/releases) instead,
+> open the app the first time with right-click → Open.
 
-## Funktionen
+## Features
 
-<img src="docs/screenshots/menueleiste.png" alt="Laufender Timer im Menü der Menüleiste" width="320" align="right">
+<img src="docs/screenshots/en/menubar.png" alt="Running timer in the menu bar popover" width="320" align="right">
 
-- **Timer in der Menüleiste**: ein Klick auf ein Projekt startet, von überall geht es mit **⌃⌥T**
-- **Projekte und Ordner**: jedes Projekt mit Farbe und Symbol, Ordner zählen ihre Projekte zusammen
-- **Übersicht** pro Ordner und Projekt: Kennzahlen, Ring mit Anteilen in Prozent, Stunden pro Tag
-- **Tools**: welche Programme (Figma, DaVinci Resolve, InDesign …) in einem Eintrag verwendet wurden, mit echten App-Icons
-- **Automatische Erkennung**: merkt sich während des Timers die App im Vordergrund und rechnet die Zeit pro Tool
-- **Notizvorschlag** aus den erkannten Apps, jederzeit selbst änderbar
-- **Einträge zusammenführen**: mehrere Zeilen eines Tages werden zu einer
-- **Leerlauf-Erkennung** (abschaltbar, auch pro Projekt): warst du weg, lässt sich die Zeit abziehen
-- **CSV-Export** für Excel und Numbers, optional gerundet, mit Stundensatz und Betrag
-- **Import aus Tim** mit allen Aufgaben, Gruppen und Zeiten
-- Alle Daten bleiben **lokal** auf dem Mac
+- **Menu bar timer**: click a project to start, or press **⌃⌥T** from anywhere
+- **Projects and folders**: each project with a color and symbol, folders add up their projects
+- **Overview** per folder and project: key figures, a ring with percentage shares, hours per day
+- **Tools**: see which apps you used for each entry (Figma, DaVinci Resolve, InDesign …), with their real icons
+- **Automatic detection**: notes the frontmost app while a timer runs and adds up time per tool
+- **Suggested notes** from the detected apps, always editable
+- **Merge entries**: turn several rows of one day into a single row
+- **Idle detection** (optional, per project too): subtract time you were away
+- **CSV export** for Excel and Numbers, optionally rounded, with hourly rate and amount
+- **Import from Tim** with all tasks, groups and times
+- All data stays **on your Mac**
 
 <br clear="right">
 
-![Tabelle aller Einträge mit Projekt, Zeiten, Dauer, Tools und Notiz](docs/screenshots/eintraege.png)
+![Table of all entries with project, times, duration, tools and note](docs/screenshots/en/entries.png)
 
-Wie alles im Detail funktioniert, steht in der **[Anleitung](docs/ANLEITUNG.md)**.
+See the **[guide](docs/GUIDE.md)** for how everything works.
 
-## Unterstützen
+## Support
 
-TOM ist kostenlos. Wer das Projekt unterstützen möchte, kann mir
-[einen Kaffee spendieren](https://buymeacoffee.com/GlantschnigJulian), auch direkt aus der App unter
-Einstellungen → „Unterstützen“.
+TOM is free. If it saves you time, you can
+[buy me a coffee](https://buymeacoffee.com/GlantschnigJulian), also right from the app under
+Settings → Support.
 
-## Aus dem Quellcode bauen
+## Build from source
 
-Mit Xcode 26 oder neuer:
+With Xcode 26 or later:
 
 ```sh
 git clone https://github.com/JulianGlantschnig/TOM.git
@@ -64,23 +64,23 @@ xcodebuild -project TOM.xcodeproj -target TOM -configuration Release SYMROOT=bui
 cp -R build/Release/TOM.app /Applications/
 ```
 
-Zum Ausprobieren ohne eigene Daten gibt es im Debug-Build einen Demo-Modus mit Beispieldaten im Speicher:
+Debug builds have a demo mode with sample data kept in memory:
 
 ```sh
 xcodebuild -project TOM.xcodeproj -target TOM -configuration Debug SYMROOT=build build
 build/Debug/TOM.app/Contents/MacOS/TOM -demo -demoPage folder
 ```
 
-## Neue Version veröffentlichen
+## Release a new version
 
 ```sh
-scripts/release.sh 1.5
-gh release create v1.5 dist/TOM-1.5.zip --title "TOM 1.5"
+scripts/release.sh 1.6
+gh release create v1.6 dist/TOM-1.6.zip --title "TOM 1.6"
 ```
 
-Danach im Repository [homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) in `Casks/tom.rb`
-die Version und `sha256` anpassen.
+Then update `version` and `sha256` in `Casks/tom.rb` in the
+[homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) repository.
 
-## Lizenz
+## License
 
 [MIT](LICENSE)

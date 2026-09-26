@@ -25,7 +25,7 @@ struct ScopeDetailView: View {
             ToolbarItem(placement: .navigation) {
                 Picker("Ansicht", selection: $mode) {
                     Label("Diagramm", systemImage: "chart.bar.fill").tag(Mode.chart)
-                    Label("Einträge", systemImage: "list.bullet").tag(Mode.list)
+                    Label(String(localized: "Einträge"), systemImage: "list.bullet").tag(Mode.list)
                 }
                 .pickerStyle(.segmented)
                 .labelStyle(.iconOnly)
@@ -46,7 +46,7 @@ struct OverviewView: View {
         let project: Project?
         let duration: TimeInterval
         var id: String { name }
-        var name: String { project?.name ?? "Ohne Projekt" }
+        var name: String { project?.name ?? String(localized: "Ohne Projekt") }
         var color: Color { project?.color ?? .gray }
     }
 
@@ -99,7 +99,7 @@ struct OverviewView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Picker("Zeitraum", selection: $range) {
-                    ForEach(StatsRange.allCases) { Text($0.rawValue).tag($0) }
+                    ForEach(StatsRange.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.menu)
                 .help("Zeitraum wählen")
@@ -109,8 +109,8 @@ struct OverviewView: View {
 
     private var emptyHint: String {
         switch scope {
-        case .folder: "Leg ein Projekt in diesem Ordner an und starte den Timer, oder wähl oben einen längeren Zeitraum."
-        default: "Starte den Timer für dieses Projekt, oder wähl oben einen längeren Zeitraum."
+        case .folder: String(localized: "Leg ein Projekt in diesem Ordner an und starte den Timer, oder wähl oben einen längeren Zeitraum.")
+        default: String(localized: "Starte den Timer für dieses Projekt, oder wähl oben einen längeren Zeitraum.")
         }
     }
 
@@ -140,15 +140,15 @@ struct OverviewView: View {
 
     private func figures(entries: [TimeEntry], slices: [Slice], activeDays: Int, total: TimeInterval) -> some View {
         let first: (String, String) = if case .folder = scope {
-            ("Aktive Projekte", "\(slices.count)")
+            (String(localized: "Aktive Projekte"), "\(slices.count)")
         } else {
-            ("Einträge", "\(entries.count)")
+            (String(localized: "Einträge"), "\(entries.count)")
         }
         let items = [
             first,
-            ("Aktive Tage", "\(activeDays)"),
-            ("Gesamtzeit", Fmt.clock(total, seconds: false, padHours: true)),
-            ("Ø pro Tag", activeDays == 0 ? "–" : Fmt.clock(total / Double(activeDays), seconds: false, padHours: true)),
+            (String(localized: "Aktive Tage"), "\(activeDays)"),
+            (String(localized: "Gesamtzeit"), Fmt.clock(total, seconds: false, padHours: true)),
+            (String(localized: "Ø pro Tag"), activeDays == 0 ? "–" : Fmt.clock(total / Double(activeDays), seconds: false, padHours: true)),
         ]
         return HStack(spacing: 0) {
             ForEach(Array(items.enumerated()), id: \.offset) { index, item in
@@ -311,7 +311,7 @@ struct OverviewView: View {
         let cal = Calendar.current
         var sums: [Date: [String: TimeInterval]] = [:]
         for entry in entries {
-            sums[cal.startOfDay(for: entry.start), default: [:]][entry.project?.name ?? "Ohne Projekt", default: 0] += entry.duration(now: timer.now)
+            sums[cal.startOfDay(for: entry.start), default: [:]][entry.project?.name ?? String(localized: "Ohne Projekt"), default: 0] += entry.duration(now: timer.now)
         }
         return sums.flatMap { day, byProject in
             let label = Fmt.shortDate(day) + "\n" + day.formatted(.dateTime.weekday(.abbreviated).locale(Fmt.locale))

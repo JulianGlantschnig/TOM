@@ -9,9 +9,9 @@ enum EntryScope: Hashable {
 
     var title: String {
         switch self {
-        case .today: "Heute"
-        case .week: "Diese Woche"
-        case .all: "Alle Einträge"
+        case .today: String(localized: "Heute")
+        case .week: String(localized: "Diese Woche")
+        case .all: String(localized: "Alle Einträge")
         case .folder(let folder): folder.name
         case .project(let project): project.name
         }

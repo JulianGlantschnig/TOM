@@ -168,7 +168,10 @@ enum Persistence {
         UserDefaults.standard.set(true, forKey: key)
         guard (try? context.fetchCount(FetchDescriptor<Project>())) == 0 else { return }
 
-        let names = ["Recherche & Literatur", "Schreiben", "Analyse & Auswertung", "Betreuung & Besprechungen"]
+        let names = [
+            String(localized: "Recherche & Literatur"), String(localized: "Schreiben"),
+            String(localized: "Analyse & Auswertung"), String(localized: "Betreuung & Besprechungen"),
+        ]
         for (index, name) in names.enumerated() {
             context.insert(Project(name: name, colorHex: ProjectPalette.colors[index].hex, sortIndex: index))
         }

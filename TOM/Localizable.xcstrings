@@ -1,0 +1,1971 @@
+{
+  "sourceLanguage": "de",
+  "strings": {
+    "": {},
+    "%@ %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ (archiviert)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ (archived)"
+          }
+        }
+      }
+    },
+    "%lld Einträge gehen dabei verloren. Wenn du die Zeiten behalten willst, archiviere das Projekt stattdessen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld entries will be lost. To keep the times, archive the project instead."
+          }
+        }
+      }
+    },
+    "%lld Einträge zu %lld Zeilen zusammenführen?": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld Einträge zu %2$lld Zeilen zusammenführen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge %1$lld entries into %2$lld rows?"
+          }
+        }
+      }
+    },
+    "%lld Einträge zu einer Zeile zusammenführen?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge %lld entries into one row?"
+          }
+        }
+      }
+    },
+    "%lld Einträge übernommen, %lld Projekte und %lld Ordner neu angelegt": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld Einträge übernommen, %2$lld Projekte und %3$lld Ordner neu angelegt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imported %1$lld entries, created %2$lld projects and %3$lld folders"
+          }
+        }
+      }
+    },
+    "%lld h": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld h"
+          }
+        }
+      }
+    },
+    "+%lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
+        }
+      }
+    },
+    ", %lld schon vorhanden oder noch laufend": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ", %lld already present or still running"
+          }
+        }
+      }
+    },
+    "1 Stunde": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 hour"
+          }
+        }
+      }
+    },
+    "10 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 minutes"
+          }
+        }
+      }
+    },
+    "15 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "15 minutes"
+          }
+        }
+      }
+    },
+    "30 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "30 minutes"
+          }
+        }
+      }
+    },
+    "5 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 minutes"
+          }
+        }
+      }
+    },
+    "Abbrechen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Abziehen und stoppen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subtract and stop"
+          }
+        }
+      }
+    },
+    "Abziehen und weiterlaufen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subtract and keep running"
+          }
+        }
+      }
+    },
+    "Aktive Projekte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active projects"
+          }
+        }
+      }
+    },
+    "Aktive Tage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Active days"
+          }
+        }
+      }
+    },
+    "Alle Einträge": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All entries"
+          }
+        }
+      }
+    },
+    "Alle Zeilen vom %@ zusammenführen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge all rows from %@ …"
+          }
+        }
+      }
+    },
+    "Alle entfernen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove all"
+          }
+        }
+      }
+    },
+    "Allgemein": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        }
+      }
+    },
+    "Als CSV exportieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export as CSV"
+          }
+        }
+      }
+    },
+    "Als Notiz übernehmen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use as note"
+          }
+        }
+      }
+    },
+    "Als Tool hinzufügen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add as tool"
+          }
+        }
+      }
+    },
+    "Analyse & Auswertung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analysis"
+          }
+        }
+      }
+    },
+    "Andere App wählen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose another app …"
+          }
+        }
+      }
+    },
+    "Ansicht": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View"
+          }
+        }
+      }
+    },
+    "Arbeitstag": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "working day"
+          }
+        }
+      }
+    },
+    "Arbeitstage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "working days"
+          }
+        }
+      }
+    },
+    "Archiv": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archive"
+          }
+        }
+      }
+    },
+    "Archivieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archive"
+          }
+        }
+      }
+    },
+    "Auch Fenstertitel mitlesen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also read window titles"
+          }
+        }
+      }
+    },
+    "Aus dem Archiv holen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unarchive"
+          }
+        }
+      }
+    },
+    "Ausschalten für Arbeit abseits des Macs, z. B. Unterricht oder Dreharbeiten.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn off for work away from the Mac, like teaching or filming."
+          }
+        }
+      }
+    },
+    "Auswertung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statistics"
+          }
+        }
+      }
+    },
+    "Bearbeiten …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit …"
+          }
+        }
+      }
+    },
+    "Beginn": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        }
+      }
+    },
+    "Beim Anmelden automatisch starten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open at login"
+          }
+        }
+      }
+    },
+    "Beim Export aufrunden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Round up on export"
+          }
+        }
+      }
+    },
+    "Beim Stoppen wird daraus eine Notiz, falls du selbst nichts schreibst.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When you stop, this becomes the note unless you write one yourself."
+          }
+        }
+      }
+    },
+    "Betrag": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amount"
+          }
+        }
+      }
+    },
+    "Betreuung & Besprechungen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meetings & supervision"
+          }
+        }
+      }
+    },
+    "Das hat nicht geklappt: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That didn’t work: %@"
+          }
+        }
+      }
+    },
+    "Daten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data"
+          }
+        }
+      }
+    },
+    "Datenordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data folder"
+          }
+        }
+      }
+    },
+    "Datum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Date"
+          }
+        }
+      }
+    },
+    "Dauer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duration"
+          }
+        }
+      }
+    },
+    "Der Import übernimmt jede Tim-Aufgabe als Projekt und kann gefahrlos wiederholt werden. Alle Zeiten liegen nur auf diesem Mac. Kopiere den Datenordner, um ein Backup zu machen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The import turns every Tim task into a project and is safe to repeat. All times stay on this Mac. Copy the data folder to make a backup."
+          }
+        }
+      }
+    },
+    "Der Timer für „%@“ ist seit %@ Uhr weitergelaufen. Was soll mit dieser Zeit passieren?": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Der Timer für „%1$@“ ist seit %2$@ Uhr weitergelaufen. Was soll mit dieser Zeit passieren?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The timer for “%1$@” has kept running since %2$@. What should happen to this time?"
+          }
+        }
+      }
+    },
+    "Diagramm": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chart"
+          }
+        }
+      }
+    },
+    "Diagramme erstellt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Made charts"
+          }
+        }
+      }
+    },
+    "Die Projekte darin und ihre Zeiten bleiben erhalten, sie stehen danach ohne Ordner in der Liste.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The projects inside and their times are kept. They will appear without a folder."
+          }
+        }
+      }
+    },
+    "Die Tim-Daten konnten nicht gelesen werden. Erlaube TOM den Zugriff auf Daten anderer Apps und versuch es nochmal.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn’t read Tim’s data. Allow TOM to access data from other apps and try again."
+          }
+        }
+      }
+    },
+    "Die zusammengeführte Zeile beginnt beim ersten Start. Pro Tag und Projekt bleibt eine Zeile, die Notizen werden untereinander übernommen.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The merged row begins at the first start. One row remains per day and project, and the notes are combined."
+          }
+        }
+      }
+    },
+    "Diese Einträge als CSV exportieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export these entries as CSV"
+          }
+        }
+      }
+    },
+    "Diese Woche": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This week"
+          }
+        }
+      }
+    },
+    "Dieser Monat": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This month"
+          }
+        }
+      }
+    },
+    "Dieses Jahr": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This year"
+          }
+        }
+      }
+    },
+    "Diplomarbeit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thesis"
+          }
+        }
+      }
+    },
+    "Du warst %@ nicht am Mac": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You were away from your Mac for %@"
+          }
+        }
+      }
+    },
+    "Einstellungen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        }
+      }
+    },
+    "Eintrag bearbeiten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit entry"
+          }
+        }
+      }
+    },
+    "Einträge": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entries"
+          }
+        }
+      }
+    },
+    "Enddatum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End date"
+          }
+        }
+      }
+    },
+    "Ende": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End"
+          }
+        }
+      }
+    },
+    "Ende liegt vor dem Beginn": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End is before start"
+          }
+        }
+      }
+    },
+    "Entstanden neben einer Diplomarbeit, gebaut in der Freizeit. Wenn dir TOM Zeit spart, freue ich mich über einen Kaffee.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Made alongside a master’s thesis, built in my spare time. If TOM saves you time, I’d be glad about a coffee."
+          }
+        }
+      }
+    },
+    "Erkannt: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detected: %@"
+          }
+        }
+      }
+    },
+    "Erkennt, woran du arbeitest …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detecting what you’re working on …"
+          }
+        }
+      }
+    },
+    "Erkennung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detection"
+          }
+        }
+      }
+    },
+    "Export": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export"
+          }
+        }
+      }
+    },
+    "Farbe": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Color"
+          }
+        }
+      }
+    },
+    "Feedback eingearbeitet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worked in feedback"
+          }
+        }
+      }
+    },
+    "Für Fenstertitel braucht TOM die Freigabe „Bildschirm- und Systemaudioaufnahme“. TOM nimmt nichts auf, macOS gibt die Titel nur mit dieser Freigabe heraus. Danach TOM einmal neu starten.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Window titles require the “Screen & System Audio Recording” permission. TOM doesn’t record anything, macOS only shares titles with this permission. Restart TOM afterwards."
+          }
+        }
+      }
+    },
+    "Gesamt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All time"
+          }
+        }
+      }
+    },
+    "Gesamt %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total %@"
+          }
+        }
+      }
+    },
+    "Gesamtzeit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Total time"
+          }
+        }
+      }
+    },
+    "Gestern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yesterday"
+          }
+        }
+      }
+    },
+    "Heute": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        }
+      }
+    },
+    "Heute erfasst": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tracked today"
+          }
+        }
+      }
+    },
+    "Im Finder zeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in Finder"
+          }
+        }
+      }
+    },
+    "Importieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import"
+          }
+        }
+      }
+    },
+    "In Ordner verschieben": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move to folder"
+          }
+        }
+      }
+    },
+    "Interviews transkribiert": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transcribed interviews"
+          }
+        }
+      }
+    },
+    "Kaffee spendieren": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buy me a coffee"
+          }
+        }
+      }
+    },
+    "Kapitel 2 gegliedert": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outlined chapter 2"
+          }
+        }
+      }
+    },
+    "Kapitel 3: Methodik": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter 3: methodology"
+          }
+        }
+      }
+    },
+    "Kein Ordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No folder"
+          }
+        }
+      }
+    },
+    "Kein Symbol": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No symbol"
+          }
+        }
+      }
+    },
+    "Kein Symbol, nur Farbpunkt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No symbol, just a color dot"
+          }
+        }
+      }
+    },
+    "Keine Tim-Daten gefunden. Ist Tim auf diesem Mac installiert?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Tim data found. Is Tim installed on this Mac?"
+          }
+        }
+      }
+    },
+    "Keine Zeiten in diesem Zeitraum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No times in this period"
+          }
+        }
+      }
+    },
+    "Klick auf ein Projekt startet den Timer. ⌃⌥T geht von überall.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click a project to start the timer. ⌃⌥T works from anywhere."
+          }
+        }
+      }
+    },
+    "Leerlauf": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idle"
+          }
+        }
+      }
+    },
+    "Leerlauf erkennen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detect idle time"
+          }
+        }
+      }
+    },
+    "Leg ein Projekt in diesem Ordner an und starte den Timer, oder wähl oben einen längeren Zeitraum.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a project in this folder and start the timer, or choose a longer period above."
+          }
+        }
+      }
+    },
+    "Letzte 30 Tage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last 30 days"
+          }
+        }
+      }
+    },
+    "Literaturliste ergänzt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extended reading list"
+          }
+        }
+      }
+    },
+    "Läuft ein Timer, während du nicht am Mac bist oder der Laptop zugeklappt ist, fragt TOM danach, ob die Zeit abgezogen werden soll.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If a timer keeps running while you’re away or your laptop is closed, TOM asks afterwards whether to subtract that time."
+          }
+        }
+      }
+    },
+    "Löschen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete"
+          }
+        }
+      }
+    },
+    "Löschen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete …"
+          }
+        }
+      }
+    },
+    "Nachfragen bei diesen Projekten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask for these projects"
+          }
+        }
+      }
+    },
+    "Nachfragen nach": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask after"
+          }
+        }
+      }
+    },
+    "Nachfragen, wenn ich weg war": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask when I was away"
+          }
+        }
+      }
+    },
+    "Name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        }
+      }
+    },
+    "Neu": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New"
+          }
+        }
+      }
+    },
+    "Neuer Ordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New folder"
+          }
+        }
+      }
+    },
+    "Neues Projekt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New project"
+          }
+        }
+      }
+    },
+    "Neues Projekt in diesem Ordner …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New project in this folder …"
+          }
+        }
+      }
+    },
+    "Neues Projekt …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New project …"
+          }
+        }
+      }
+    },
+    "Nicht runden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don’t round"
+          }
+        }
+      }
+    },
+    "Noch keine Zeiten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No times yet"
+          }
+        }
+      }
+    },
+    "Notiz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note"
+          }
+        }
+      }
+    },
+    "Nur Arbeitszeit behalten (%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep working time only (%@)"
+          }
+        }
+      }
+    },
+    "Ohne Ordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No folder"
+          }
+        }
+      }
+    },
+    "Ohne Projekt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No project"
+          }
+        }
+      }
+    },
+    "Ordner": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder"
+          }
+        }
+      }
+    },
+    "Ordner anlegen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create folder"
+          }
+        }
+      }
+    },
+    "Ordner bearbeiten …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit folder …"
+          }
+        }
+      }
+    },
+    "Ordner löschen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete folder"
+          }
+        }
+      }
+    },
+    "Ordner löschen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete folder …"
+          }
+        }
+      }
+    },
+    "Ordner „%@“ löschen?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete folder “%@”?"
+          }
+        }
+      }
+    },
+    "Pro Tag zusammenführen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge per day …"
+          }
+        }
+      }
+    },
+    "Projekt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project"
+          }
+        }
+      }
+    },
+    "Projekt anlegen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create project"
+          }
+        }
+      }
+    },
+    "Projekt auf GitHub": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project on GitHub"
+          }
+        }
+      }
+    },
+    "Projekt und alle Einträge löschen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete project and all entries"
+          }
+        }
+      }
+    },
+    "Projekt wählen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose project"
+          }
+        }
+      }
+    },
+    "Projekte": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects"
+          }
+        }
+      }
+    },
+    "Quellen zu Methodik gesichtet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reviewed methodology sources"
+          }
+        }
+      }
+    },
+    "Recherche & Literatur": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Research & reading"
+          }
+        }
+      }
+    },
+    "Schalte Projekte aus, bei denen du vom Mac weg bist und die Zeit trotzdem zählt, zum Beispiel Unterricht oder Dreharbeiten. Dort läuft der Timer auch mit zugeklapptem Laptop einfach weiter.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn off projects where you’re away from the Mac but the time still counts, like teaching or filming. Their timer keeps running even with the laptop closed."
+          }
+        }
+      }
+    },
+    "Schreiben": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Writing"
+          }
+        }
+      }
+    },
+    "Sekunden in der Menüleiste zeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show seconds in the menu bar"
+          }
+        }
+      }
+    },
+    "Startdatum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start date"
+          }
+        }
+      }
+    },
+    "Starte den Timer für dieses Projekt, oder wähl oben einen längeren Zeitraum.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start the timer for this project, or choose a longer period above."
+          }
+        }
+      }
+    },
+    "Starte einen Timer über das Symbol in der Menüleiste oder trag eine Zeit von Hand nach.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start a timer from the menu bar icon or add a time manually."
+          }
+        }
+      }
+    },
+    "Stunden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hours"
+          }
+        }
+      }
+    },
+    "Stundensatz": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hourly rate"
+          }
+        }
+      }
+    },
+    "Symbol": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Symbol"
+          }
+        }
+      }
+    },
+    "Systemeinstellungen öffnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open System Settings"
+          }
+        }
+      }
+    },
+    "TOM": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TOM"
+          }
+        }
+      }
+    },
+    "TOM beenden": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit TOM"
+          }
+        }
+      }
+    },
+    "TOM ist kostenlos": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TOM is free"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day"
+          }
+        }
+      }
+    },
+    "Timer für dieses Projekt starten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start the timer for this project"
+          }
+        }
+      }
+    },
+    "Timer läuft noch": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timer still running"
+          }
+        }
+      }
+    },
+    "Timer starten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start timer"
+          }
+        }
+      }
+    },
+    "Timer starten oder stoppen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start or stop timer"
+          }
+        }
+      }
+    },
+    "Timer stoppen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop timer"
+          }
+        }
+      }
+    },
+    "Timer stoppen (⌃⌥T)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop timer (⌃⌥T)"
+          }
+        }
+      }
+    },
+    "Tools": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tools"
+          }
+        }
+      }
+    },
+    "Tools für diesen Eintrag wählen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose tools for this entry"
+          }
+        }
+      }
+    },
+    "Tools wählen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose tools"
+          }
+        }
+      }
+    },
+    "Tätigkeit automatisch erkennen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detect activity automatically"
+          }
+        }
+      }
+    },
+    "Unterstützen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support"
+          }
+        }
+      }
+    },
+    "Verwendet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Used"
+          }
+        }
+      }
+    },
+    "Von Beginn bis Ende, mit Pausen (%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From start to end, including breaks (%@)"
+          }
+        }
+      }
+    },
+    "Vorschlag:\n%@\n\nWird beim Stoppen automatisch eingetragen, falls du selbst nichts schreibst.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggestion:\n%@\n\nAdded automatically when you stop, unless you write a note yourself."
+          }
+        }
+      }
+    },
+    "Woran arbeitest du gerade?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What are you working on?"
+          }
+        }
+      }
+    },
+    "Wähl oben einen längeren Zeitraum.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a longer period above."
+          }
+        }
+      }
+    },
+    "Während ein Timer läuft, merkt sich TOM, welche App vorne ist. Daraus werden die Tools des Eintrags und ein Vorschlag für die Notiz, falls du selbst nichts geschrieben hast. Nichts davon verlässt diesen Mac.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While a timer runs, TOM notes which app is in front. This fills in the entry’s tools and suggests a note if you haven’t written one. None of this leaves your Mac."
+          }
+        }
+      }
+    },
+    "Währung": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Currency"
+          }
+        }
+      }
+    },
+    "Zeit behalten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep time"
+          }
+        }
+      }
+    },
+    "Zeit hinzufügen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add time"
+          }
+        }
+      }
+    },
+    "Zeit nachtragen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add time"
+          }
+        }
+      }
+    },
+    "Zeiten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Times"
+          }
+        }
+      }
+    },
+    "Zeiten aus Tim": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Times from Tim"
+          }
+        }
+      }
+    },
+    "Zeitraum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Period"
+          }
+        }
+      }
+    },
+    "Zeitraum wählen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose period"
+          }
+        }
+      }
+    },
+    "Zusammenführen …": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge …"
+          }
+        }
+      }
+    },
+    "Zwischen Diagramm und Einträgen wechseln": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch between chart and entries"
+          }
+        }
+      }
+    },
+    "auf 15 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "to 15 minutes"
+          }
+        }
+      }
+    },
+    "auf 30 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "to 30 minutes"
+          }
+        }
+      }
+    },
+    "auf 5 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "to 5 minutes"
+          }
+        }
+      }
+    },
+    "auf 6 Minuten": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "to 6 minutes"
+          }
+        }
+      }
+    },
+    "erfasst": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tracked"
+          }
+        }
+      }
+    },
+    "gesamt": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "total"
+          }
+        }
+      }
+    },
+    "läuft": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "running"
+          }
+        }
+      }
+    },
+    "optional, in %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "optional, in %@"
+          }
+        }
+      }
+    },
+    "pro Arbeitstag": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "per working day"
+          }
+        }
+      }
+    },
+    "seit %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "since %@"
+          }
+        }
+      }
+    },
+    "und %lld weitere": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "and %lld more"
+          }
+        }
+      }
+    },
+    "verrechenbar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "billable"
+          }
+        }
+      }
+    },
+    "z. B. Diplomarbeit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Thesis"
+          }
+        }
+      }
+    },
+    "z. B. Kapitel 3 überarbeitet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Revised chapter 3"
+          }
+        }
+      }
+    },
+    "z. B. Literaturrecherche": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "e.g. Literature review"
+          }
+        }
+      }
+    },
+    "Änderungen sichern": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save changes"
+          }
+        }
+      }
+    },
+    "Öffnet buymeacoffee.com im Browser": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens buymeacoffee.com in your browser"
+          }
+        }
+      }
+    },
+    "Ø pro Tag": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ø per day"
+          }
+        }
+      }
+    },
+    "Übersicht öffnen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open overview"
+          }
+        }
+      }
+    },
+    "„%@“ löschen?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete “%@”?"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

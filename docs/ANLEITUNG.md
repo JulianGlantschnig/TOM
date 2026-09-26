@@ -1,5 +1,7 @@
 # Anleitung
 
+[English](GUIDE.md) · **Deutsch**
+
 ## Inhalt
 
 - [Erste Schritte](#erste-schritte)
@@ -126,14 +128,14 @@ Die Erkennung lässt sich in den Einstellungen ausschalten. Nichts davon verläs
 ## Export
 
 Das Teilen-Symbol oben rechts in jeder Tabelle speichert die angezeigten Einträge als CSV-Datei.
-Sie nutzt Semikolon und Dezimalkomma und öffnet sich deshalb in Excel und Numbers auf Deutsch direkt richtig.
+Auf Deutsch nutzt sie Semikolon und Dezimalkomma und öffnet sich deshalb in Excel und Numbers direkt richtig.
 
 Spalten: Datum, Beginn, Ende, Dauer, Stunden, Projekt, Tools, Notiz, Stundensatz, Betrag.
 In den Einstellungen lässt sich das Aufrunden auf 5, 6, 15 oder 30 Minuten einschalten.
 
 ## Import aus Tim
 
-Einstellungen → „Zeiten aus Tim“ → **Importieren**.
+Einstellungen → Daten → „Zeiten aus Tim“ → **Importieren**.
 
 - Jede Tim-Aufgabe wird ein Projekt, jede Tim-Gruppe ein Ordner.
 - Farben und Notizen werden übernommen.

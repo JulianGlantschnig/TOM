@@ -11,8 +11,8 @@ enum TimImporter {
         var skippedEntries = 0
 
         var description: String {
-            "\(importedEntries) Einträge übernommen, \(newProjects) Projekte und \(newFolders) Ordner neu angelegt"
-                + (skippedEntries > 0 ? ", \(skippedEntries) schon vorhanden oder noch laufend" : "")
+            String(localized: "\(importedEntries) Einträge übernommen, \(newProjects) Projekte und \(newFolders) Ordner neu angelegt")
+                + (skippedEntries > 0 ? String(localized: ", \(skippedEntries) schon vorhanden oder noch laufend") : "")
         }
     }
 
@@ -22,8 +22,8 @@ enum TimImporter {
 
         var errorDescription: String? {
             switch self {
-            case .notFound: "Keine Tim-Daten gefunden. Ist Tim auf diesem Mac installiert?"
-            case .unreadable: "Die Tim-Daten konnten nicht gelesen werden. Erlaube TOM den Zugriff auf Daten anderer Apps und versuch es nochmal."
+            case .notFound: String(localized: "Keine Tim-Daten gefunden. Ist Tim auf diesem Mac installiert?")
+            case .unreadable: String(localized: "Die Tim-Daten konnten nicht gelesen werden. Erlaube TOM den Zugriff auf Daten anderer Apps und versuch es nochmal.")
             }
         }
     }
