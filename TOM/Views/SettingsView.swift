@@ -218,7 +218,7 @@ private struct DataSettings: View {
 // MARK: - Unterstützen
 
 private struct SupportSettings: View {
-    static let donationURL = URL(string: "https://buymeacoffee.com/julianglantschnig")!
+    static let donationURL = URL(string: "https://buymeacoffee.com/GlantschnigJulian")!
     static let projectURL = URL(string: "https://github.com/JulianGlantschnig/TOM")!
     private let ochre = Color(hex: ProjectPalette.colors[2].hex)
 

@@ -49,8 +49,9 @@ Wie alles im Detail funktioniert, steht in der **[Anleitung](docs/ANLEITUNG.md)*
 
 ## Unterstützen
 
-TOM ist kostenlos. Wer das Projekt unterstützen möchte, findet in den Einstellungen unter „Unterstützen“
-einen Button, um einen Kaffee zu spendieren.
+TOM ist kostenlos. Wer das Projekt unterstützen möchte, kann mir
+[einen Kaffee spendieren](https://buymeacoffee.com/GlantschnigJulian), auch direkt aus der App unter
+Einstellungen → „Unterstützen“.
 
 ## Aus dem Quellcode bauen
 

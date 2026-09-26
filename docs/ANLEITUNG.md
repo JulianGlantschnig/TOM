@@ -173,4 +173,5 @@ brew uninstall --zap --cask tom    # App und alle Daten
 ## Unterstützen
 
 TOM ist kostenlos und entstand neben einer Diplomarbeit. Wer das Projekt unterstützen möchte:
-Einstellungen → **Unterstützen** → „Kaffee spendieren“.
+Einstellungen → **Unterstützen** → „Kaffee spendieren“, oder direkt auf
+[buymeacoffee.com/GlantschnigJulian](https://buymeacoffee.com/GlantschnigJulian).
