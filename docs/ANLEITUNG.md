@@ -12,6 +12,7 @@
 - [Import aus Tim](#import-aus-tim)
 - [Einstellungen](#einstellungen)
 - [Daten, Backup und Deinstallation](#daten-backup-und-deinstallation)
+- [Unterstützen](#unterstützen)
 
 ## Erste Schritte
 
@@ -30,9 +31,22 @@ In den Einstellungen (Zahnrad im Menü) lässt sich TOM beim Anmelden automatisc
 - Im Menü kannst du während der Arbeit eine Notiz schreiben („Woran arbeitest du gerade?“).
 - Einträge unter 3 Sekunden werden verworfen, damit versehentliche Klicks nicht zählen.
 
-**Leerlauf:** Warst du länger nicht am Mac (einstellbar, Standard 10 Minuten) oder war er im Ruhezustand,
+### Leerlauf
+
+<img src="screenshots/leerlauf.png" alt="Einstellungen, Tab Leerlauf mit Schalter und Ausnahmen pro Projekt" width="400" align="right">
+
+Warst du länger nicht am Mac (einstellbar, Standard 10 Minuten) oder war der Laptop zugeklappt,
 fragt TOM danach, ob die Zeit abgezogen werden soll: abziehen und weiterlaufen, abziehen und stoppen,
 oder behalten.
+
+Einstellungen → **Leerlauf**:
+
+- **Leerlauf erkennen** schaltet die Nachfrage ganz ein oder aus.
+- **Nachfragen bei diesen Projekten**: Für Arbeit abseits des Macs, etwa Unterricht oder Dreharbeiten,
+  das Projekt ausschalten. Dann einfach Play drücken, den Laptop zuklappen, und die Zeit läuft ohne
+  Nachfrage weiter. Derselbe Schalter steht auch beim Bearbeiten eines Projekts.
+
+<br clear="right">
 
 ## Projekte, Symbole und Ordner
 
@@ -40,7 +54,7 @@ oder behalten.
 
 - **Neues Projekt oder neuer Ordner:** im Hauptfenster unten links auf „+ Neu“.
 - **Bearbeiten:** Rechtsklick auf das Projekt → „Bearbeiten …“. Dort gibt es Name, Farbe, **Symbol**,
-  Ordner und einen optionalen Stundensatz.
+  Ordner, einen optionalen Stundensatz und ob bei Leerlauf nachgefragt wird.
 - **Ordner** fassen Projekte zusammen, z. B. „Diplomarbeit“. Neben dem Ordner steht die Gesamtzeit aller
   Projekte darin. Projekte lassen sich per Rechtsklick → „In Ordner verschieben“ umhängen.
 - **Archivieren** blendet ein Projekt aus dem Menü aus, die Zeiten bleiben erhalten.
@@ -102,7 +116,7 @@ Die Erkennung lässt sich in den Einstellungen ausschalten. Nichts davon verläs
 - Ein Klick auf einen **Ordner** oder ein **Projekt** zeigt die Übersicht. Oben links wechselst du zwischen
   Diagramm und Tabelle.
 - Kennzahlen: aktive Projekte bzw. Einträge, aktive Tage, Gesamtzeit und Durchschnitt pro Tag.
-- Der **Ring** zeigt die Anteile der Projekte in Prozent direkt im Segment, in der Mitte die Gesamtzeit.
+- Der **Ring** zeigt die Anteile der Projekte in Prozent mittig in jedem Segment, in der Mitte die Gesamtzeit.
 - Die **Tools**-Liste zeigt die Zeit pro Programm.
 - Das **Balkendiagramm** zeigt die Stunden pro Tag, gestapelt nach Projekt.
 - Oben rechts wählst du den Zeitraum: diese Woche, letzte 30 Tage, dieser Monat, dieses Jahr oder gesamt.
@@ -128,15 +142,21 @@ Einstellungen → „Zeiten aus Tim“ → **Importieren**.
 
 ## Einstellungen
 
-| Einstellung | Wirkung |
-| --- | --- |
-| Beim Anmelden automatisch starten | TOM startet mit dem Mac |
-| Sekunden in der Menüleiste zeigen | 1:05:09 statt 1:05 |
-| Nachfragen, wenn ich weg war | Leerlauf-Grenze oder nie |
-| Tätigkeit automatisch erkennen | Tools und Notizvorschlag aus der App im Vordergrund |
-| Auch Fenstertitel mitlesen | Dokument- und Seitentitel im Notizvorschlag |
-| Beim Export aufrunden | Dauer im CSV auf volle Minuten aufrunden |
-| Währung | Zeichen für Beträge |
+Die Einstellungen öffnest du über das Zahnrad im Menü. Sie haben fünf Tabs:
+
+| Tab | Einstellung | Wirkung |
+| --- | --- | --- |
+| Allgemein | Beim Anmelden automatisch starten | TOM startet mit dem Mac |
+| Allgemein | Sekunden in der Menüleiste zeigen | 1:05:09 statt 1:05 |
+| Leerlauf | Leerlauf erkennen | Nachfrage nach Abwesenheit ein oder aus |
+| Leerlauf | Nachfragen nach | 5, 10, 15, 30 Minuten oder 1 Stunde |
+| Leerlauf | Nachfragen bei diesen Projekten | Ausnahmen für Arbeit abseits des Macs |
+| Erkennung | Tätigkeit automatisch erkennen | Tools und Notizvorschlag aus der App im Vordergrund |
+| Erkennung | Auch Fenstertitel mitlesen | Dokument- und Seitentitel im Notizvorschlag |
+| Daten | Beim Export aufrunden | Dauer im CSV auf volle Minuten aufrunden |
+| Daten | Währung | Zeichen für Beträge |
+| Daten | Zeiten aus Tim, Datenordner | Import und Backup |
+| Unterstützen | Kaffee spendieren | Öffnet die Spendenseite im Browser |
 
 ## Daten, Backup und Deinstallation
 
@@ -149,3 +169,8 @@ Deinstallieren:
 brew uninstall --cask tom          # nur die App
 brew uninstall --zap --cask tom    # App und alle Daten
 ```
+
+## Unterstützen
+
+TOM ist kostenlos und entstand neben einer Diplomarbeit. Wer das Projekt unterstützen möchte:
+Einstellungen → **Unterstützen** → „Kaffee spendieren“.

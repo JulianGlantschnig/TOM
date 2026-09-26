@@ -10,6 +10,7 @@ enum SidebarItem: Hashable {
 struct ContentView: View {
     @Environment(\.modelContext) private var context
     @Environment(TimerController.self) private var timer
+    @Environment(\.openSettings) private var openSettings
     @Query(sort: \Project.sortIndex) private var projects: [Project]
     @Query(sort: \Folder.sortIndex) private var folders: [Folder]
 
@@ -128,6 +129,8 @@ struct ContentView: View {
             // Demo-Fenster sollen beim Anschauen keine Tastatureingaben abfangen.
             if DemoData.isEnabled {
                 if UserDefaults.standard.string(forKey: "demoPage") == "folder" { selection = folders.first.map { .folder($0) } }
+                // Das echte Einstellungsfenster, nur dort zeigt SwiftUI die Tabs in der Titelleiste.
+                if UserDefaults.standard.string(forKey: "demoSettingsTab") != nil { openSettings() }
                 return
             }
             #endif

@@ -14,6 +14,8 @@ final class Project {
     var folder: Folder?
     /// SF-Symbol-Name, `nil` zeigt nur den Farbpunkt.
     var iconName: String?
+    /// Für Arbeit abseits des Macs (Unterricht, Dreharbeiten): keine Leerlauf-Nachfrage.
+    var ignoresIdle: Bool = false
 
     @Relationship(deleteRule: .cascade, inverse: \TimeEntry.project)
     var entries: [TimeEntry] = []

@@ -103,6 +103,7 @@ struct ProjectEditor: View {
     @State private var name: String
     @State private var colorHex: String
     @State private var iconName: String?
+    @State private var ignoresIdle: Bool
     @State private var hourlyRate: Double?
     @State private var folder: Folder?
 
@@ -112,6 +113,7 @@ struct ProjectEditor: View {
         _name = State(initialValue: project?.name ?? "")
         _colorHex = State(initialValue: project?.colorHex ?? ProjectPalette.colors[0].hex)
         _iconName = State(initialValue: project?.iconName)
+        _ignoresIdle = State(initialValue: project?.ignoresIdle ?? false)
         _hourlyRate = State(initialValue: project?.hourlyRate)
     }
 
@@ -132,6 +134,10 @@ struct ProjectEditor: View {
                     }
                 }
                 TextField("Stundensatz", value: $hourlyRate, format: .number, prompt: Text("optional, in \(currency)"))
+                Toggle(isOn: Binding(get: { !ignoresIdle }, set: { ignoresIdle = !$0 })) {
+                    Text("Nachfragen, wenn ich weg war")
+                    Text("Ausschalten für Arbeit abseits des Macs, z. B. Unterricht oder Dreharbeiten.")
+                }
             }
             .formStyle(.grouped)
 
@@ -158,6 +164,7 @@ struct ProjectEditor: View {
         target.name = name.trimmingCharacters(in: .whitespaces)
         target.colorHex = colorHex
         target.iconName = iconName
+        target.ignoresIdle = ignoresIdle
         target.hourlyRate = hourlyRate.flatMap { $0 > 0 ? $0 : nil }
         target.folder = folder
         folder?.isExpanded = true

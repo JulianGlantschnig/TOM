@@ -36,7 +36,7 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 - **Automatische Erkennung**: merkt sich während des Timers die App im Vordergrund und rechnet die Zeit pro Tool
 - **Notizvorschlag** aus den erkannten Apps, jederzeit selbst änderbar
 - **Einträge zusammenführen**: mehrere Zeilen eines Tages werden zu einer
-- **Leerlauf-Erkennung**: warst du weg, lässt sich die Zeit abziehen
+- **Leerlauf-Erkennung** (abschaltbar, auch pro Projekt): warst du weg, lässt sich die Zeit abziehen
 - **CSV-Export** für Excel und Numbers, optional gerundet, mit Stundensatz und Betrag
 - **Import aus Tim** mit allen Aufgaben, Gruppen und Zeiten
 - Alle Daten bleiben **lokal** auf dem Mac
@@ -46,6 +46,11 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 ![Tabelle aller Einträge mit Projekt, Zeiten, Dauer, Tools und Notiz](docs/screenshots/eintraege.png)
 
 Wie alles im Detail funktioniert, steht in der **[Anleitung](docs/ANLEITUNG.md)**.
+
+## Unterstützen
+
+TOM ist kostenlos. Wer das Projekt unterstützen möchte, findet in den Einstellungen unter „Unterstützen“
+einen Button, um einen Kaffee zu spendieren.
 
 ## Aus dem Quellcode bauen
 
@@ -68,8 +73,8 @@ build/Debug/TOM.app/Contents/MacOS/TOM -demo -demoPage folder
 ## Neue Version veröffentlichen
 
 ```sh
-scripts/release.sh 1.4
-gh release create v1.4 dist/TOM-1.4.zip --title "TOM 1.4"
+scripts/release.sh 1.5
+gh release create v1.5 dist/TOM-1.5.zip --title "TOM 1.5"
 ```
 
 Danach im Repository [homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) in `Casks/tom.rb`

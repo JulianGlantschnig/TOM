@@ -2,7 +2,9 @@ import AppKit
 import SwiftUI
 
 enum Prefs {
-    /// Minuten ohne Eingabe, bis nachgefragt wird. 0 = aus.
+    /// Nachfragen, wenn der Mac während eines Timers unbenutzt war.
+    static let idleDetection = "idleDetection"
+    /// Minuten ohne Eingabe, bis nachgefragt wird. 0 stammt aus älteren Versionen und heißt aus.
     static let idleMinutes = "idleMinutes"
     static let showSecondsInMenuBar = "showSecondsInMenuBar"
     /// Aufrunden beim Export auf volle N Minuten. 0 = exakt.
@@ -15,6 +17,7 @@ enum Prefs {
 
     static func registerDefaults() {
         UserDefaults.standard.register(defaults: [
+            idleDetection: true,
             idleMinutes: 10,
             showSecondsInMenuBar: true,
             roundingMinutes: 0,

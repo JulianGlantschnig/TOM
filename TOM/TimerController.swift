@@ -39,7 +39,7 @@ final class TimerController {
             forName: NSWorkspace.willSleepNotification, object: nil, queue: .main
         ) { [weak self] _ in
             MainActor.assumeIsolated {
-                guard let self, self.running != nil, self.idleSince == nil else { return }
+                guard let self, self.idleSince == nil, let entry = self.running, Self.asksAboutIdle(for: entry) else { return }
                 self.idleSince = .now
             }
         }
@@ -161,7 +161,7 @@ final class TimerController {
     private func checkIdle() {
         guard !isShowingIdleAlert else { return }
         let minutes = UserDefaults.standard.integer(forKey: Prefs.idleMinutes)
-        guard minutes > 0, let entry = running else {
+        guard minutes > 0, let entry = running, Self.asksAboutIdle(for: entry) else {
             idleSince = nil
             return
         }
@@ -177,6 +177,11 @@ final class TimerController {
                 presentIdleAlert(for: entry, since: max(since, entry.start))
             }
         }
+    }
+
+    /// Leerlauf-Nachfrage ist global abschaltbar und pro Projekt, z. B. für Unterricht oder Dreharbeiten.
+    static func asksAboutIdle(for entry: TimeEntry) -> Bool {
+        UserDefaults.standard.bool(forKey: Prefs.idleDetection) && !(entry.project?.ignoresIdle ?? false)
     }
 
     private func presentIdleAlert(for entry: TimeEntry, since: Date) {

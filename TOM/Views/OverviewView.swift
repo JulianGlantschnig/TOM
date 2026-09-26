@@ -179,19 +179,33 @@ struct OverviewView: View {
             Chart(slices) { slice in
                 SectorMark(
                     angle: .value("Dauer", slice.duration),
-                    innerRadius: .ratio(0.52),
+                    innerRadius: .ratio(Self.innerRatio),
                     angularInset: 1.5
                 )
                 .cornerRadius(4)
                 .foregroundStyle(slice.color)
-                // Anteil direkt ins Segment schreiben, bei sehr schmalen Segmenten weglassen.
-                .annotation(position: .overlay) {
-                    if total > 0, slice.duration / total >= 0.06 {
-                        Text(share(slice))
-                            .font(.system(size: 12, weight: .bold, design: .rounded))
-                            .monospacedDigit()
-                            .foregroundStyle(.white)
-                            .shadow(color: .black.opacity(0.25), radius: 1, y: 0.5)
+            }
+            // Anteile genau in die Mitte jedes Segments setzen, bei sehr schmalen Segmenten weglassen.
+            .chartOverlay { proxy in
+                GeometryReader { geometry in
+                    if let plot = proxy.plotFrame.map({ geometry[$0] }), total > 0 {
+                        let center = CGPoint(x: plot.midX, y: plot.midY)
+                        let outer = min(plot.width, plot.height) / 2
+                        let radius = outer * (1 + Self.innerRatio) / 2
+                        ForEach(Self.midAngles(slices, total: total), id: \.slice.id) { item in
+                            if item.slice.duration / total >= 0.06 {
+                                Text(share(item.slice))
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                    .monospacedDigit()
+                                    .foregroundStyle(.white)
+                                    .shadow(color: .black.opacity(0.3), radius: 1, y: 0.5)
+                                    .fixedSize()
+                                    .position(
+                                        x: center.x + radius * sin(item.angle),
+                                        y: center.y - radius * cos(item.angle)
+                                    )
+                            }
+                        }
                     }
                 }
             }
@@ -224,6 +238,18 @@ struct OverviewView: View {
                 }
             }
             .frame(width: 250)
+        }
+    }
+
+    private static let innerRatio = 0.52
+
+    /// Winkel der Segmentmitte im Bogenmaß, im Uhrzeigersinn ab 12 Uhr wie in Swift Charts.
+    private static func midAngles(_ slices: [Slice], total: TimeInterval) -> [(slice: Slice, angle: Double)] {
+        var start = 0.0
+        return slices.map { slice in
+            let sweep = slice.duration / total * 2 * .pi
+            defer { start += sweep }
+            return (slice, start + sweep / 2)
         }
     }
 
