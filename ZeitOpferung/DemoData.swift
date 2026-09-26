@@ -23,7 +23,7 @@ enum DemoData {
             window.orderFrontRegardless()
             windows.append(window)
         }
-        show(ContentView(), title: "Timecounter", size: CGSize(width: 1120, height: 680))
+        show(ContentView(), title: "ZeitOpferung", size: CGSize(width: 1120, height: 680))
         show(MenuBarView(), title: "Popover-Vorschau", size: CGSize(width: 320, height: 380))
         if UserDefaults.standard.string(forKey: "demoPage") == "editor",
            let project = try? container.mainContext.fetch(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.sortIndex)])).first {

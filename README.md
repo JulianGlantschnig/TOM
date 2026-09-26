@@ -1,26 +1,28 @@
-# Timecounter
+# ZeitOpferung
 
 Ein schlanker Zeiterfasser für die macOS-Menüleiste, inspiriert von [Tim](https://tim.neat.software/).
 Entstanden, um die Arbeitszeit an einer Diplomarbeit zu messen.
 
 *A small menu bar time tracker for macOS. The interface is in German.*
 
+> Bis Version 1.1 hieß die App **Timecounter**. Beim ersten Start von ZeitOpferung werden die bisherigen Daten automatisch übernommen.
+
 ![Übersicht eines Ordners mit Kennzahlen, Tools, Anteilen pro Projekt und Stunden pro Tag](docs/screenshots/uebersicht.png)
 
 ## Installation
 
 ```sh
-brew install --cask julianglantschnig/tap/timecounter
+brew install --cask julianglantschnig/tap/zeitopferung
 ```
 
-Danach Timecounter aus dem Programme-Ordner starten. Das Symbol erscheint oben rechts in der Menüleiste.
-Aktualisieren geht mit `brew upgrade --cask timecounter`.
+Danach ZeitOpferung aus dem Programme-Ordner starten. Das Symbol erscheint oben rechts in der Menüleiste.
+Aktualisieren geht mit `brew upgrade --cask zeitopferung`.
 
 Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 
-> Timecounter ist nicht von Apple notarisiert (dafür braucht es ein kostenpflichtiges Entwicklerkonto).
+> ZeitOpferung ist nicht von Apple notarisiert (dafür braucht es ein kostenpflichtiges Entwicklerkonto).
 > Die Homebrew-Installation entfernt deshalb die Quarantäne-Markierung, damit macOS die App öffnet.
-> Wer die ZIP-Datei direkt von den [Releases](https://github.com/JulianGlantschnig/timecounter/releases) lädt,
+> Wer die ZIP-Datei direkt von den [Releases](https://github.com/JulianGlantschnig/ZeitOpferung/releases) lädt,
 > öffnet die App beim ersten Mal mit Rechtsklick → „Öffnen“.
 
 ## Funktionen
@@ -50,27 +52,27 @@ Wie alles im Detail funktioniert, steht in der **[Anleitung](docs/ANLEITUNG.md)*
 Mit Xcode 26 oder neuer:
 
 ```sh
-git clone https://github.com/JulianGlantschnig/timecounter.git
-cd timecounter
-xcodebuild -project Timecounter.xcodeproj -target Timecounter -configuration Release SYMROOT=build build
-cp -R build/Release/Timecounter.app /Applications/
+git clone https://github.com/JulianGlantschnig/ZeitOpferung.git
+cd ZeitOpferung
+xcodebuild -project ZeitOpferung.xcodeproj -target ZeitOpferung -configuration Release SYMROOT=build build
+cp -R build/Release/ZeitOpferung.app /Applications/
 ```
 
 Zum Ausprobieren ohne eigene Daten gibt es im Debug-Build einen Demo-Modus mit Beispieldaten im Speicher:
 
 ```sh
-xcodebuild -project Timecounter.xcodeproj -target Timecounter -configuration Debug SYMROOT=build build
-build/Debug/Timecounter.app/Contents/MacOS/Timecounter -demo -demoPage folder
+xcodebuild -project ZeitOpferung.xcodeproj -target ZeitOpferung -configuration Debug SYMROOT=build build
+build/Debug/ZeitOpferung.app/Contents/MacOS/ZeitOpferung -demo -demoPage folder
 ```
 
 ## Neue Version veröffentlichen
 
 ```sh
 scripts/release.sh 1.2
-gh release create v1.2 dist/Timecounter-1.2.zip --title "Timecounter 1.2"
+gh release create v1.2 dist/ZeitOpferung-1.2.zip --title "ZeitOpferung 1.2"
 ```
 
-Danach im Repository [homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) in `Casks/timecounter.rb`
+Danach im Repository [homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) in `Casks/zeitopferung.rb`
 die Version und `sha256` anpassen.
 
 ## Lizenz

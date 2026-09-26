@@ -15,12 +15,12 @@
 
 ## Erste Schritte
 
-1. Timecounter starten. Es erscheint kein Fenster, sondern ein Uhr-Symbol in der Menüleiste.
+1. ZeitOpferung starten. Es erscheint kein Fenster, sondern ein Uhr-Symbol in der Menüleiste.
 2. Auf das Symbol klicken, unten „Neues Projekt …“ eintippen und mit Return bestätigen.
 3. Auf das Projekt klicken, der Timer läuft. Noch ein Klick oder **⌃⌥T** stoppt ihn.
 4. „Übersicht öffnen“ zeigt das Hauptfenster mit allen Zeiten.
 
-In den Einstellungen (Zahnrad im Menü) lässt sich Timecounter beim Anmelden automatisch starten.
+In den Einstellungen (Zahnrad im Menü) lässt sich ZeitOpferung beim Anmelden automatisch starten.
 
 ## Timer
 
@@ -31,7 +31,7 @@ In den Einstellungen (Zahnrad im Menü) lässt sich Timecounter beim Anmelden au
 - Einträge unter 3 Sekunden werden verworfen, damit versehentliche Klicks nicht zählen.
 
 **Leerlauf:** Warst du länger nicht am Mac (einstellbar, Standard 10 Minuten) oder war er im Ruhezustand,
-fragt Timecounter danach, ob die Zeit abgezogen werden soll: abziehen und weiterlaufen, abziehen und stoppen,
+fragt ZeitOpferung danach, ob die Zeit abgezogen werden soll: abziehen und weiterlaufen, abziehen und stoppen,
 oder behalten.
 
 ## Projekte, Symbole und Ordner
@@ -79,7 +79,7 @@ Die Spalte **Tools** zeigt, mit welchen Programmen du gearbeitet hast, mit den e
 - **Von Hand:** Klick in die Spalte (oder im Bearbeiten-Fenster auf „Tools“) öffnet eine Liste der
   installierten Programme wie Figma, DaVinci Resolve, InDesign, Illustrator, Photoshop, Word oder VS Code.
   „Andere App wählen …“ erlaubt jede weitere App.
-- **Automatisch:** Während ein Timer läuft, schaut Timecounter alle 5 Sekunden, welche App vorne ist.
+- **Automatisch:** Während ein Timer läuft, schaut ZeitOpferung alle 5 Sekunden, welche App vorne ist.
   Beim Stoppen werden die Apps mit ihrer Zeit gespeichert, sofern sie mindestens eine Minute und einen
   spürbaren Anteil ausmachen. Beim laufenden Eintrag sind die Icons schon live zu sehen.
 - Zeigt die Maus auf die Icons, steht die Zeit pro App daneben.
@@ -93,7 +93,7 @@ Sie wird beim Stoppen nur eingetragen, wenn die Notiz leer ist. Im Menü lässt 
 **Fenstertitel (optional):** Mit dem Schalter „Auch Fenstertitel mitlesen“ steht im Vorschlag zusätzlich,
 welches Dokument oder welche Webseite offen war. macOS gibt Fenstertitel anderer Apps nur mit der Freigabe
 „Bildschirm- und Systemaudioaufnahme“ heraus (Systemeinstellungen → Datenschutz & Sicherheit).
-Timecounter nimmt dabei nichts auf. Ohne diese Freigabe werden nur App-Namen erkannt.
+ZeitOpferung nimmt dabei nichts auf. Ohne diese Freigabe werden nur App-Namen erkannt.
 
 Die Erkennung lässt sich in den Einstellungen ausschalten. Nichts davon verlässt den Mac.
 
@@ -130,7 +130,7 @@ Einstellungen → „Zeiten aus Tim“ → **Importieren**.
 
 | Einstellung | Wirkung |
 | --- | --- |
-| Beim Anmelden automatisch starten | Timecounter startet mit dem Mac |
+| Beim Anmelden automatisch starten | ZeitOpferung startet mit dem Mac |
 | Sekunden in der Menüleiste zeigen | 1:05:09 statt 1:05 |
 | Nachfragen, wenn ich weg war | Leerlauf-Grenze oder nie |
 | Tätigkeit automatisch erkennen | Tools und Notizvorschlag aus der App im Vordergrund |
@@ -140,12 +140,12 @@ Einstellungen → „Zeiten aus Tim“ → **Importieren**.
 
 ## Daten, Backup und Deinstallation
 
-Alle Zeiten liegen in `~/Library/Application Support/Timecounter`. Für ein Backup diesen Ordner kopieren
+Alle Zeiten liegen in `~/Library/Application Support/ZeitOpferung`. Für ein Backup diesen Ordner kopieren
 (Einstellungen → „Datenordner“ → „Im Finder zeigen“).
 
 Deinstallieren:
 
 ```sh
-brew uninstall --cask timecounter          # nur die App
-brew uninstall --zap --cask timecounter    # App und alle Daten
+brew uninstall --cask zeitopferung          # nur die App
+brew uninstall --zap --cask zeitopferung    # App und alle Daten
 ```

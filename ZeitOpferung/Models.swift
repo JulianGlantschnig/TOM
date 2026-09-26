@@ -109,18 +109,43 @@ enum ProjectIcons {
 }
 
 enum Persistence {
-    static var storeDirectory: URL {
-        URL.applicationSupportDirectory.appending(path: "Timecounter", directoryHint: .isDirectory)
-    }
+    /// Wird beim ersten Zugriff festgelegt, nachdem alte Daten aus der Zeit als „Timecounter“ umgezogen sind.
+    static let storeDirectory: URL = migrateLegacyStore()
+
+    private static let storeName = "ZeitOpferung"
 
     static func makeContainer() -> ModelContainer {
         try? FileManager.default.createDirectory(at: storeDirectory, withIntermediateDirectories: true)
-        let config = ModelConfiguration(url: storeDirectory.appending(path: "Timecounter.store"))
+        let file = FileManager.default.fileExists(atPath: storeDirectory.appending(path: "\(storeName).store").path)
+            || !FileManager.default.fileExists(atPath: storeDirectory.appending(path: "Timecounter.store").path)
+            ? storeName : "Timecounter"
+        let config = ModelConfiguration(url: storeDirectory.appending(path: "\(file).store"))
         do {
             return try ModelContainer(for: Folder.self, Project.self, TimeEntry.self, configurations: config)
         } catch {
             fatalError("Datenbank konnte nicht geöffnet werden: \(error)")
         }
+    }
+
+    /// Die App hieß früher „Timecounter“. Ordner und Datenbank einmalig umbenennen.
+    /// Klappt das nicht, bleibt alles am alten Ort, damit keine Zeiten verloren gehen.
+    private static func migrateLegacyStore() -> URL {
+        let fm = FileManager.default
+        let base = URL.applicationSupportDirectory
+        let current = base.appending(path: storeName, directoryHint: .isDirectory)
+        let legacy = base.appending(path: "Timecounter", directoryHint: .isDirectory)
+        guard !fm.fileExists(atPath: current.path), fm.fileExists(atPath: legacy.path) else { return current }
+        do {
+            try fm.moveItem(at: legacy, to: current)
+        } catch {
+            return legacy
+        }
+        for suffix in ["", "-shm", "-wal"] {
+            let old = current.appending(path: "Timecounter.store\(suffix)")
+            guard fm.fileExists(atPath: old.path) else { continue }
+            try? fm.moveItem(at: old, to: current.appending(path: "\(storeName).store\(suffix)"))
+        }
+        return current
     }
 
     /// Legt beim allerersten Start ein paar Projekte für die Diplomarbeit an.

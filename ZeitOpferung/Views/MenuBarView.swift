@@ -97,7 +97,7 @@ private struct MenuContent: View {
                 } label: {
                     Image(systemName: "power")
                 }
-                .help("Timecounter beenden")
+                .help("ZeitOpferung beenden")
             }
             .buttonStyle(.borderless)
             .padding(.horizontal, 16)

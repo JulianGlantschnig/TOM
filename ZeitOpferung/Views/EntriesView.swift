@@ -107,7 +107,7 @@ struct EntriesView: View {
             isPresented: Binding(get: { exportDocument != nil }, set: { if !$0 { exportDocument = nil } }),
             document: exportDocument,
             contentType: .commaSeparatedText,
-            defaultFilename: "Timecounter \(title) \(Date.now.formatted(.iso8601.year().month().day()))"
+            defaultFilename: "ZeitOpferung \(title) \(Date.now.formatted(.iso8601.year().month().day()))"
         ) { _ in }
     }
 
