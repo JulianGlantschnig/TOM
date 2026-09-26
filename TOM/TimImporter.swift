@@ -23,7 +23,7 @@ enum TimImporter {
         var errorDescription: String? {
             switch self {
             case .notFound: "Keine Tim-Daten gefunden. Ist Tim auf diesem Mac installiert?"
-            case .unreadable: "Die Tim-Daten konnten nicht gelesen werden. Erlaube ZeitOpferung den Zugriff auf Daten anderer Apps und versuch es nochmal."
+            case .unreadable: "Die Tim-Daten konnten nicht gelesen werden. Erlaube TOM den Zugriff auf Daten anderer Apps und versuch es nochmal."
             }
         }
     }

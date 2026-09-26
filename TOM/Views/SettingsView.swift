@@ -56,13 +56,13 @@ struct SettingsView: View {
                 Toggle("Auch Fenstertitel mitlesen", isOn: $readWindowTitles)
                     .disabled(!detectActivity)
                     .onChange(of: readWindowTitles) { _, enabled in
-                        // Fragt beim ersten Mal nach und trägt ZeitOpferung in die Liste der Systemeinstellungen ein.
+                        // Fragt beim ersten Mal nach und trägt TOM in die Liste der Systemeinstellungen ein.
                         if enabled, !ActivityTracker.hasTitleAccess { CGRequestScreenCaptureAccess() }
                         hasTitleAccess = ActivityTracker.hasTitleAccess
                     }
                 if detectActivity, readWindowTitles, !hasTitleAccess {
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("Für Fenstertitel braucht ZeitOpferung die Freigabe „Bildschirm- und Systemaudioaufnahme“. ZeitOpferung nimmt nichts auf, macOS gibt die Titel nur mit dieser Freigabe heraus. Danach ZeitOpferung einmal neu starten.")
+                        Text("Für Fenstertitel braucht TOM die Freigabe „Bildschirm- und Systemaudioaufnahme“. TOM nimmt nichts auf, macOS gibt die Titel nur mit dieser Freigabe heraus. Danach TOM einmal neu starten.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
@@ -72,7 +72,7 @@ struct SettingsView: View {
                     }
                 }
             } footer: {
-                Text("Während ein Timer läuft, merkt sich ZeitOpferung, welche App vorne ist. Daraus wird beim Stoppen eine Notiz wie „Figma (40 min): Screens Kapitel 3“, aber nur, wenn du selbst nichts geschrieben hast. Du kannst sie jederzeit ändern. Nichts davon verlässt diesen Mac.")
+                Text("Während ein Timer läuft, merkt sich TOM, welche App vorne ist. Daraus wird beim Stoppen eine Notiz wie „Figma (40 min): Screens Kapitel 3“, aber nur, wenn du selbst nichts geschrieben hast. Du kannst sie jederzeit ändern. Nichts davon verlässt diesen Mac.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

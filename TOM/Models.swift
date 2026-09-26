@@ -109,16 +109,19 @@ enum ProjectIcons {
 }
 
 enum Persistence {
-    /// Wird beim ersten Zugriff festgelegt, nachdem alte Daten aus der Zeit als „Timecounter“ umgezogen sind.
+    /// Wird beim ersten Zugriff festgelegt, nachdem Daten unter einem früheren App-Namen umgezogen sind.
     static let storeDirectory: URL = migrateLegacyStore()
 
-    private static let storeName = "ZeitOpferung"
+    private static let storeName = "TOM"
+    /// Frühere Namen der App, neuester zuerst.
+    private static let legacyNames = ["ZeitOpferung", "Timecounter"]
 
     static func makeContainer() -> ModelContainer {
         try? FileManager.default.createDirectory(at: storeDirectory, withIntermediateDirectories: true)
-        let file = FileManager.default.fileExists(atPath: storeDirectory.appending(path: "\(storeName).store").path)
-            || !FileManager.default.fileExists(atPath: storeDirectory.appending(path: "Timecounter.store").path)
-            ? storeName : "Timecounter"
+        // Falls das Umbenennen der Datei nicht geklappt hat, die vorhandene alte Datei weiterverwenden.
+        let file = ([storeName] + legacyNames).first {
+            FileManager.default.fileExists(atPath: storeDirectory.appending(path: "\($0).store").path)
+        } ?? storeName
         let config = ModelConfiguration(url: storeDirectory.appending(path: "\(file).store"))
         do {
             return try ModelContainer(for: Folder.self, Project.self, TimeEntry.self, configurations: config)
@@ -127,23 +130,30 @@ enum Persistence {
         }
     }
 
-    /// Die App hieß früher „Timecounter“. Ordner und Datenbank einmalig umbenennen.
+    /// Die App hieß früher „Timecounter“ und „ZeitOpferung“. Ordner und Datenbank einmalig umbenennen.
     /// Klappt das nicht, bleibt alles am alten Ort, damit keine Zeiten verloren gehen.
     private static func migrateLegacyStore() -> URL {
         let fm = FileManager.default
         let base = URL.applicationSupportDirectory
         let current = base.appending(path: storeName, directoryHint: .isDirectory)
-        let legacy = base.appending(path: "Timecounter", directoryHint: .isDirectory)
-        guard !fm.fileExists(atPath: current.path), fm.fileExists(atPath: legacy.path) else { return current }
+        guard !fm.fileExists(atPath: current.path) else { return current }
+        guard let legacy = legacyNames
+            .map({ base.appending(path: $0, directoryHint: .isDirectory) })
+            .first(where: { fm.fileExists(atPath: $0.path) })
+        else { return current }
         do {
             try fm.moveItem(at: legacy, to: current)
         } catch {
             return legacy
         }
-        for suffix in ["", "-shm", "-wal"] {
-            let old = current.appending(path: "Timecounter.store\(suffix)")
-            guard fm.fileExists(atPath: old.path) else { continue }
-            try? fm.moveItem(at: old, to: current.appending(path: "\(storeName).store\(suffix)"))
+        for name in legacyNames {
+            guard fm.fileExists(atPath: current.appending(path: "\(name).store").path) else { continue }
+            for suffix in ["", "-shm", "-wal"] {
+                let old = current.appending(path: "\(name).store\(suffix)")
+                guard fm.fileExists(atPath: old.path) else { continue }
+                try? fm.moveItem(at: old, to: current.appending(path: "\(storeName).store\(suffix)"))
+            }
+            break
         }
         return current
     }

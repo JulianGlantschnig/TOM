@@ -5,12 +5,12 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 version="${1:?Version angeben, z. B. scripts/release.sh 1.1}"
-xcodebuild -project ZeitOpferung.xcodeproj -target ZeitOpferung -configuration Release \
+xcodebuild -project TOM.xcodeproj -target TOM -configuration Release \
   MARKETING_VERSION="$version" SYMROOT=build clean build | grep -E "error|BUILD"
 
 mkdir -p dist
-zip="dist/ZeitOpferung-$version.zip"
+zip="dist/TOM-$version.zip"
 rm -f "$zip"
-ditto -c -k --keepParent build/Release/ZeitOpferung.app "$zip"
+ditto -c -k --keepParent build/Release/TOM.app "$zip"
 echo "$zip"
 shasum -a 256 "$zip"

@@ -2,7 +2,7 @@ import SwiftData
 import SwiftUI
 
 @main
-struct ZeitOpferungApp: App {
+struct TOMApp: App {
     private let container: ModelContainer
     @State private var timer: TimerController
 
@@ -43,7 +43,7 @@ struct ZeitOpferungApp: App {
         }
         .menuBarExtraStyle(.window)
 
-        Window("ZeitOpferung", id: "main") {
+        Window("TOM", id: "main") {
             ContentView()
                 .environment(timer)
                 .modelContainer(container)
