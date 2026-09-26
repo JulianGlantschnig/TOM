@@ -7,6 +7,8 @@ enum Prefs {
     /// Minuten ohne Eingabe, bis nachgefragt wird. 0 stammt aus älteren Versionen und heißt aus.
     static let idleMinutes = "idleMinutes"
     static let showSecondsInMenuBar = "showSecondsInMenuBar"
+    /// Dock-Symbol zeigen, solange das Übersichtsfenster offen ist.
+    static let showInDock = "showInDock"
     /// Aufrunden beim Export auf volle N Minuten. 0 = exakt.
     static let roundingMinutes = "roundingMinutes"
     static let currency = "currency"
@@ -20,6 +22,7 @@ enum Prefs {
             idleDetection: true,
             idleMinutes: 10,
             showSecondsInMenuBar: true,
+            showInDock: true,
             roundingMinutes: 0,
             currency: "€",
             detectActivity: true,
@@ -29,6 +32,19 @@ enum Prefs {
 
     static var rounding: Int { UserDefaults.standard.integer(forKey: roundingMinutes) }
     static var currencySymbol: String { UserDefaults.standard.string(forKey: currency) ?? "€" }
+}
+
+/// TOM lebt in der Menüleiste. Ins Dock kommt es nur, solange die Übersicht offen ist und es gewünscht ist.
+@MainActor
+enum DockIcon {
+    static var windowIsOpen = false
+
+    static func update() {
+        let visible = windowIsOpen && UserDefaults.standard.bool(forKey: Prefs.showInDock)
+        NSApp.setActivationPolicy(visible ? .regular : .accessory)
+        // Beim Wechsel verliert die App sonst den Fokus und das Fenster rutscht nach hinten.
+        if windowIsOpen { NSApp.activate(ignoringOtherApps: true) }
+    }
 }
 
 enum Fmt {

@@ -134,11 +134,12 @@ struct ContentView: View {
                 return
             }
             #endif
-            NSApp.setActivationPolicy(.regular)
-            NSApp.activate(ignoringOtherApps: true)
+            DockIcon.windowIsOpen = true
+            DockIcon.update()
         }
         .onDisappear {
-            NSApp.setActivationPolicy(.accessory)
+            DockIcon.windowIsOpen = false
+            DockIcon.update()
         }
     }
 

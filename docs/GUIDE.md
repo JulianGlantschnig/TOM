@@ -144,6 +144,7 @@ Open Settings with the gear icon in the menu. There are five tabs:
 | --- | --- | --- |
 | General | Open at login | TOM starts with your Mac |
 | General | Show seconds in the menu bar | 1:05:09 instead of 1:05 |
+| General | Show in Dock | Dock icon while the overview is open; off = menu bar only |
 | Idle | Detect idle time | Ask about time away, on or off |
 | Idle | Ask after | 5, 10, 15, 30 minutes or 1 hour |
 | Idle | Ask for these projects | Exceptions for work away from the Mac |

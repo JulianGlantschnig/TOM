@@ -52,6 +52,7 @@ private struct Footnote: View {
 
 private struct GeneralSettings: View {
     @AppStorage(Prefs.showSecondsInMenuBar) private var showSeconds = true
+    @AppStorage(Prefs.showInDock) private var showInDock = true
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var loginError: String?
 
@@ -75,6 +76,11 @@ private struct GeneralSettings: View {
                     Text(loginError).font(.caption).foregroundStyle(.red)
                 }
                 Toggle("Sekunden in der Menüleiste zeigen", isOn: $showSeconds)
+                Toggle(isOn: $showInDock) {
+                    Text("Im Dock anzeigen")
+                    Text("Solange die Übersicht offen ist. Ausgeschaltet bleibt TOM nur in der Menüleiste.")
+                }
+                .onChange(of: showInDock) { DockIcon.update() }
                 LabeledContent("Timer starten oder stoppen", value: "⌃⌥T")
             }
         }

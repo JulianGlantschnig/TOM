@@ -846,6 +846,16 @@
         }
       }
     },
+    "Im Dock anzeigen": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in Dock"
+          }
+        }
+      }
+    },
     "Im Finder zeigen": {
       "localizations": {
         "en": {
@@ -1382,6 +1392,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Show seconds in the menu bar"
+          }
+        }
+      }
+    },
+    "Solange die Übersicht offen ist. Ausgeschaltet bleibt TOM nur in der Menüleiste.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While the overview is open. When off, TOM stays in the menu bar only."
           }
         }
       }

@@ -150,6 +150,7 @@ Die Einstellungen öffnest du über das Zahnrad im Menü. Sie haben fünf Tabs:
 | --- | --- | --- |
 | Allgemein | Beim Anmelden automatisch starten | TOM startet mit dem Mac |
 | Allgemein | Sekunden in der Menüleiste zeigen | 1:05:09 statt 1:05 |
+| Allgemein | Im Dock anzeigen | Dock-Symbol, solange die Übersicht offen ist; aus = nur Menüleiste |
 | Leerlauf | Leerlauf erkennen | Nachfrage nach Abwesenheit ein oder aus |
 | Leerlauf | Nachfragen nach | 5, 10, 15, 30 Minuten oder 1 Stunde |
 | Leerlauf | Nachfragen bei diesen Projekten | Ausnahmen für Arbeit abseits des Macs |

@@ -74,8 +74,8 @@ build/Debug/TOM.app/Contents/MacOS/TOM -demo -demoPage folder
 ## Release a new version
 
 ```sh
-scripts/release.sh 1.6
-gh release create v1.6 dist/TOM-1.6.zip --title "TOM 1.6"
+scripts/release.sh 1.7
+gh release create v1.7 dist/TOM-1.7.zip --title "TOM 1.7"
 ```
 
 Then update `version` and `sha256` in `Casks/tom.rb` in the
