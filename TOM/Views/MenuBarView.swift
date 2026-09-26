@@ -39,13 +39,22 @@ private struct MenuContent: View {
             .reduce(0) { $0 + $1.duration(now: timer.now) }
     }
 
+    /// Der zuletzt gestoppte Eintrag, falls das höchstens eine Stunde her ist. Für versehentliches Stoppen.
+    private var lastStopped: TimeEntry? {
+        let latest = todayEntries
+            .filter { !$0.isRunning && !($0.project?.isArchived ?? true) }
+            .max { ($0.end ?? $0.start) < ($1.end ?? $1.start) }
+        guard let end = latest?.end, timer.now.timeIntervalSince(end) < 3600 else { return nil }
+        return latest
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             Group {
                 if let entry = timer.running {
                     RunningCard(entry: entry)
                 } else {
-                    IdleCard(todayTotal: todayTotal)
+                    IdleCard(todayTotal: todayTotal, lastStopped: lastStopped)
                 }
             }
             .padding(16)
@@ -198,21 +207,57 @@ private struct ActivityHint: View {
 
 private struct IdleCard: View {
     let todayTotal: TimeInterval
+    let lastStopped: TimeEntry?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Heute erfasst")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            Text(Fmt.hoursMinutes(todayTotal))
-                .font(.system(size: 30, weight: .semibold, design: .rounded))
-                .monospacedDigit()
-            Text("Klick auf ein Projekt startet den Timer. ⌃⌥T geht von überall.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            DurationText(interval: todayTotal, size: 30)
+            if let lastStopped {
+                ResumeButton(entry: lastStopped)
+                    .padding(.top, 6)
+            } else {
+                Text("Klick auf ein Projekt startet den Timer. ⌃⌥T geht von überall.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+/// Nach versehentlichem Stoppen einfach weiterlaufen lassen, statt später zusammenzuführen.
+private struct ResumeButton: View {
+    @Environment(TimerController.self) private var timer
+    let entry: TimeEntry
+
+    var body: some View {
+        let color = entry.project?.color ?? .secondary
+        let pause = timer.now.timeIntervalSince(entry.end ?? timer.now)
+        Button {
+            timer.resume(entry)
+        } label: {
+            HStack(spacing: 8) {
+                Image(systemName: "arrow.clockwise")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(color)
+                Text("\(entry.project?.name ?? String(localized: "Ohne Projekt")) fortsetzen")
+                    .lineLimit(1)
+                Spacer(minLength: 6)
+                Text("gestoppt \(Fmt.time(entry.end ?? entry.start))")
+                    .foregroundStyle(.secondary)
+            }
+            .font(.callout)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(color.opacity(0.12), in: RoundedRectangle(cornerRadius: 6))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .help(String(localized: "Macht den Eintrag wieder auf. Die \(Fmt.hoursMinutes(pause)) seit dem Stoppen zählen mit. Für eine echte Pause stattdessen das Projekt unten neu starten."))
     }
 }
 
@@ -244,6 +289,7 @@ private struct FolderHeader: View {
 
 private struct ProjectRow: View {
     @Environment(TimerController.self) private var timer
+    @Environment(\.openWindow) private var openWindow
     let project: Project
     let today: TimeInterval
     var indent: CGFloat = 0
@@ -283,5 +329,11 @@ private struct ProjectRow: View {
         }
         .buttonStyle(.plain)
         .onHover { isHovering = $0 }
+        .contextMenu {
+            Button("Projekt bearbeiten …") {
+                openWindow(id: "project-editor", value: project.persistentModelID)
+                NSApp.activate(ignoringOtherApps: true)
+            }
+        }
     }
 }

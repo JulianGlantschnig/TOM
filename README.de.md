@@ -37,11 +37,13 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 - **Tools**: welche Programme (Figma, DaVinci Resolve, InDesign …) in einem Eintrag verwendet wurden, mit echten App-Icons
 - **Automatische Erkennung**: merkt sich während des Timers die App im Vordergrund und rechnet die Zeit pro Tool
 - **Notizvorschlag** aus den erkannten Apps, jederzeit selbst änderbar
-- **Einträge zusammenführen**: mehrere Zeilen eines Tages werden zu einer
+- **Einträge zusammenführen** zu einer Zeile pro Tag, per Drag & Drop in ein anderes Projekt **verschieben**
+  und einen versehentlich gestoppten Timer **fortsetzen**
+- **Archiv** für alte Projekte und ganze Ordner, damit sie nicht im Weg sind
 - **Leerlauf-Erkennung** (abschaltbar, auch pro Projekt): warst du weg, lässt sich die Zeit abziehen
 - **CSV-Export** für Excel und Numbers, optional gerundet, mit Stundensatz und Betrag
 - **Import aus Tim** mit allen Aufgaben, Gruppen und Zeiten
-- Alle Daten bleiben **lokal** auf dem Mac
+- Alle Daten bleiben **lokal** auf dem Mac, vor jedem Update mit automatischem Backup
 
 <br clear="right">
 

@@ -3,7 +3,7 @@
 import AppKit
 import CoreGraphics
 
-// Zeichnet das TOM-Icon: Ring aus drei Projektfarben mit Uhrzeiger, auf Tintenblau.
+// Zeichnet das TOM-Icon: Zeitblöcke in Projektfarben mit „Jetzt“-Linie, auf Tintenblau.
 let size: CGFloat = 1024
 let fullBleed = CommandLine.arguments.contains("--full")
 let cs = CGColorSpace(name: CGColorSpace.sRGB)!
@@ -30,38 +30,31 @@ ctx.addPath(shape); ctx.clip()
 let gradient = CGGradient(colorsSpace: cs, colors: [rgb(0x2A3350), rgb(0x161B29)] as CFArray, locations: [0, 1])!
 ctx.drawLinearGradient(gradient, start: CGPoint(x: body.midX, y: body.maxY), end: CGPoint(x: body.midX, y: body.minY), options: [])
 
-// Ring: Segmente im Uhrzeigersinn ab 12 Uhr, mit Lücken und runden Enden.
-let center = CGPoint(x: size / 2, y: size / 2)
-let ringRadius = body.width * 0.30
-let lineWidth = body.width * 0.125
-let segments: [(UInt32, CGFloat)] = [(0xD99A2B, 0.46), (0x3B5BDB, 0.32), (0x4C9A6A, 0.22)]
-let gap: CGFloat = 0.035 // im Bogenmaß, Platz für die runden Enden
-var start = CGFloat.pi / 2 // 12 Uhr in CoreGraphics (y nach oben)
-ctx.setLineCap(.round)
-ctx.setLineWidth(lineWidth)
-for (color, share) in segments {
-    let sweep = share * 2 * .pi
-    let a0 = start - gap - lineWidth / ringRadius / 2
-    let a1 = start - sweep + gap + lineWidth / ringRadius / 2
-    ctx.setStrokeColor(rgb(color))
-    ctx.addArc(center: center, radius: ringRadius, startAngle: a0, endAngle: a1, clockwise: true)
-    ctx.strokePath()
-    start -= sweep
+// Drei Zeitblöcke in Projektfarben, versetzt wie ein Tag im Kalender, dazu eine weiße „Jetzt“-Linie.
+// Bewusst kein Ring mit Zeiger mehr, der sah aus wie ein Tacho.
+let w = body.width
+func pill(_ r: CGRect, _ c: CGColor) {
+    ctx.addPath(CGPath(roundedRect: r, cornerWidth: r.height / 2, cornerHeight: r.height / 2, transform: nil))
+    ctx.setFillColor(c); ctx.fillPath()
 }
-
-// Uhrzeiger mit Nabe, zeigt auf ca. 2 Uhr.
-let handAngle = CGFloat.pi / 2 - 0.95
-let handLength = ringRadius * 0.62
-let tip = CGPoint(x: center.x + cos(handAngle) * handLength, y: center.y + sin(handAngle) * handLength)
-ctx.setStrokeColor(rgb(0xF4F6FB))
-ctx.setLineWidth(body.width * 0.052)
-ctx.move(to: center); ctx.addLine(to: tip); ctx.strokePath()
-let hub = body.width * 0.062
+let barHeight = w * 0.13, barGap = w * 0.07
+let span = w * 0.72
+let rows: [(start: CGFloat, length: CGFloat, color: UInt32)] = [(0.0, 0.55, 0xD99A2B), (0.22, 0.60, 0x4F6FF0), (0.48, 0.40, 0x4C9A6A)]
+let extent = rows.map { $0.start + $0.length }.max()!
+let left = body.midX - span * extent / 2
+let stackHeight = 3 * barHeight + 2 * barGap
+var y = body.midY + stackHeight / 2 - barHeight
+for row in rows {
+    pill(CGRect(x: left + span * row.start, y: y, width: span * row.length, height: barHeight), rgb(row.color))
+    y -= barHeight + barGap
+}
+let nowX = left + span * 0.74
+let lineWidth = w * 0.028
+let overhang = w * 0.07
 ctx.setFillColor(rgb(0xF4F6FB))
-ctx.fillEllipse(in: CGRect(x: center.x - hub, y: center.y - hub, width: 2 * hub, height: 2 * hub))
-ctx.setFillColor(rgb(0x1C2233))
-let dot = hub * 0.38
-ctx.fillEllipse(in: CGRect(x: center.x - dot, y: center.y - dot, width: 2 * dot, height: 2 * dot))
+ctx.fill(CGRect(x: nowX - lineWidth / 2, y: body.midY - stackHeight / 2 - overhang, width: lineWidth, height: stackHeight + 2 * overhang))
+let knob = w * 0.045
+ctx.fillEllipse(in: CGRect(x: nowX - knob, y: body.midY + stackHeight / 2 + overhang - knob, width: 2 * knob, height: 2 * knob))
 
 // Feiner Lichtrand oben für Tiefe.
 ctx.addPath(shape)

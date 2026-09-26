@@ -85,7 +85,10 @@ enum DemoData {
         }
         let morning = Date.now.addingTimeInterval(-3 * 3600)
         context.insert(TimeEntry(start: morning, end: morning.addingTimeInterval(5400), note: String(localized: "Literaturliste ergänzt"), project: projects[0]))
-        context.insert(TimeEntry(start: Date.now.addingTimeInterval(-2843), note: ActivityTracker.isEnabled ? "" : String(localized: "Kapitel 3: Methodik"), project: projects[1]))
+        let current = TimeEntry(start: Date.now.addingTimeInterval(-2843), note: ActivityTracker.isEnabled ? "" : String(localized: "Kapitel 3: Methodik"), project: projects[1])
+        // `-demoPage resume`: gerade eben versehentlich gestoppt, um „Fortsetzen“ zu zeigen.
+        if UserDefaults.standard.string(forKey: "demoPage") == "resume" { current.end = Date.now.addingTimeInterval(-240) }
+        context.insert(current)
         try? context.save()
         return container
     }

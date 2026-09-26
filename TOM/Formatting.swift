@@ -6,7 +6,10 @@ enum Prefs {
     static let idleDetection = "idleDetection"
     /// Minuten ohne Eingabe, bis nachgefragt wird. 0 stammt aus älteren Versionen und heißt aus.
     static let idleMinutes = "idleMinutes"
+    /// Früher ein Schalter für Sekunden, jetzt nur noch zum Übernehmen alter Einstellungen.
     static let showSecondsInMenuBar = "showSecondsInMenuBar"
+    /// Was die Menüleiste zeigt, siehe `MenuBarStyle`.
+    static let menuBarStyle = "menuBarStyle"
     /// Dock-Symbol zeigen, solange das Übersichtsfenster offen ist.
     static let showInDock = "showInDock"
     /// Aufrunden beim Export auf volle N Minuten. 0 = exakt.
@@ -21,7 +24,7 @@ enum Prefs {
         UserDefaults.standard.register(defaults: [
             idleDetection: true,
             idleMinutes: 10,
-            showSecondsInMenuBar: true,
+            menuBarStyle: legacyMenuBarStyle.rawValue,
             showInDock: true,
             roundingMinutes: 0,
             currency: "€",
@@ -30,8 +33,33 @@ enum Prefs {
         ])
     }
 
+    /// Wer früher Sekunden ausdrücklich eingeschaltet hatte, behält sie. Sonst gilt h:mm.
+    private static var legacyMenuBarStyle: MenuBarStyle {
+        UserDefaults.standard.object(forKey: showSecondsInMenuBar) as? Bool == true ? .iconSeconds : .iconMinutes
+    }
+
     static var rounding: Int { UserDefaults.standard.integer(forKey: roundingMinutes) }
     static var currencySymbol: String { UserDefaults.standard.string(forKey: currency) ?? "€" }
+}
+
+/// Anzeige in der Menüleiste, solange ein Timer läuft.
+enum MenuBarStyle: String, CaseIterable, Identifiable {
+    case iconMinutes, iconSeconds, minutes, icon
+
+    var id: Self { self }
+
+    var title: String {
+        switch self {
+        case .iconMinutes: String(localized: "Symbol und Zeit (1:05)")
+        case .iconSeconds: String(localized: "Symbol und Zeit mit Sekunden (1:05:09)")
+        case .minutes: String(localized: "Nur Zeit (1:05)")
+        case .icon: String(localized: "Nur Symbol")
+        }
+    }
+
+    var showsIcon: Bool { self != .minutes }
+    var showsTime: Bool { self != .icon }
+    var showsSeconds: Bool { self == .iconSeconds }
 }
 
 /// TOM lebt in der Menüleiste. Ins Dock kommt es nur, solange die Übersicht offen ist und es gewünscht ist.

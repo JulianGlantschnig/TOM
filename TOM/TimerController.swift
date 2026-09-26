@@ -72,6 +72,18 @@ final class TimerController {
         save()
     }
 
+    /// Versehentlich gestoppt: den Eintrag wieder aufmachen, die Zeit seit dem Stoppen zählt mit.
+    func resume(_ entry: TimeEntry) {
+        guard !entry.isRunning else { return }
+        if let current = running { finish(current, at: .now) }
+        entry.end = nil
+        save()
+        running = entry
+        now = .now
+        idleSince = nil
+        activity.reset()
+    }
+
     func toggle() {
         if running != nil {
             stop()

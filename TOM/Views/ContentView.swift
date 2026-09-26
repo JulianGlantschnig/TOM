@@ -30,10 +30,15 @@ struct ContentView: View {
     @State private var editingFolder: Folder?
     @State private var creatingFolder = false
     @State private var deletingFolder: Folder?
+    @State private var dropTarget: PersistentIdentifier?
+    @AppStorage("archiveExpanded") private var archiveExpanded = false
 
     private var activeProjects: [Project] { projects.filter { !$0.isArchived } }
     private var looseProjects: [Project] { activeProjects.filter { $0.folder == nil } }
-    private var archivedProjects: [Project] { projects.filter(\.isArchived) }
+    private var activeFolders: [Folder] { folders.filter { !$0.isArchived } }
+    private var archivedFolders: [Folder] { folders.filter(\.isArchived) }
+    /// Archivierte Projekte, die nicht schon mit ihrem ganzen Ordner im Archiv stehen.
+    private var archivedProjects: [Project] { projects.filter { $0.isArchived && !($0.folder?.isArchived ?? false) } }
 
     private func activeProjects(in folder: Folder) -> [Project] {
         activeProjects.filter { $0.folder?.persistentModelID == folder.persistentModelID }
@@ -49,7 +54,7 @@ struct ContentView: View {
                     Label("Auswertung", systemImage: "chart.bar.xaxis").tag(SidebarItem.stats)
                 }
                 Section("Projekte") {
-                    ForEach(folders) { folder in
+                    ForEach(activeFolders) { folder in
                         DisclosureGroup(isExpanded: Binding(
                             get: { folder.isExpanded },
                             set: { folder.isExpanded = $0 }
@@ -68,25 +73,48 @@ struct ContentView: View {
                     }
                     .onMove { reorder(looseProjects, from: $0, to: $1) }
                 }
-                if !archivedProjects.isEmpty {
-                    Section("Archiv") {
+                if !archivedProjects.isEmpty || !archivedFolders.isEmpty {
+                    // Standardmäßig zugeklappt, damit alte Projekte nicht im Weg sind.
+                    Section(isExpanded: $archiveExpanded) {
+                        ForEach(archivedFolders) { folder in
+                            DisclosureGroup {
+                                ForEach(projects.filter { $0.folder?.persistentModelID == folder.persistentModelID }) { project in
+                                    projectRow(project)
+                                }
+                            } label: {
+                                folderRow(folder)
+                            }
+                        }
                         ForEach(archivedProjects) { project in
                             projectRow(project)
                         }
+                    } header: {
+                        Text("Archiv (\(archivedFolders.count + archivedProjects.count))")
                     }
                 }
             }
             .navigationSplitViewColumnWidth(min: 210, ideal: 250)
             .safeAreaInset(edge: .bottom) {
-                Menu {
-                    Button("Neues Projekt") { newProjectFolder = .some(nil) }
-                    Button("Neuer Ordner") { creatingFolder = true }
-                } label: {
-                    Label("Neu", systemImage: "plus")
+                HStack {
+                    Menu {
+                        Button("Neues Projekt") { newProjectFolder = .some(nil) }
+                        Button("Neuer Ordner") { creatingFolder = true }
+                    } label: {
+                        Label("Neu", systemImage: "plus")
+                    }
+                    .menuStyle(.borderlessButton)
+                    .fixedSize()
+                    Spacer()
+                    Button {
+                        openSettings()
+                    } label: {
+                        Image(systemName: "gearshape")
+                            .font(.system(size: 13))
+                    }
+                    .buttonStyle(.borderless)
+                    .help("Einstellungen (⌘,)")
+                    .accessibilityLabel("Einstellungen")
                 }
-                .menuStyle(.borderlessButton)
-                .fixedSize()
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(12)
             }
         } detail: {
@@ -146,7 +174,8 @@ struct ContentView: View {
     // MARK: - Zeilen
 
     private func folderRow(_ folder: Folder) -> some View {
-        let total = activeProjects(in: folder).flatMap(\.entries).reduce(0) { $0 + $1.duration() }
+        let shown = folder.isArchived ? folder.projects : activeProjects(in: folder)
+        let total = shown.flatMap(\.entries).reduce(0) { $0 + $1.duration() }
         return HStack(spacing: 8) {
             Image(systemName: "folder.fill")
                 .foregroundStyle(folder.color)
@@ -161,6 +190,10 @@ struct ContentView: View {
         .contextMenu {
             Button("Neues Projekt in diesem Ordner …") { newProjectFolder = .some(folder) }
             Button("Ordner bearbeiten …") { editingFolder = folder }
+            Button(folder.isArchived ? String(localized: "Ordner aus dem Archiv holen") : String(localized: "Ordner archivieren")) {
+                setArchived(folder.projects, !folder.isArchived)
+            }
+            .disabled(folder.projects.isEmpty)
             Divider()
             Button("Ordner löschen …", role: .destructive) { deletingFolder = folder }
         }
@@ -176,7 +209,28 @@ struct ContentView: View {
                     .foregroundStyle(project.color)
             }
         }
+        .overlay {
+            if dropTarget == project.persistentModelID {
+                RoundedRectangle(cornerRadius: 5)
+                    .strokeBorder(project.color, lineWidth: 1.5)
+                    .padding(-3)
+            }
+        }
         .tag(SidebarItem.project(project))
+        // Einträge aus der Tabelle hierher ziehen, um sie in dieses Projekt zu verschieben.
+        .dropDestination(for: String.self) { items, _ in
+            let moved = EntryDrag.entries(from: items, in: context)
+            guard !moved.isEmpty, !project.isArchived else { return false }
+            for entry in moved { entry.project = project }
+            try? context.save()
+            return true
+        } isTargeted: { targeted in
+            if targeted {
+                dropTarget = project.persistentModelID
+            } else if dropTarget == project.persistentModelID {
+                dropTarget = nil
+            }
+        }
         .contextMenu {
             Button(timer.isRunning(project) ? String(localized: "Timer stoppen") : String(localized: "Timer starten")) {
                 timer.isRunning(project) ? timer.stop() : timer.start(project)
@@ -193,9 +247,7 @@ struct ContentView: View {
                     .disabled(project.folder == nil)
             }
             Button(project.isArchived ? String(localized: "Aus dem Archiv holen") : String(localized: "Archivieren")) {
-                if timer.isRunning(project) { timer.stop() }
-                project.isArchived.toggle()
-                try? context.save()
+                setArchived([project], !project.isArchived)
             }
             Divider()
             Button("Löschen …", role: .destructive) { deletingProject = project }
@@ -208,6 +260,14 @@ struct ContentView: View {
         var ordered = list
         ordered.move(fromOffsets: source, toOffset: destination)
         for (index, project) in ordered.enumerated() { project.sortIndex = index }
+        try? context.save()
+    }
+
+    private func setArchived(_ list: [Project], _ archived: Bool) {
+        for project in list {
+            if archived, timer.isRunning(project) { timer.stop() }
+            project.isArchived = archived
+        }
         try? context.save()
     }
 

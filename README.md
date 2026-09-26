@@ -35,11 +35,13 @@ Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks Englis
 - **Tools**: see which apps you used for each entry (Figma, DaVinci Resolve, InDesign …), with their real icons
 - **Automatic detection**: notes the frontmost app while a timer runs and adds up time per tool
 - **Suggested notes** from the detected apps, always editable
-- **Merge entries**: turn several rows of one day into a single row
+- **Merge entries** into one row per day, **move** them to another project by drag and drop,
+  and **continue** a timer you stopped by accident
+- **Archive** old projects and whole folders to hide them
 - **Idle detection** (optional, per project too): subtract time you were away
 - **CSV export** for Excel and Numbers, optionally rounded, with hourly rate and amount
 - **Import from Tim** with all tasks, groups and times
-- All data stays **on your Mac**
+- All data stays **on your Mac**, with an automatic backup before every update
 
 <br clear="right">
 

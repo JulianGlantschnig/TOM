@@ -8,6 +8,8 @@ struct ScopeDetailView: View {
 
     let scope: EntryScope
     @State private var mode: Mode
+    @State private var editingProject: Project?
+    @State private var editingFolder: Folder?
 
     init(scope: EntryScope) {
         self.scope = scope
@@ -31,7 +33,21 @@ struct ScopeDetailView: View {
                 .labelStyle(.iconOnly)
                 .help("Zwischen Diagramm und Einträgen wechseln")
             }
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    switch scope {
+                    case .project(let project): editingProject = project
+                    case .folder(let folder): editingFolder = folder
+                    default: break
+                    }
+                } label: {
+                    Label(scope.project == nil ? String(localized: "Ordner bearbeiten") : String(localized: "Projekteinstellungen"), systemImage: "slider.horizontal.3")
+                }
+                .help(scope.project == nil ? String(localized: "Name und Farbe des Ordners ändern") : String(localized: "Name, Farbe, Symbol, Stundensatz und Archiv"))
+            }
         }
+        .sheet(item: $editingProject) { ProjectEditor(project: $0) }
+        .sheet(item: $editingFolder) { FolderEditor(folder: $0) }
     }
 }
 

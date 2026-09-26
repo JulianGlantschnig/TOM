@@ -7,6 +7,8 @@ struct EntriesView: View {
     @Environment(\.modelContext) private var context
     @Environment(TimerController.self) private var timer
     @Query(sort: \TimeEntry.start, order: .reverse) private var allEntries: [TimeEntry]
+    @Query(sort: \Project.sortIndex) private var projects: [Project]
+    @Query(sort: \Folder.sortIndex) private var folders: [Folder]
 
     @State private var selection = Set<PersistentIdentifier>()
     @State private var sortOrder = [KeyPathComparator(\TimeEntry.start, order: .reverse)]
@@ -47,7 +49,11 @@ struct EntriesView: View {
                 .contextMenu(forSelectionType: PersistentIdentifier.self) { ids in
                     if ids.count == 1 {
                         Button("Bearbeiten …") { editingEntry = entry(for: ids.first) }
+                        if let one = entry(for: ids.first), canResume(one) {
+                            Button("Fortsetzen") { timer.resume(one) }
+                        }
                     }
+                    moveMenu(ids)
                     let groups = mergeGroups(for: ids)
                     Button(mergeTitle(ids: ids, groups: groups)) { pendingMerge = groups }
                         .disabled(groups.isEmpty)
@@ -113,6 +119,50 @@ struct EntriesView: View {
 
     private func entry(for id: PersistentIdentifier?) -> TimeEntry? {
         allEntries.first { $0.persistentModelID == id }
+    }
+
+    // MARK: - Verschieben und Fortsetzen
+
+    /// Einträge in ein anderes Projekt schieben, nach Ordnern gegliedert wie in der Seitenleiste.
+    @ViewBuilder
+    private func moveMenu(_ ids: Set<PersistentIdentifier>) -> some View {
+        let active = projects.filter { !$0.isArchived }
+        let current = Set(allEntries.filter { ids.contains($0.persistentModelID) }.compactMap { $0.project?.persistentModelID })
+        Menu(ids.count == 1 ? String(localized: "In Projekt verschieben") : String(localized: "\(ids.count) Einträge verschieben nach")) {
+            ForEach(folders) { folder in
+                let children = active.filter { $0.folder?.persistentModelID == folder.persistentModelID }
+                if !children.isEmpty {
+                    Section(folder.name) {
+                        ForEach(children) { project in
+                            Button(project.name) { move(ids, to: project) }
+                                .disabled(current == [project.persistentModelID])
+                        }
+                    }
+                }
+            }
+            let loose = active.filter { $0.folder == nil }
+            if !loose.isEmpty {
+                Section {
+                    ForEach(loose) { project in
+                        Button(project.name) { move(ids, to: project) }
+                            .disabled(current == [project.persistentModelID])
+                    }
+                }
+            }
+        }
+    }
+
+    private func move(_ ids: Set<PersistentIdentifier>, to project: Project) {
+        for entry in allEntries where ids.contains(entry.persistentModelID) {
+            entry.project = project
+        }
+        try? context.save()
+    }
+
+    /// Nur der zuletzt beendete Eintrag von heute lässt sich fortsetzen, die Zeit seit dem Stoppen zählt dann mit.
+    private func canResume(_ entry: TimeEntry) -> Bool {
+        guard let end = entry.end, Calendar.current.isDateInToday(end), timer.running == nil else { return false }
+        return !allEntries.contains { ($0.end ?? .distantFuture) > end }
     }
 
     // MARK: - Zusammenführen
@@ -198,7 +248,7 @@ private struct EntriesTable: View {
     @Binding var sortOrder: [KeyPathComparator<TimeEntry>]
 
     var body: some View {
-        Table(entries, selection: $selection, sortOrder: $sortOrder) {
+        Table(of: TimeEntry.self, selection: $selection, sortOrder: $sortOrder) {
             if showsProject {
                 TableColumn("Projekt", value: \.projectName) { entry in
                     HStack(spacing: 7) {
@@ -259,6 +309,11 @@ private struct EntriesTable: View {
                     .help(entry.note)
             }
             .width(min: 140, ideal: 220)
+        } rows: {
+            // Zeilen lassen sich auf ein Projekt in der Seitenleiste ziehen.
+            ForEach(entries) { entry in
+                TableRow(entry).draggable(EntryDrag.payload(for: entry))
+            }
         }
         .monospacedDigit()
     }
@@ -290,5 +345,25 @@ private extension TimeEntry {
 
     func amount(now: Date) -> Double? {
         project?.hourlyRate.map { $0 * duration(now: now) / 3600 }
+    }
+}
+
+/// Einträge per Drag & Drop verschieben. Übertragen wird die ID als Text mit eigenem Präfix.
+enum EntryDrag {
+    private static let prefix = "tom-entry:"
+
+    static func payload(for entry: TimeEntry) -> String {
+        let data = (try? JSONEncoder().encode(entry.persistentModelID)) ?? Data()
+        return prefix + data.base64EncodedString()
+    }
+
+    static func entries(from items: [String], in context: ModelContext) -> [TimeEntry] {
+        items.compactMap { item in
+            guard item.hasPrefix(prefix),
+                  let data = Data(base64Encoded: String(item.dropFirst(prefix.count))),
+                  let id = try? JSONDecoder().decode(PersistentIdentifier.self, from: data)
+            else { return nil }
+            return context.model(for: id) as? TimeEntry
+        }
     }
 }

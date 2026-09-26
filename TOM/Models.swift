@@ -50,6 +50,9 @@ final class Folder {
     }
 
     var color: Color { Color(hex: colorHex) }
+
+    /// Ein Ordner gilt als archiviert, wenn alle seine Projekte im Archiv sind.
+    var isArchived: Bool { !projects.isEmpty && projects.allSatisfy(\.isArchived) }
 }
 
 @Model
@@ -160,21 +163,29 @@ enum Persistence {
         return current
     }
 
-    /// Legt beim allerersten Start ein paar Projekte für die Diplomarbeit an.
-    @MainActor
-    static func seedIfNeeded(_ context: ModelContext) {
-        let key = "didSeedProjects"
-        guard !UserDefaults.standard.bool(forKey: key) else { return }
-        UserDefaults.standard.set(true, forKey: key)
-        guard (try? context.fetchCount(FetchDescriptor<Project>())) == 0 else { return }
+    /// Kopiert die Datenbank beim ersten Start einer neuen Version in `Backups`, bevor SwiftData sie womöglich umbaut.
+    /// Die letzten fünf Sicherungen bleiben liegen, so geht bei einem Update nie etwas verloren.
+    static func backupIfNewVersion() {
+        let key = "lastLaunchedVersion"
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+        let previous = UserDefaults.standard.string(forKey: key)
+        guard previous != version else { return }
+        defer { UserDefaults.standard.set(version, forKey: key) }
 
-        let names = [
-            String(localized: "Recherche & Literatur"), String(localized: "Schreiben"),
-            String(localized: "Analyse & Auswertung"), String(localized: "Betreuung & Besprechungen"),
-        ]
-        for (index, name) in names.enumerated() {
-            context.insert(Project(name: name, colorHex: ProjectPalette.colors[index].hex, sortIndex: index))
-        }
-        try? context.save()
+        let fm = FileManager.default
+        let files = ((try? fm.contentsOfDirectory(atPath: storeDirectory.path)) ?? []).filter { $0.contains(".store") }
+        guard !files.isEmpty else { return }
+        let stamp = Date.now.formatted(.iso8601.year().month().day().dateSeparator(.dash))
+        let backups = storeDirectory.appending(path: "Backups", directoryHint: .isDirectory)
+        let target = backups.appending(path: "\(stamp) vor \(version)", directoryHint: .isDirectory)
+        do {
+            try fm.createDirectory(at: target, withIntermediateDirectories: true)
+            for file in files {
+                try? fm.copyItem(at: storeDirectory.appending(path: file), to: target.appending(path: file))
+            }
+        } catch { return }
+
+        let old = ((try? fm.contentsOfDirectory(atPath: backups.path)) ?? []).sorted().dropLast(5)
+        for name in old { try? fm.removeItem(at: backups.appending(path: name)) }
     }
 }

@@ -68,11 +68,13 @@ struct StatsView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 28) {
                 HStack(alignment: .firstTextBaseline, spacing: 40) {
-                    figure(Fmt.hoursMinutes(total), "erfasst")
-                    figure(workDays == 0 ? "–" : Fmt.hoursMinutes(total / Double(workDays)), "pro Arbeitstag")
-                    figure("\(workDays)", workDays == 1 ? "Arbeitstag" : "Arbeitstage")
+                    figure("erfasst") { DurationText(interval: total) }
+                    figure("pro Arbeitstag") {
+                        if workDays == 0 { plainFigure("–") } else { DurationText(interval: total / Double(workDays)) }
+                    }
+                    figure(workDays == 1 ? "Arbeitstag" : "Arbeitstage") { plainFigure("\(workDays)") }
                     if amount > 0 {
-                        figure(Fmt.money(amount), "verrechenbar")
+                        figure("verrechenbar") { plainFigure(Fmt.money(amount)) }
                     }
                 }
 
@@ -127,11 +129,15 @@ struct StatsView: View {
         }
     }
 
-    private func figure(_ value: String, _ label: LocalizedStringKey) -> some View {
+    private func plainFigure(_ value: String) -> some View {
+        Text(value)
+            .font(.system(size: 26, weight: .semibold, design: .rounded))
+            .monospacedDigit()
+    }
+
+    private func figure(_ label: LocalizedStringKey, @ViewBuilder value: () -> some View) -> some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(value)
-                .font(.system(size: 26, weight: .semibold, design: .rounded))
-                .monospacedDigit()
+            value()
             Text(label)
                 .font(.callout)
                 .foregroundStyle(.secondary)

@@ -9,11 +9,11 @@ struct TOMApp: App {
     init() {
         Prefs.registerDefaults()
         #if DEBUG
+        if !DemoData.isEnabled { Persistence.backupIfNewVersion() }
         let container = DemoData.isEnabled ? DemoData.makeContainer() : Persistence.makeContainer()
-        if !DemoData.isEnabled { Persistence.seedIfNeeded(container.mainContext) }
         #else
+        Persistence.backupIfNewVersion()
         let container = Persistence.makeContainer()
-        Persistence.seedIfNeeded(container.mainContext)
         #endif
         self.container = container
         if CommandLine.arguments.contains("-importTim") {
@@ -51,6 +51,16 @@ struct TOMApp: App {
         .defaultSize(width: 1120, height: 680)
         .defaultLaunchBehavior(.suppressed)
 
+        // Projekt-Einstellungen direkt aus dem Menü heraus, ohne erst die Übersicht zu öffnen.
+        WindowGroup("Projekt bearbeiten", id: "project-editor", for: PersistentIdentifier.self) { $id in
+            ProjectEditorWindow(id: id)
+                .environment(timer)
+                .modelContainer(container)
+        }
+        .windowResizability(.contentSize)
+        .defaultLaunchBehavior(.suppressed)
+        .restorationBehavior(.disabled)
+
         Settings {
             SettingsView()
                 .modelContainer(container)
@@ -59,17 +69,33 @@ struct TOMApp: App {
     }
 }
 
-/// Zeigt die aktive Laufzeit direkt in der Menüleiste.
+/// Zeigt die aktive Laufzeit direkt in der Menüleiste, in der gewählten Variante.
 struct MenuBarLabel: View {
     @Environment(TimerController.self) private var timer
-    @AppStorage(Prefs.showSecondsInMenuBar) private var showSeconds = true
+    @AppStorage(Prefs.menuBarStyle) private var style: MenuBarStyle = .iconMinutes
 
     var body: some View {
-        if timer.running != nil {
-            Text("\(Image(systemName: timer.running?.project?.iconName ?? "timer")) \(Fmt.clock(timer.elapsed, seconds: showSeconds))")
-                .monospacedDigit()
+        if timer.running != nil, style.showsTime {
+            let clock = Fmt.clock(timer.elapsed, seconds: style.showsSeconds)
+            if style.showsIcon {
+                Text("\(Image(systemName: timer.running?.project?.iconName ?? "timer")) \(clock)")
+                    .monospacedDigit()
+            } else {
+                Text(clock).monospacedDigit()
+            }
         } else {
-            Image(systemName: "timer")
+            Image(systemName: timer.running?.project?.iconName ?? "timer")
+        }
+    }
+}
+
+private struct ProjectEditorWindow: View {
+    let id: PersistentIdentifier?
+    @Environment(\.modelContext) private var context
+
+    var body: some View {
+        if let id, let project = context.model(for: id) as? Project {
+            ProjectEditor(project: project)
         }
     }
 }

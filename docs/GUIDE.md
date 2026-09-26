@@ -23,15 +23,18 @@
 3. Click the project and the timer starts. Click again or press **⌃⌥T** to stop it.
 4. “Open overview” shows the main window with all your times.
 
-In Settings (gear icon in the menu), TOM can open automatically at login.
+In Settings (gear icon in the menu or at the bottom left of the main window), TOM can open automatically at login.
 
 ## Timer
 
 - Only one timer runs at a time. Starting another project ends the running entry.
 - **⌃⌥T** works in any app: it stops the running timer or starts the project you used last.
-- The menu bar shows the running time next to the project's symbol.
+- The menu bar shows the running time next to the project's symbol. In Settings → General you choose
+  between h:mm (default), h:mm:ss, the time without a symbol, or the symbol only.
 - You can write a note in the menu while you work (“What are you working on?”).
 - Entries shorter than 3 seconds are discarded, so accidental clicks don't count.
+- **Stopped by accident?** For an hour after stopping, the menu shows “Continue …”. It reopens the
+  entry, and the time since stopping counts too. For a real break, just start the project again.
 
 ### Idle time
 
@@ -51,11 +54,14 @@ Settings → **Idle**:
 ![Editing a project with color, symbol, folder and hourly rate](screenshots/en/project.png)
 
 - **New project or folder:** click “+ New” at the bottom left of the main window.
-- **Edit:** right-click the project → “Edit …”. You can set the name, color, **symbol**, folder,
+- **Edit:** the slider button at the top right of a project (“Project settings”), right-click → “Edit …”
+  in the sidebar, or right-click the project in the menu bar. You can set the name, color, **symbol**, folder,
   an optional hourly rate and whether TOM asks about idle time.
 - **Folders** group projects, for example “Thesis”. The folder shows the total time of all its projects.
   Move projects with right-click → “Move to folder”.
-- **Archive** hides a project from the menu and keeps its times.
+- **Archive** (right-click, or the switch in the project settings) hides a project from the menu and the list
+  and keeps its times. Right-click a folder → “Archive folder” archives all of its projects at once.
+  Archived items sit in the collapsed “Archive” section at the bottom of the sidebar.
 - **Deleting** a project also deletes its entries. Deleting a folder keeps its projects.
 
 ## Entries
@@ -65,6 +71,9 @@ Settings → **Idle**:
 - **Edit:** double-click a row.
 - **Add time manually:** “+” at the top right.
 - **Delete:** select a row and press ⌫, or right-click → “Delete”.
+- **Move to another project:** drag rows onto a project in the sidebar, or right-click → “Move to project”.
+  Works with several selected rows too.
+- **Continue:** right-click the last stopped entry of today → “Continue”.
 
 ### Merging
 
@@ -143,7 +152,7 @@ Open Settings with the gear icon in the menu. There are five tabs:
 | Tab | Setting | Effect |
 | --- | --- | --- |
 | General | Open at login | TOM starts with your Mac |
-| General | Show seconds in the menu bar | 1:05:09 instead of 1:05 |
+| General | Menu bar shows | Symbol and time (1:05), with seconds, time only, or symbol only |
 | General | Show in Dock | Dock icon while the overview is open; off = menu bar only |
 | Idle | Detect idle time | Ask about time away, on or off |
 | Idle | Ask after | 5, 10, 15, 30 minutes or 1 hour |
@@ -159,6 +168,9 @@ Open Settings with the gear icon in the menu. There are five tabs:
 
 All times are stored in `~/Library/Application Support/TOM`. To back up, copy this folder
 (Settings → Data → “Data folder” → “Show in Finder”).
+
+When you start a new version for the first time, TOM automatically copies the database into the
+`Backups` subfolder first. The last five backups are kept, so an update can't lose any times.
 
 Uninstall:
 

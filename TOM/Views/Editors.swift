@@ -96,6 +96,7 @@ struct ProjectEditor: View {
 
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Environment(TimerController.self) private var timer
     @Query private var allProjects: [Project]
     @Query(sort: \Folder.sortIndex) private var folders: [Folder]
     @AppStorage(Prefs.currency) private var currency = "€"
@@ -106,9 +107,11 @@ struct ProjectEditor: View {
     @State private var ignoresIdle: Bool
     @State private var hourlyRate: Double?
     @State private var folder: Folder?
+    @State private var isArchived: Bool
 
     init(project: Project?, folder: Folder? = nil) {
         self.project = project
+        _isArchived = State(initialValue: project?.isArchived ?? false)
         _folder = State(initialValue: project?.folder ?? folder)
         _name = State(initialValue: project?.name ?? "")
         _colorHex = State(initialValue: project?.colorHex ?? ProjectPalette.colors[0].hex)
@@ -137,6 +140,12 @@ struct ProjectEditor: View {
                 Toggle(isOn: Binding(get: { !ignoresIdle }, set: { ignoresIdle = !$0 })) {
                     Text("Nachfragen, wenn ich weg war")
                     Text("Ausschalten für Arbeit abseits des Macs, z. B. Unterricht oder Dreharbeiten.")
+                }
+                if project != nil {
+                    Toggle(isOn: $isArchived) {
+                        Text("Archiviert")
+                        Text("Blendet das Projekt aus Menü und Liste aus. Die Zeiten bleiben erhalten.")
+                    }
                 }
             }
             .formStyle(.grouped)
@@ -168,6 +177,8 @@ struct ProjectEditor: View {
         target.hourlyRate = hourlyRate.flatMap { $0 > 0 ? $0 : nil }
         target.folder = folder
         folder?.isExpanded = true
+        if isArchived, timer.isRunning(target) { timer.stop() }
+        target.isArchived = isArchived
         try? context.save()
         dismiss()
     }

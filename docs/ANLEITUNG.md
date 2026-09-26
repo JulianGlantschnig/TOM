@@ -23,15 +23,18 @@
 3. Auf das Projekt klicken, der Timer läuft. Noch ein Klick oder **⌃⌥T** stoppt ihn.
 4. „Übersicht öffnen“ zeigt das Hauptfenster mit allen Zeiten.
 
-In den Einstellungen (Zahnrad im Menü) lässt sich TOM beim Anmelden automatisch starten.
+In den Einstellungen (Zahnrad im Menü oder unten links im Hauptfenster) lässt sich TOM beim Anmelden automatisch starten.
 
 ## Timer
 
 - Es läuft immer höchstens ein Timer. Startest du ein anderes Projekt, endet der laufende Eintrag automatisch.
 - **⌃⌥T** funktioniert in jeder App: stoppt den laufenden Timer oder startet das zuletzt genutzte Projekt.
-- In der Menüleiste steht die laufende Zeit mit dem Symbol des Projekts.
+- In der Menüleiste steht die laufende Zeit mit dem Symbol des Projekts. Unter Einstellungen → Allgemein
+  wählst du zwischen h:mm (Standard), h:mm:ss, nur der Zeit oder nur dem Symbol.
 - Im Menü kannst du während der Arbeit eine Notiz schreiben („Woran arbeitest du gerade?“).
 - Einträge unter 3 Sekunden werden verworfen, damit versehentliche Klicks nicht zählen.
+- **Versehentlich gestoppt?** Eine Stunde lang zeigt das Menü danach „… fortsetzen“. Das macht den Eintrag
+  wieder auf, die Zeit seit dem Stoppen zählt mit. Für eine echte Pause einfach das Projekt neu starten.
 
 ### Leerlauf
 
@@ -55,11 +58,14 @@ Einstellungen → **Leerlauf**:
 ![Projekt bearbeiten mit Farbe, Symbol, Ordner und Stundensatz](screenshots/projekt.png)
 
 - **Neues Projekt oder neuer Ordner:** im Hauptfenster unten links auf „+ Neu“.
-- **Bearbeiten:** Rechtsklick auf das Projekt → „Bearbeiten …“. Dort gibt es Name, Farbe, **Symbol**,
+- **Bearbeiten:** über den Regler-Knopf oben rechts im Projekt („Projekteinstellungen“), per Rechtsklick →
+  „Bearbeiten …“ in der Seitenleiste oder per Rechtsklick auf das Projekt im Menü. Dort gibt es Name, Farbe, **Symbol**,
   Ordner, einen optionalen Stundensatz und ob bei Leerlauf nachgefragt wird.
 - **Ordner** fassen Projekte zusammen, z. B. „Diplomarbeit“. Neben dem Ordner steht die Gesamtzeit aller
   Projekte darin. Projekte lassen sich per Rechtsklick → „In Ordner verschieben“ umhängen.
-- **Archivieren** blendet ein Projekt aus dem Menü aus, die Zeiten bleiben erhalten.
+- **Archivieren** (Rechtsklick oder Schalter in den Projekteinstellungen) blendet ein Projekt aus Menü und Liste
+  aus, die Zeiten bleiben erhalten. Rechtsklick auf einen Ordner → „Ordner archivieren“ archiviert alle Projekte
+  darin auf einmal. Archiviertes steht im zugeklappten Bereich „Archiv“ unten in der Seitenleiste.
 - **Löschen** eines Projekts löscht auch seine Einträge. Beim Löschen eines Ordners bleiben die Projekte erhalten.
 
 ## Einträge
@@ -70,6 +76,9 @@ Klick auf die Überschrift sortieren.
 - **Bearbeiten:** Doppelklick auf eine Zeile.
 - **Zeit nachtragen:** „+“ oben rechts.
 - **Löschen:** Zeile markieren und ⌫ drücken, oder Rechtsklick → „Löschen“.
+- **In ein anderes Projekt verschieben:** Zeilen auf ein Projekt in der Seitenleiste ziehen, oder Rechtsklick →
+  „In Projekt verschieben“. Geht auch mit mehreren markierten Zeilen.
+- **Fortsetzen:** Rechtsklick auf den zuletzt gestoppten Eintrag von heute → „Fortsetzen“.
 
 ### Zusammenführen
 
@@ -149,7 +158,7 @@ Die Einstellungen öffnest du über das Zahnrad im Menü. Sie haben fünf Tabs:
 | Tab | Einstellung | Wirkung |
 | --- | --- | --- |
 | Allgemein | Beim Anmelden automatisch starten | TOM startet mit dem Mac |
-| Allgemein | Sekunden in der Menüleiste zeigen | 1:05:09 statt 1:05 |
+| Allgemein | Menüleiste zeigt | Symbol und Zeit (1:05), mit Sekunden, nur Zeit oder nur Symbol |
 | Allgemein | Im Dock anzeigen | Dock-Symbol, solange die Übersicht offen ist; aus = nur Menüleiste |
 | Leerlauf | Leerlauf erkennen | Nachfrage nach Abwesenheit ein oder aus |
 | Leerlauf | Nachfragen nach | 5, 10, 15, 30 Minuten oder 1 Stunde |
@@ -165,6 +174,9 @@ Die Einstellungen öffnest du über das Zahnrad im Menü. Sie haben fünf Tabs:
 
 Alle Zeiten liegen in `~/Library/Application Support/TOM`. Für ein Backup diesen Ordner kopieren
 (Einstellungen → „Datenordner“ → „Im Finder zeigen“).
+
+Beim ersten Start einer neuen Version kopiert TOM die Datenbank vorher automatisch in den Unterordner
+`Backups`. Die letzten fünf Sicherungen bleiben liegen, bei einem Update gehen also keine Zeiten verloren.
 
 Deinstallieren:
 

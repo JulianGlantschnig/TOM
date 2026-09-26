@@ -51,7 +51,7 @@ private struct Footnote: View {
 // MARK: - Allgemein
 
 private struct GeneralSettings: View {
-    @AppStorage(Prefs.showSecondsInMenuBar) private var showSeconds = true
+    @AppStorage(Prefs.menuBarStyle) private var menuBarStyle: MenuBarStyle = .iconMinutes
     @AppStorage(Prefs.showInDock) private var showInDock = true
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var loginError: String?
@@ -75,7 +75,9 @@ private struct GeneralSettings: View {
                 if let loginError {
                     Text(loginError).font(.caption).foregroundStyle(.red)
                 }
-                Toggle("Sekunden in der Menüleiste zeigen", isOn: $showSeconds)
+                Picker("Menüleiste zeigt", selection: $menuBarStyle) {
+                    ForEach(MenuBarStyle.allCases) { Text($0.title).tag($0) }
+                }
                 Toggle(isOn: $showInDock) {
                     Text("Im Dock anzeigen")
                     Text("Solange die Übersicht offen ist. Ausgeschaltet bleibt TOM nur in der Menüleiste.")
