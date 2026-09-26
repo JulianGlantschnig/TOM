@@ -11,7 +11,7 @@ struct CSVDocument: FileDocument {
     init(entries: [TimeEntry]) {
         let rounding = Prefs.rounding
         let now = Date.now
-        var rows = [["Datum", "Beginn", "Ende", "Dauer", "Stunden", "Projekt", "Notiz", "Stundensatz", "Betrag"]]
+        var rows = [["Datum", "Beginn", "Ende", "Dauer", "Stunden", "Projekt", "Tools", "Notiz", "Stundensatz", "Betrag"]]
 
         for entry in entries.sorted(by: { $0.start < $1.start }) {
             let end = entry.end ?? now
@@ -24,6 +24,7 @@ struct CSVDocument: FileDocument {
                 Fmt.clock(duration, seconds: false),
                 Fmt.decimalHours(duration),
                 entry.project?.name ?? "",
+                entry.tools.map(\.name).joined(separator: ", "),
                 entry.note,
                 rate.map(Fmt.money) ?? "",
                 rate.map { Fmt.money($0 * duration / 3600) } ?? "",

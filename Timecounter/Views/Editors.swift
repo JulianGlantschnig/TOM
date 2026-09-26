@@ -14,6 +14,7 @@ struct EntryEditor: View {
     @State private var start: Date
     @State private var end: Date
     @State private var note: String
+    @State private var tools: [ToolUsage]
 
     init(entry: TimeEntry?, defaultProject: Project?) {
         self.entry = entry
@@ -22,6 +23,7 @@ struct EntryEditor: View {
         _start = State(initialValue: entry?.start ?? now.addingTimeInterval(-3600))
         _end = State(initialValue: entry?.end ?? now)
         _note = State(initialValue: entry?.note ?? "")
+        _tools = State(initialValue: entry?.tools ?? [])
     }
 
     private var isRunning: Bool { entry?.isRunning ?? false }
@@ -49,6 +51,9 @@ struct EntryEditor: View {
                         Text(end > start ? Fmt.hoursMinutes(end.timeIntervalSince(start)) : "Ende liegt vor dem Beginn")
                             .foregroundStyle(end > start ? Color.primary : Color.red)
                     }
+                }
+                LabeledContent("Tools") {
+                    ToolsMenu(tools: $tools, maxIcons: 8, showsEmptyLabel: true)
                 }
                 TextField("Notiz", text: $note, prompt: Text("z. B. Kapitel 3 überarbeitet"), axis: .vertical)
                     .lineLimit(3...6)
@@ -79,6 +84,7 @@ struct EntryEditor: View {
         target.start = start
         if !isRunning { target.end = end }
         target.note = note.trimmingCharacters(in: .whitespacesAndNewlines)
+        target.tools = tools
         try? context.save()
         dismiss()
     }

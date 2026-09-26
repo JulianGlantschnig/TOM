@@ -99,9 +99,12 @@ final class TimerController {
 
     private func finish(_ entry: TimeEntry, at date: Date) {
         entry.end = max(date, entry.start)
-        // Selbst geschriebene Notizen haben Vorrang, der Vorschlag füllt nur eine leere.
-        if ActivityTracker.isEnabled, entry.note.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            entry.note = activity.suggestion
+        if ActivityTracker.isEnabled {
+            entry.tools = Self.combine(entry.tools, activity.tools)
+            // Selbst geschriebene Notizen haben Vorrang, der Vorschlag füllt nur eine leere.
+            if entry.note.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                entry.note = activity.suggestion
+            }
         }
         activity.reset()
         // Versehentliche Klicks nicht als Eintrag behalten.
@@ -112,6 +115,19 @@ final class TimerController {
             running = nil
         }
         idleSince = nil
+    }
+
+    /// Von Hand gewählte und erkannte Tools zusammenlegen, Zeiten gleicher Programme addieren.
+    static func combine(_ lists: [ToolUsage]...) -> [ToolUsage] {
+        var result: [ToolUsage] = []
+        for tool in lists.joined() {
+            if let index = result.firstIndex(where: { $0.name == tool.name }) {
+                result[index].seconds += tool.seconds
+            } else {
+                result.append(tool)
+            }
+        }
+        return result
     }
 
     private func refresh() {

@@ -53,6 +53,8 @@ enum DemoData {
         projects[0...2].forEach { $0.folder = thesis }
 
         let notes = ["Kapitel 2 gegliedert", "Quellen zu Methodik gesichtet", "Interviews transkribiert", "", "Feedback eingearbeitet", "Diagramme erstellt"]
+        let demoTools = ["Figma", "Adobe InDesign", "DaVinci Resolve", "Microsoft Word", "Zen", "Adobe Illustrator"]
+            .compactMap { name in ToolCatalog.installed.first { $0.name == name }?.usage }
         let cal = Calendar.current
         var generator = SystemRandomNumberGenerator()
         for dayOffset in 1..<40 {
@@ -67,6 +69,9 @@ enum DemoData {
                     note: notes.randomElement(using: &generator)!,
                     project: projects.randomElement(using: &generator)!
                 )
+                let picked = demoTools.shuffled(using: &generator).prefix(Int.random(in: 0...2, using: &generator))
+                let shares = picked.isEmpty ? [] : [0.7, 0.3].prefix(picked.count)
+                entry.tools = zip(picked, shares).map { ToolUsage(bundleID: $0.bundleID, name: $0.name, seconds: length * $1) }
                 context.insert(entry)
                 cursor = cursor.addingTimeInterval(length + 20 * 60)
             }

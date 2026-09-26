@@ -101,6 +101,8 @@ struct StatsView: View {
                             if item.id != totals.last?.id { Divider() }
                         }
                     }
+
+                    ToolTotalsView(entries: entries, now: timer.now, limit: 12)
                 }
             }
             .padding(28)

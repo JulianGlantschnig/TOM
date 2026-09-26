@@ -57,6 +57,8 @@ final class TimeEntry {
     var end: Date?
     var note: String = ""
     var project: Project?
+    /// Verwendete Programme als JSON, siehe `tools`.
+    var toolsJSON: String = ""
 
     init(start: Date, end: Date? = nil, note: String = "", project: Project?) {
         self.start = start

@@ -5,36 +5,49 @@ Entstanden, um die Arbeitszeit an einer Diplomarbeit zu messen.
 
 *A small menu bar time tracker for macOS. The interface is in German.*
 
+![Übersicht eines Ordners mit Kennzahlen, Tools, Anteilen pro Projekt und Stunden pro Tag](docs/screenshots/uebersicht.png)
+
 ## Installation
 
 ```sh
 brew install --cask julianglantschnig/tap/timecounter
 ```
 
-Danach Timecounter aus dem Programme-Ordner starten, das Symbol erscheint oben in der Menüleiste.
-
-> Timecounter ist nicht von Apple notarisiert (dafür braucht es ein kostenpflichtiges Entwicklerkonto).
-> Die Homebrew-Installation entfernt deshalb die Quarantäne-Markierung, damit macOS die App öffnet.
-> Wer das nicht möchte, kann die App selbst aus dem Quellcode bauen (siehe unten).
+Danach Timecounter aus dem Programme-Ordner starten. Das Symbol erscheint oben rechts in der Menüleiste.
+Aktualisieren geht mit `brew upgrade --cask timecounter`.
 
 Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 
+> Timecounter ist nicht von Apple notarisiert (dafür braucht es ein kostenpflichtiges Entwicklerkonto).
+> Die Homebrew-Installation entfernt deshalb die Quarantäne-Markierung, damit macOS die App öffnet.
+> Wer die ZIP-Datei direkt von den [Releases](https://github.com/JulianGlantschnig/timecounter/releases) lädt,
+> öffnet die App beim ersten Mal mit Rechtsklick → „Öffnen“.
+
 ## Funktionen
 
-- Timer per Klick in der Menüleiste oder von überall mit **⌃⌥T**
-- Projekte mit Farbe und Symbol, zusammengefasst in **Ordnern** mit Gesamtstunden
-- Übersicht pro Ordner und Projekt: Kennzahlen, Ring mit Anteilen in Prozent, Balken pro Tag
-- Tabelle aller Einträge wie in Tim, sortierbar, mit Notizen
-- Mehrere Einträge eines Tages zu **einer Zeile zusammenführen**
-- **Leerlauf-Erkennung**: war der Mac unbenutzt, lässt sich die Zeit abziehen
-- **Tätigkeit erkennen** (optional): merkt sich, welche App vorne war, und schlägt daraus eine Notiz vor
-- Export als CSV (Excel-tauglich), optional gerundet, mit Stundensatz und Betrag
-- Import aller Aufgaben und Zeiten aus Tim
-- Alle Daten bleiben lokal unter `~/Library/Application Support/Timecounter`
+<img src="docs/screenshots/menueleiste.png" alt="Laufender Timer im Menü der Menüleiste" width="320" align="right">
+
+- **Timer in der Menüleiste**: ein Klick auf ein Projekt startet, von überall geht es mit **⌃⌥T**
+- **Projekte und Ordner**: jedes Projekt mit Farbe und Symbol, Ordner zählen ihre Projekte zusammen
+- **Übersicht** pro Ordner und Projekt: Kennzahlen, Ring mit Anteilen in Prozent, Stunden pro Tag
+- **Tools**: welche Programme (Figma, DaVinci Resolve, InDesign …) in einem Eintrag verwendet wurden, mit echten App-Icons
+- **Automatische Erkennung**: merkt sich während des Timers die App im Vordergrund und rechnet die Zeit pro Tool
+- **Notizvorschlag** aus den erkannten Apps, jederzeit selbst änderbar
+- **Einträge zusammenführen**: mehrere Zeilen eines Tages werden zu einer
+- **Leerlauf-Erkennung**: warst du weg, lässt sich die Zeit abziehen
+- **CSV-Export** für Excel und Numbers, optional gerundet, mit Stundensatz und Betrag
+- **Import aus Tim** mit allen Aufgaben, Gruppen und Zeiten
+- Alle Daten bleiben **lokal** auf dem Mac
+
+<br clear="right">
+
+![Tabelle aller Einträge mit Projekt, Zeiten, Dauer, Tools und Notiz](docs/screenshots/eintraege.png)
+
+Wie alles im Detail funktioniert, steht in der **[Anleitung](docs/ANLEITUNG.md)**.
 
 ## Aus dem Quellcode bauen
 
-Xcode 26 oder neuer:
+Mit Xcode 26 oder neuer:
 
 ```sh
 git clone https://github.com/JulianGlantschnig/timecounter.git
@@ -43,15 +56,23 @@ xcodebuild -project Timecounter.xcodeproj -target Timecounter -configuration Rel
 cp -R build/Release/Timecounter.app /Applications/
 ```
 
+Zum Ausprobieren ohne eigene Daten gibt es im Debug-Build einen Demo-Modus mit Beispieldaten im Speicher:
+
+```sh
+xcodebuild -project Timecounter.xcodeproj -target Timecounter -configuration Debug SYMROOT=build build
+build/Debug/Timecounter.app/Contents/MacOS/Timecounter -demo -demoPage folder
+```
+
 ## Neue Version veröffentlichen
 
 ```sh
-scripts/release.sh 1.1
-gh release create v1.1 dist/Timecounter-1.1.zip --title "Timecounter 1.1"
+scripts/release.sh 1.2
+gh release create v1.2 dist/Timecounter-1.2.zip --title "Timecounter 1.2"
 ```
 
-Danach in `Casks/timecounter.rb` im Repository `homebrew-tap` Version und `sha256` aktualisieren.
+Danach im Repository [homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) in `Casks/timecounter.rb`
+die Version und `sha256` anpassen.
 
 ## Lizenz
 
-MIT
+[MIT](LICENSE)

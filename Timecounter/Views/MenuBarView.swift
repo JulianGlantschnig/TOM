@@ -119,7 +119,7 @@ private struct MenuContent: View {
 /// Die laufende Zeit ist das eine laute Element der App: groß, in Projektfarbe.
 private struct RunningCard: View {
     @Environment(TimerController.self) private var timer
-    @AppStorage(Prefs.detectActivity) private var detectActivity = false
+    @AppStorage(Prefs.detectActivity) private var detectActivity = true
     @Bindable var entry: TimeEntry
 
     var body: some View {

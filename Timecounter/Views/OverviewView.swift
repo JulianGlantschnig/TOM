@@ -71,6 +71,8 @@ struct OverviewView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     header
                     figures(entries: entries, slices: slices, activeDays: days.count, total: total)
+                    ToolTotalsView(entries: entries, now: timer.now, limit: 5)
+                        .frame(maxWidth: 520)
                 }
                 Spacer(minLength: 0)
                 if !slices.isEmpty {

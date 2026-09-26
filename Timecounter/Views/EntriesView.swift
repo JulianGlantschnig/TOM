@@ -171,6 +171,7 @@ struct EntriesView: View {
 
             first.end = includeBreaks ? lastEnd : first.start.addingTimeInterval(worked)
             first.note = notes.joined(separator: "\n")
+            first.tools = TimerController.combine(group.flatMap(\.tools))
             group.dropFirst().forEach(context.delete)
         }
         try? context.save()
@@ -189,6 +190,7 @@ struct EntriesView: View {
 /// Tabelle im Stil von Tim: eine Zeile pro Eintrag, alle Spalten sortierbar.
 private struct EntriesTable: View {
     @Environment(TimerController.self) private var timer
+    @Environment(\.modelContext) private var context
     let entries: [TimeEntry]
     let showsProject: Bool
     let showsAmount: Bool
@@ -236,7 +238,7 @@ private struct EntriesTable: View {
                     .fontWeight(entry.isRunning ? .semibold : .regular)
                     .foregroundStyle(entry.isRunning ? (entry.project?.color ?? .accentColor) : .primary)
             }
-            .width(min: 50, ideal: 56, max: 84)
+            .width(min: 68, ideal: 74, max: 90)
 
             if showsAmount {
                 TableColumn("Betrag", value: \.amountForSorting) { entry in
@@ -245,6 +247,11 @@ private struct EntriesTable: View {
                 }
                 .width(min: 60, ideal: 76, max: 110)
             }
+
+            TableColumn("Tools", value: \.toolsSortKey) { entry in
+                ToolsMenu(tools: toolsBinding(for: entry))
+            }
+            .width(min: 60, ideal: 96, max: 180)
 
             TableColumn("Notiz", value: \.note) { entry in
                 Text(Fmt.firstLine(entry.note))
@@ -255,11 +262,29 @@ private struct EntriesTable: View {
         }
         .monospacedDigit()
     }
+
+    /// Beim laufenden Eintrag zeigt die Spalte schon, was gerade erkannt wird.
+    private func toolsBinding(for entry: TimeEntry) -> Binding<[ToolUsage]> {
+        Binding(
+            get: {
+                guard entry.isRunning, timer.running?.persistentModelID == entry.persistentModelID else { return entry.tools }
+                return TimerController.combine(entry.tools, timer.activity.tools)
+            },
+            set: { newValue in
+                // Beim laufenden Eintrag nur die von Hand gewählten speichern, der Rest kommt beim Stoppen dazu.
+                let detected = entry.isRunning ? Set(timer.activity.tools.map(\.name)) : []
+                let stored = Set(entry.tools.map(\.name))
+                entry.tools = newValue.filter { !detected.contains($0.name) || stored.contains($0.name) }
+                try? context.save()
+            }
+        )
+    }
 }
 
 private extension TimeEntry {
     var projectName: String { project?.name ?? "Ohne Projekt" }
     var endForSorting: Date { end ?? .distantFuture }
+    var toolsSortKey: String { tools.first?.name ?? "" }
     var storedDuration: TimeInterval { duration() }
     var amountForSorting: Double { amount(now: .now) ?? 0 }
 

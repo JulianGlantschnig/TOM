@@ -11,6 +11,7 @@ import CoreGraphics
 final class ActivityTracker {
     struct AppUsage {
         let name: String
+        let bundleID: String
         var seconds: TimeInterval = 0
         var titles: [String: TimeInterval] = [:]
     }
@@ -50,12 +51,14 @@ final class ActivityTracker {
             CGEventSource.secondsSinceLastEventType(.combinedSessionState, eventType: anyInput) < Self.idleLimit,
             let app = NSWorkspace.shared.frontmostApplication,
             !Self.ignoredBundleIDs.contains(app.bundleIdentifier ?? ""),
-            let name = app.localizedName
+            let rawName = app.localizedName,
+            let bundleID = app.bundleIdentifier
         else { return }
+        let name = ToolCatalog.displayName(rawName)
 
         // Nach Schlaf oder Hänger nicht die ganze Lücke der aktuellen App zuschlagen.
         let seconds = min(elapsed, Self.interval * 2)
-        var usage = apps[name] ?? AppUsage(name: name)
+        var usage = apps[name] ?? AppUsage(name: name, bundleID: bundleID)
         usage.seconds += seconds
         if Self.readsTitles, let title = Self.frontWindowTitle(pid: app.processIdentifier, appName: name) {
             usage.titles[title, default: 0] += seconds
@@ -66,6 +69,15 @@ final class ActivityTracker {
     /// Die meistgenutzten Apps, für die kurze Anzeige im Menü.
     var topAppNames: [String] {
         ranked.prefix(3).map(\.name)
+    }
+
+    /// Die Apps, in denen wirklich gearbeitet wurde, mit gemessener Zeit.
+    var tools: [ToolUsage] {
+        let ranked = ranked
+        let total = ranked.reduce(0) { $0 + $1.seconds }
+        let relevant = ranked.filter { $0.seconds >= max(60, total * 0.05) }
+        return (relevant.isEmpty ? Array(ranked.prefix(1)) : relevant)
+            .map { ToolUsage(bundleID: $0.bundleID, name: $0.name, seconds: $0.seconds) }
     }
 
     /// Notizvorschlag, eine Zeile pro App, z. B. „Figma (40 min): Screens Kapitel 3, Navigation“.

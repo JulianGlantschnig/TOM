@@ -6,7 +6,7 @@ struct SettingsView: View {
     @AppStorage(Prefs.showSecondsInMenuBar) private var showSeconds = true
     @AppStorage(Prefs.roundingMinutes) private var roundingMinutes = 0
     @AppStorage(Prefs.currency) private var currency = "€"
-    @AppStorage(Prefs.detectActivity) private var detectActivity = false
+    @AppStorage(Prefs.detectActivity) private var detectActivity = true
     @AppStorage(Prefs.readWindowTitles) private var readWindowTitles = false
     @State private var hasTitleAccess = ActivityTracker.hasTitleAccess
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled

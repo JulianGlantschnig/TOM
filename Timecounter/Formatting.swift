@@ -19,7 +19,7 @@ enum Prefs {
             showSecondsInMenuBar: true,
             roundingMinutes: 0,
             currency: "€",
-            detectActivity: false,
+            detectActivity: true,
             readWindowTitles: false,
         ])
     }
