@@ -22,9 +22,12 @@ struct DurationText: View {
     }
 
     private func group(_ number: String, _ unit: String) -> Text {
+        // Die enge Laufweite wirkt auch nach der letzten Ziffer, ein schmales Leerzeichen gibt der Einheit wieder Luft.
         Text(number)
             .font(.system(size: size, weight: .semibold, design: .rounded))
             .tracking(-size * 0.03)
+        + Text(verbatim: "\u{2009}")
+            .font(.system(size: size * 0.52, weight: .medium, design: .rounded))
         + Text(verbatim: unit)
             .font(.system(size: size * 0.52, weight: .medium, design: .rounded))
             .foregroundStyle(.secondary)
