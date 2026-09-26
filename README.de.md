@@ -14,7 +14,8 @@ Entstanden, um die Arbeitszeit an einer Diplomarbeit zu messen.
 ## Installation
 
 ```sh
-brew install --cask julianglantschnig/tap/tom
+brew tap julianglantschnig/tom https://github.com/JulianGlantschnig/TOM
+brew install --cask julianglantschnig/tom/tom
 ```
 
 Danach TOM aus dem Programme-Ordner starten. Das Symbol erscheint oben rechts in der Menüleiste.
@@ -99,8 +100,7 @@ scripts/release.sh 1.7
 gh release create v1.7 dist/TOM-1.7.zip --title "TOM 1.7"
 ```
 
-Danach im Repository [homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) in `Casks/tom.rb`
-die Version und `sha256` anpassen.
+Danach in [`Casks/tom.rb`](Casks/tom.rb) die Version und `sha256` anpassen und pushen.
 
 ## Lizenz
 

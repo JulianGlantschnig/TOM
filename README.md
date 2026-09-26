@@ -12,7 +12,8 @@ Built to track the hours spent on a master's thesis, and useful for any project 
 ## Install
 
 ```sh
-brew install --cask julianglantschnig/tap/tom
+brew tap julianglantschnig/tom https://github.com/JulianGlantschnig/TOM
+brew install --cask julianglantschnig/tom/tom
 ```
 
 Then open TOM from your Applications folder. Its icon appears in the menu bar.
@@ -95,8 +96,7 @@ scripts/release.sh 1.7
 gh release create v1.7 dist/TOM-1.7.zip --title "TOM 1.7"
 ```
 
-Then update `version` and `sha256` in `Casks/tom.rb` in the
-[homebrew-tap](https://github.com/JulianGlantschnig/homebrew-tap) repository.
+Then update `version` and `sha256` in [`Casks/tom.rb`](Casks/tom.rb) and push.
 
 ## License
 
