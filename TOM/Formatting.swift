@@ -21,6 +21,10 @@ enum Prefs {
     static let detectActivity = "detectActivity"
     /// Liest zusätzlich die Fenstertitel mit (braucht die Freigabe für Bildschirmaufnahme).
     static let readWindowTitles = "readWindowTitles"
+    /// Kommt eine App nach vorne, die einem Projekt zugeordnet ist, startet TOM dieses Projekt.
+    static let appTriggers = "appTriggers"
+    /// Vorher nachfragen statt direkt zu starten.
+    static let appTriggersAsk = "appTriggersAsk"
 
     static func registerDefaults() {
         UserDefaults.standard.register(defaults: [
@@ -33,6 +37,8 @@ enum Prefs {
             currency: "€",
             detectActivity: true,
             readWindowTitles: false,
+            appTriggers: false,
+            appTriggersAsk: true,
         ])
     }
 

@@ -152,6 +152,8 @@ private struct IdleSettings: View {
 private struct DetectionSettings: View {
     @AppStorage(Prefs.detectActivity) private var detectActivity = true
     @AppStorage(Prefs.readWindowTitles) private var readWindowTitles = false
+    @AppStorage(Prefs.appTriggers) private var appTriggers = false
+    @AppStorage(Prefs.appTriggersAsk) private var appTriggersAsk = true
     @State private var hasTitleAccess = ActivityTracker.hasTitleAccess
 
     var body: some View {
@@ -175,6 +177,13 @@ private struct DetectionSettings: View {
                 }
             } footer: {
                 Footnote("Während ein Timer läuft, merkt sich TOM, welche App vorne ist. Daraus werden die Tools des Eintrags und ein Vorschlag für die Notiz, falls du selbst nichts geschrieben hast. Nichts davon verlässt diesen Mac.")
+            }
+            Section {
+                Toggle("Timer starten, wenn ich eine App öffne", isOn: $appTriggers)
+                Toggle("Vorher nachfragen", isOn: $appTriggersAsk)
+                    .disabled(!appTriggers)
+            } footer: {
+                Footnote("Welche Apps zu einem Projekt gehören, stellst du beim Projekt unter „Startet mit“ ein. Läuft schon ein anderes Projekt, fragt TOM immer, bevor es wechselt.")
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in

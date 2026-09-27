@@ -60,6 +60,16 @@
         }
       }
     },
+    "%@ starten?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start %@?"
+          }
+        }
+      }
+    },
     "%lld Einträge gehen dabei verloren. Wenn du die Zeiten behalten willst, archiviere das Projekt stattdessen." : {
       "localizations" : {
         "en" : {
@@ -349,6 +359,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "View"
+          }
+        }
+      }
+    },
+    "Apps wählen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Apps"
           }
         }
       }
@@ -749,6 +769,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Thesis"
+          }
+        }
+      }
+    },
+    "Du arbeitest in %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You’re working in %@"
           }
         }
       }
@@ -1197,6 +1227,16 @@
         }
       }
     },
+    "Kommt eine dieser Apps nach vorne, startet TOM dieses Projekt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When one of these apps comes to the front, TOM starts this project."
+          }
+        }
+      }
+    },
     "läuft" : {
       "localizations" : {
         "en" : {
@@ -1364,6 +1404,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name, color, symbol, hourly rate and archive"
+          }
+        }
+      }
+    },
+    "Nein" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No"
           }
         }
       }
@@ -1832,6 +1882,26 @@
         }
       }
     },
+    "Starten" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "Startet mit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Starts with"
+          }
+        }
+      }
+    },
     "Stunden" : {
       "localizations" : {
         "en" : {
@@ -1948,6 +2018,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Start or stop timer"
+          }
+        }
+      }
+    },
+    "Timer starten, wenn ich eine App öffne" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start timer when I open an app"
           }
         }
       }
@@ -2092,6 +2172,16 @@
         }
       }
     },
+    "Vorher nachfragen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ask first"
+          }
+        }
+      }
+    },
     "Vorschlag:\n%@\n\nWird beim Stoppen automatisch eingetragen, falls du selbst nichts schreibst." : {
       "localizations" : {
         "en" : {
@@ -2128,6 +2218,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Currency"
+          }
+        }
+      }
+    },
+    "Wechseln" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switch"
+          }
+        }
+      }
+    },
+    "Welche Apps zu einem Projekt gehören, stellst du beim Projekt unter „Startet mit“ ein. Läuft schon ein anderes Projekt, fragt TOM immer, bevor es wechselt." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose which apps belong to a project under “Starts with” in the project settings. If another project is already running, TOM always asks before switching."
           }
         }
       }
@@ -2248,6 +2358,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Choose period"
+          }
+        }
+      }
+    },
+    "Zu %@ wechseln?" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Switch to %@?"
           }
         }
       }

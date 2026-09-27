@@ -170,6 +170,7 @@ Open Settings with the gear icon in the menu. There are five tabs:
 | Idle | Ask for these projects | Exceptions for work away from the Mac |
 | Detection | Detect activity automatically | Tools and suggested note from the frontmost app |
 | Detection | Also read window titles | Document and page titles in the suggested note |
+| Detection | Start timer when I open an app | Starts the project whose app (project → “Starts with”) comes to the front; “Ask first” shows a prompt instead |
 | Data | Round up on export | Round durations in the CSV up to full minutes |
 | Data | Currency | Symbol for amounts |
 | Data | Times from Tim, data folder | Import and backup |

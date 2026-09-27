@@ -172,6 +172,7 @@ Die Einstellungen öffnest du über das Zahnrad im Menü. Sie haben fünf Tabs:
 | Leerlauf | Nachfragen bei diesen Projekten | Ausnahmen für Arbeit abseits des Macs |
 | Erkennung | Tätigkeit automatisch erkennen | Tools und Notizvorschlag aus der App im Vordergrund |
 | Erkennung | Auch Fenstertitel mitlesen | Dokument- und Seitentitel im Notizvorschlag |
+| Erkennung | Timer starten, wenn ich eine App öffne | Startet das Projekt, dessen App (Projekt → „Startet mit“) nach vorne kommt; „Vorher nachfragen“ zeigt stattdessen einen Hinweis |
 | Daten | Beim Export aufrunden | Dauer im CSV auf volle Minuten aufrunden |
 | Daten | Währung | Zeichen für Beträge |
 | Daten | Zeiten aus Tim, Datenordner | Import und Backup |

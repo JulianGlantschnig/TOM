@@ -16,6 +16,8 @@ final class Project {
     var iconName: String?
     /// Für Arbeit abseits des Macs (Unterricht, Dreharbeiten): keine Leerlauf-Nachfrage.
     var ignoresIdle: Bool = false
+    /// Apps, bei denen TOM dieses Projekt starten soll, als JSON, siehe `triggerApps`.
+    var triggerAppsJSON: String = ""
 
     @Relationship(deleteRule: .cascade, inverse: \TimeEntry.project)
     var entries: [TimeEntry] = []

@@ -50,6 +50,8 @@ enum DemoData {
         for (project, icon) in zip(projects, ["books.vertical", "square.and.pencil", "chart.pie", nil]) {
             project.iconName = icon
         }
+        // Für „Startet mit“: Schreiben startet mit TextEdit.
+        projects[1].triggerApps = [ToolUsage(bundleID: "com.apple.TextEdit", name: "TextEdit")]
         projects.forEach(context.insert)
         let thesis = Folder(name: String(localized: "Diplomarbeit"), colorHex: ProjectPalette.colors[2].hex)
         context.insert(thesis)

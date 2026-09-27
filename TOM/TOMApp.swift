@@ -5,6 +5,7 @@ import SwiftUI
 struct TOMApp: App {
     private let container: ModelContainer
     @State private var timer: TimerController
+    private let appTrigger: AppTrigger
 
     init() {
         Prefs.registerDefaults()
@@ -26,6 +27,7 @@ struct TOMApp: App {
         }
         let timer = TimerController(context: container.mainContext)
         _timer = State(initialValue: timer)
+        appTrigger = AppTrigger(context: container.mainContext, timer: timer)
         #if DEBUG
         if DemoData.isEnabled {
             DispatchQueue.main.async { DemoData.presentWindows(timer: timer, container: container) }

@@ -35,6 +35,18 @@ extension TimeEntry {
     }
 }
 
+extension Project {
+    var triggerApps: [ToolUsage] {
+        get {
+            guard !triggerAppsJSON.isEmpty else { return [] }
+            return (try? JSONDecoder().decode([ToolUsage].self, from: Data(triggerAppsJSON.utf8))) ?? []
+        }
+        set {
+            triggerAppsJSON = newValue.isEmpty ? "" : (try? String(decoding: JSONEncoder().encode(newValue), as: UTF8.self)) ?? ""
+        }
+    }
+}
+
 /// Findet die installierten Programme und ihre Icons.
 @MainActor
 enum ToolCatalog {
@@ -167,6 +179,7 @@ struct ToolsMenu: View {
     @Binding var tools: [ToolUsage]
     var maxIcons = 5
     var showsEmptyLabel = false
+    var emptyTitle: LocalizedStringKey = "Tools wählen"
 
     var body: some View {
         Menu {
@@ -205,7 +218,7 @@ struct ToolsMenu: View {
     private var label: some View {
         if tools.isEmpty {
             if showsEmptyLabel {
-                Label("Tools wählen", systemImage: "plus.circle")
+                Label(emptyTitle, systemImage: "plus.circle")
             } else {
                 // Menü-Beschriftungen ignorieren SwiftUI-Farben, deshalb ein fertig eingefärbtes Symbol.
                 Image(nsImage: Self.faintPlus)

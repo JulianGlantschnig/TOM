@@ -100,6 +100,7 @@ struct ProjectEditor: View {
     @Query private var allProjects: [Project]
     @Query(sort: \Folder.sortIndex) private var folders: [Folder]
     @AppStorage(Prefs.currency) private var currency = "€"
+    @AppStorage(Prefs.appTriggers) private var appTriggers = false
 
     @State private var name: String
     @State private var colorHex: String
@@ -108,6 +109,7 @@ struct ProjectEditor: View {
     @State private var hourlyRate: Double?
     @State private var folder: Folder?
     @State private var isArchived: Bool
+    @State private var triggerApps: [ToolUsage]
 
     init(project: Project?, folder: Folder? = nil) {
         self.project = project
@@ -118,6 +120,7 @@ struct ProjectEditor: View {
         _iconName = State(initialValue: project?.iconName)
         _ignoresIdle = State(initialValue: project?.ignoresIdle ?? false)
         _hourlyRate = State(initialValue: project?.hourlyRate)
+        _triggerApps = State(initialValue: project?.triggerApps ?? [])
     }
 
     var body: some View {
@@ -140,6 +143,14 @@ struct ProjectEditor: View {
                 Toggle(isOn: Binding(get: { !ignoresIdle }, set: { ignoresIdle = !$0 })) {
                     Text("Nachfragen, wenn ich weg war")
                     Text("Ausschalten für Arbeit abseits des Macs, z. B. Unterricht oder Dreharbeiten.")
+                }
+                if appTriggers {
+                    LabeledContent {
+                        ToolsMenu(tools: $triggerApps, showsEmptyLabel: true, emptyTitle: "Apps wählen")
+                    } label: {
+                        Text("Startet mit")
+                        Text("Kommt eine dieser Apps nach vorne, startet TOM dieses Projekt.")
+                    }
                 }
                 if project != nil {
                     Toggle(isOn: $isArchived) {
@@ -174,6 +185,7 @@ struct ProjectEditor: View {
         target.colorHex = colorHex
         target.iconName = iconName
         target.ignoresIdle = ignoresIdle
+        target.triggerApps = triggerApps.map { ToolUsage(bundleID: $0.bundleID, name: $0.name) }
         target.hourlyRate = hourlyRate.flatMap { $0 > 0 ? $0 : nil }
         target.folder = folder
         folder?.isExpanded = true
