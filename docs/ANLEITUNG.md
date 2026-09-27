@@ -164,6 +164,7 @@ Die Einstellungen öffnest du über das Zahnrad im Menü. Sie haben fünf Tabs:
 | Tab | Einstellung | Wirkung |
 | --- | --- | --- |
 | Allgemein | Beim Anmelden automatisch starten | TOM startet mit dem Mac |
+| Allgemein | Erscheinungsbild | Wie System, Hell oder Dunkel |
 | Allgemein | Menüleiste zeigt | Symbol und Zeit (1:05), mit Sekunden, nur Zeit oder nur Symbol |
 | Allgemein | Im Dock anzeigen | Dock-Symbol, solange die Übersicht offen ist; aus = nur Menüleiste |
 | Leerlauf | Leerlauf erkennen | Nachfrage nach Abwesenheit ein oder aus |

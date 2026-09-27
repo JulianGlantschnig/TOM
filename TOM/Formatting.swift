@@ -12,6 +12,8 @@ enum Prefs {
     static let menuBarStyle = "menuBarStyle"
     /// Dock-Symbol zeigen, solange das Übersichtsfenster offen ist.
     static let showInDock = "showInDock"
+    /// Hell, dunkel oder wie das System, siehe `AppAppearance`.
+    static let appearance = "appearance"
     /// Aufrunden beim Export auf volle N Minuten. 0 = exakt.
     static let roundingMinutes = "roundingMinutes"
     static let currency = "currency"
@@ -26,6 +28,7 @@ enum Prefs {
             idleMinutes: 10,
             menuBarStyle: legacyMenuBarStyle.rawValue,
             showInDock: true,
+            appearance: AppAppearance.system.rawValue,
             roundingMinutes: 0,
             currency: "€",
             detectActivity: true,
@@ -60,6 +63,31 @@ enum MenuBarStyle: String, CaseIterable, Identifiable {
     var showsIcon: Bool { self != .minutes }
     var showsTime: Bool { self != .icon }
     var showsSeconds: Bool { self == .iconSeconds }
+}
+
+/// Erscheinungsbild der ganzen App, also Menü, Übersicht und Einstellungen gemeinsam.
+enum AppAppearance: String, CaseIterable, Identifiable {
+    case system, light, dark
+
+    var id: Self { self }
+
+    var title: String {
+        switch self {
+        case .system: String(localized: "Wie System")
+        case .light: String(localized: "Hell")
+        case .dark: String(localized: "Dunkel")
+        }
+    }
+
+    @MainActor
+    static func apply() {
+        let stored = UserDefaults.standard.string(forKey: Prefs.appearance)
+        NSApplication.shared.appearance = switch AppAppearance(rawValue: stored ?? "") ?? .system {
+        case .system: nil
+        case .light: NSAppearance(named: .aqua)
+        case .dark: NSAppearance(named: .darkAqua)
+        }
+    }
 }
 
 /// TOM lebt in der Menüleiste. Ins Dock kommt es nur, solange die Übersicht offen ist und es gewünscht ist.

@@ -763,6 +763,16 @@
         }
       }
     },
+    "Dunkel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
+          }
+        }
+      }
+    },
     "Einstellungen" : {
       "localizations" : {
         "en" : {
@@ -883,6 +893,16 @@
         }
       }
     },
+    "Erscheinungsbild" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        }
+      }
+    },
     "Export" : {
       "localizations" : {
         "en" : {
@@ -990,6 +1010,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "stopped %@"
+          }
+        }
+      }
+    },
+    "Hell" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
           }
         }
       }
@@ -2098,6 +2128,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Currency"
+          }
+        }
+      }
+    },
+    "Wie System" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Match System"
           }
         }
       }

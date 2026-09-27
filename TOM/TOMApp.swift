@@ -8,6 +8,7 @@ struct TOMApp: App {
 
     init() {
         Prefs.registerDefaults()
+        AppAppearance.apply()
         #if DEBUG
         if !DemoData.isEnabled { Persistence.backupIfNewVersion() }
         let container = DemoData.isEnabled ? DemoData.makeContainer() : Persistence.makeContainer()

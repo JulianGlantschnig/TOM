@@ -53,6 +53,7 @@ private struct Footnote: View {
 private struct GeneralSettings: View {
     @AppStorage(Prefs.menuBarStyle) private var menuBarStyle: MenuBarStyle = .iconMinutes
     @AppStorage(Prefs.showInDock) private var showInDock = true
+    @AppStorage(Prefs.appearance) private var appearance: AppAppearance = .system
     @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
     @State private var loginError: String?
 
@@ -75,6 +76,10 @@ private struct GeneralSettings: View {
                 if let loginError {
                     Text(loginError).font(.caption).foregroundStyle(.red)
                 }
+                Picker("Erscheinungsbild", selection: $appearance) {
+                    ForEach(AppAppearance.allCases) { Text($0.title).tag($0) }
+                }
+                .onChange(of: appearance) { AppAppearance.apply() }
                 Picker("Menüleiste zeigt", selection: $menuBarStyle) {
                     ForEach(MenuBarStyle.allCases) { Text($0.title).tag($0) }
                 }

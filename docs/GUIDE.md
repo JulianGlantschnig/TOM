@@ -162,6 +162,7 @@ Open Settings with the gear icon in the menu. There are five tabs:
 | Tab | Setting | Effect |
 | --- | --- | --- |
 | General | Open at login | TOM starts with your Mac |
+| General | Appearance | Match System, Light, or Dark |
 | General | Menu bar shows | Symbol and time (1:05), with seconds, time only, or symbol only |
 | General | Show in Dock | Dock icon while the overview is open; off = menu bar only |
 | Idle | Detect idle time | Ask about time away, on or off |
