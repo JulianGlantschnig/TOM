@@ -33,7 +33,8 @@ In den Einstellungen (Zahnrad im Menü oder unten links im Hauptfenster) lässt 
 - **⌃⌥T** funktioniert in jeder App: stoppt den laufenden Timer oder startet das zuletzt genutzte Projekt.
 - In der Menüleiste steht die laufende Zeit mit dem Symbol des Projekts. Unter Einstellungen → Allgemein
   wählst du zwischen h:mm (Standard), h:mm:ss, nur der Zeit oder nur dem Symbol.
-- Im Menü kannst du während der Arbeit eine Notiz schreiben („Woran arbeitest du gerade?“).
+- Im Menü kannst du während der Arbeit eine Notiz schreiben („Woran arbeitest du gerade?“). Beim Bearbeiten eines
+  Eintrags ist die Notiz ein eigener Textblock, dort macht Enter einen neuen Absatz.
 - Einträge unter 3 Sekunden werden verworfen, damit versehentliche Klicks nicht zählen.
 - **Versehentlich gestoppt?** Eine Stunde lang zeigt das Menü danach „… fortsetzen“. Das macht den Eintrag
   wieder auf, die Zeit seit dem Stoppen zählt mit. Für eine echte Pause einfach das Projekt neu starten.
@@ -64,7 +65,8 @@ Einstellungen → **Leerlauf**:
 - **Neues Projekt oder neuer Ordner:** im Hauptfenster unten links auf „+ Neu“.
 - **Bearbeiten:** über den Regler-Knopf oben rechts im Projekt („Projekteinstellungen“), per Rechtsklick →
   „Bearbeiten …“ in der Seitenleiste oder per Rechtsklick auf das Projekt im Menü. Dort gibt es Name, Farbe, **Symbol**,
-  Ordner, einen optionalen Stundensatz und ob bei Leerlauf nachgefragt wird.
+  Ordner, einen optionalen Stundensatz und ob bei Leerlauf nachgefragt wird. Der bunte Kreis am Ende der Farben
+  öffnet den Farbkreis von macOS für eine eigene Farbe.
 - **Ordner** fassen Projekte zusammen, z. B. „Diplomarbeit“. Neben dem Ordner steht die Gesamtzeit aller
   Projekte darin. Projekte lassen sich per Rechtsklick → „In Ordner verschieben“ umhängen.
 - **Archivieren** (Rechtsklick oder Schalter in den Projekteinstellungen) blendet ein Projekt aus Menü und Liste

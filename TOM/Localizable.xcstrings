@@ -803,6 +803,16 @@
         }
       }
     },
+    "Eigene Farbe wählen …" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose Custom Color…"
+          }
+        }
+      }
+    },
     "Einstellungen" : {
       "localizations" : {
         "en" : {

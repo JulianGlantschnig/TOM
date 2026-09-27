@@ -1,3 +1,4 @@
+import AppKit
 import SwiftData
 import SwiftUI
 
@@ -55,8 +56,21 @@ struct EntryEditor: View {
                 LabeledContent("Tools") {
                     ToolsMenu(tools: $tools, maxIcons: 8, showsEmptyLabel: true)
                 }
-                TextField("Notiz", text: $note, prompt: Text("z. B. Kapitel 3 überarbeitet"), axis: .vertical)
-                    .lineLimit(3...6)
+                // Eigener Textblock: Enter macht einen Absatz, statt das Fenster zu schließen.
+                Section("Notiz") {
+                    TextEditor(text: $note)
+                        .font(.body)
+                        .scrollContentBackground(.hidden)
+                        .frame(minHeight: 110, maxHeight: 260)
+                        .overlay(alignment: .topLeading) {
+                            if note.isEmpty {
+                                Text("z. B. Kapitel 3 überarbeitet")
+                                    .foregroundStyle(.tertiary)
+                                    .padding(.leading, 5)
+                                    .allowsHitTesting(false)
+                            }
+                        }
+                }
             }
             .formStyle(.grouped)
 
@@ -251,6 +265,11 @@ struct FolderEditor: View {
 
 struct ColorSwatchPicker: View {
     @Binding var selection: String
+    @State private var panel = ColorPanelBridge()
+
+    private var isCustom: Bool {
+        !ProjectPalette.colors.contains { $0.hex.caseInsensitiveCompare(selection) == .orderedSame }
+    }
 
     var body: some View {
         HStack(spacing: 8) {
@@ -258,21 +277,81 @@ struct ColorSwatchPicker: View {
                 Button {
                     selection = swatch.hex
                 } label: {
-                    Circle()
-                        .fill(Color(hex: swatch.hex))
-                        .frame(width: 20, height: 20)
-                        .overlay {
-                            if swatch.hex == selection {
-                                Circle().strokeBorder(.background, lineWidth: 2.5)
-                                Circle().strokeBorder(Color(hex: swatch.hex), lineWidth: 1).padding(-3)
-                            }
-                        }
+                    swatchCircle(Color(hex: swatch.hex), selected: swatch.hex == selection)
                 }
                 .buttonStyle(.plain)
                 .help(swatch.name)
                 .accessibilityLabel(swatch.name)
             }
+            // Eigene Farbe: öffnet das Farbfenster von macOS mit Farbkreis, Reglern und Pipette.
+            Button {
+                panel.open(hex: selection) { selection = $0 }
+            } label: {
+                ZStack {
+                    Circle().fill(AngularGradient(
+                        colors: [.red, .yellow, .green, .cyan, .blue, .purple, .red], center: .center
+                    ))
+                    if isCustom {
+                        Circle().fill(Color(hex: selection)).padding(4)
+                    }
+                }
+                .frame(width: 20, height: 20)
+                .overlay {
+                    if isCustom {
+                        Circle().strokeBorder(Color(hex: selection), lineWidth: 1).padding(-3)
+                    }
+                }
+            }
+            .buttonStyle(.plain)
+            .help("Eigene Farbe wählen …")
+            .accessibilityLabel(String(localized: "Eigene Farbe wählen …"))
         }
+        .onDisappear { panel.close() }
+    }
+
+    private func swatchCircle(_ color: Color, selected: Bool) -> some View {
+        Circle()
+            .fill(color)
+            .frame(width: 20, height: 20)
+            .overlay {
+                if selected {
+                    Circle().strokeBorder(.background, lineWidth: 2.5)
+                    Circle().strokeBorder(color, lineWidth: 1).padding(-3)
+                }
+            }
+    }
+}
+
+/// Verbindet das Farbfenster von macOS mit SwiftUI. Änderungen kommen sofort an.
+@MainActor
+private final class ColorPanelBridge: NSObject {
+    private var onChange: ((String) -> Void)?
+
+    func open(hex: String, onChange: @escaping (String) -> Void) {
+        self.onChange = onChange
+        let panel = NSColorPanel.shared
+        panel.showsAlpha = false
+        panel.mode = .wheel
+        panel.setTarget(nil)
+        panel.color = NSColor(Color(hex: hex))
+        panel.setTarget(self)
+        panel.setAction(#selector(changed(_:)))
+        panel.orderFront(nil)
+    }
+
+    func close() {
+        let panel = NSColorPanel.shared
+        guard onChange != nil else { return }
+        onChange = nil
+        panel.setTarget(nil)
+        panel.setAction(nil)
+        panel.orderOut(nil)
+    }
+
+    @objc private func changed(_ sender: NSColorPanel) {
+        guard let rgb = sender.color.usingColorSpace(.sRGB) else { return }
+        let channel = { (value: CGFloat) in Int((min(max(value, 0), 1) * 255).rounded()) }
+        onChange?(String(format: "#%02X%02X%02X", channel(rgb.redComponent), channel(rgb.greenComponent), channel(rgb.blueComponent)))
     }
 }
 

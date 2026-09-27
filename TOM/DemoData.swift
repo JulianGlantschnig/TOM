@@ -29,6 +29,11 @@ enum DemoData {
            let project = try? container.mainContext.fetch(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.sortIndex)])).first {
             show(ProjectEditor(project: project), title: "Projekt bearbeiten", size: CGSize(width: 480, height: 520))
         }
+        if UserDefaults.standard.string(forKey: "demoPage") == "entry",
+           let entry = try? container.mainContext.fetch(FetchDescriptor<TimeEntry>(sortBy: [SortDescriptor(\.start, order: .reverse)])).dropFirst().first {
+            entry.note = String(localized: "Literaturliste ergänzt") + "\n\n– Kapitel 2: drei neue Quellen\n– Zitate geprüft"
+            show(EntryEditor(entry: entry, defaultProject: nil), title: "Eintrag bearbeiten", size: CGSize(width: 440, height: 560))
+        }
     }
 
     @MainActor private static var windows: [NSWindow] = []
@@ -47,6 +52,8 @@ enum DemoData {
             Project(name: name, colorHex: ProjectPalette.colors[index].hex, sortIndex: index)
         }
         projects[3].hourlyRate = 45
+        // `-demoColor #FF6A00`: eigene Farbe fürs erste Projekt, um den Farbkreis zu zeigen.
+        if let hex = UserDefaults.standard.string(forKey: "demoColor") { projects[0].colorHex = hex }
         for (project, icon) in zip(projects, ["books.vertical", "square.and.pencil", "chart.pie", nil]) {
             project.iconName = icon
         }

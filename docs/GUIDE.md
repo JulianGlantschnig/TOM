@@ -33,7 +33,8 @@ In Settings (gear icon in the menu or at the bottom left of the main window), TO
 - **⌃⌥T** works in any app: it stops the running timer or starts the project you used last.
 - The menu bar shows the running time next to the project's symbol. In Settings → General you choose
   between h:mm (default), h:mm:ss, the time without a symbol, or the symbol only.
-- You can write a note in the menu while you work (“What are you working on?”).
+- You can write a note in the menu while you work (“What are you working on?”). When you edit an entry, the note
+  is a text block of its own where Return starts a new paragraph.
 - Entries shorter than 3 seconds are discarded, so accidental clicks don't count.
 - **Stopped by accident?** For an hour after stopping, the menu shows “Continue …”. It reopens the
   entry, and the time since stopping counts too. For a real break, just start the project again.
@@ -64,7 +65,8 @@ Settings → **Idle**:
 - **New project or folder:** click “+ New” at the bottom left of the main window.
 - **Edit:** the slider button at the top right of a project (“Project settings”), right-click → “Edit …”
   in the sidebar, or right-click the project in the menu bar. You can set the name, color, **symbol**, folder,
-  an optional hourly rate and whether TOM asks about idle time.
+  an optional hourly rate and whether TOM asks about idle time. The rainbow circle after the colors opens
+  the macOS color wheel for a custom color.
 - **Folders** group projects, for example “Thesis”. The folder shows the total time of all its projects.
   Move projects with right-click → “Move to folder”.
 - **Archive** (right-click, or the switch in the project settings) hides a project from the menu and the list
