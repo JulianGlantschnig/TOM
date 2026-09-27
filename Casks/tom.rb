@@ -1,6 +1,6 @@
 cask "tom" do
-  version "1.8"
-  sha256 "a3ef4597092e971cb07e92ee5eb14578534f77e0cbcd6d9df828aba8f28c0fec"
+  version "1.9"
+  sha256 "393c195935af9556263b5c26b7f3ebf8a2e09c3c8894d66e46eace2475d3402f"
 
   url "https://github.com/JulianGlantschnig/TOM/releases/download/v#{version}/TOM-#{version}.zip"
   name "TOM"
