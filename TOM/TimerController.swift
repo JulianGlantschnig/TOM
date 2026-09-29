@@ -160,6 +160,9 @@ final class TimerController {
         if running != nil {
             now = .now
             if ActivityTracker.isEnabled { activity.sample(at: now) }
+        } else if !Calendar.current.isDate(now, inSameDayAs: .now) {
+            // Ohne laufenden Timer tickt `now` nicht mit, sonst bliebe „Heute erfasst“ nach Mitternacht auf gestern stehen.
+            now = .now
         }
         checkIdle()
     }
