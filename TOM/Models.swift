@@ -18,6 +18,12 @@ final class Project {
     var ignoresIdle: Bool = false
     /// Apps, bei denen TOM dieses Projekt starten soll, als JSON, siehe `triggerApps`.
     var triggerAppsJSON: String = ""
+    /// Mit dem Kunden vereinbarte Stunden, `nil` heißt kein Budget.
+    var budgetHours: Double?
+    /// Ab hier warnt TOM vor, z. B. bei 25 von 30 Stunden.
+    var budgetWarnHours: Double?
+    /// Welcher Budget-Hinweis schon kam, siehe `budgetLevel`. Verhindert, dass er jede Sekunde wiederkommt.
+    var budgetAlertLevel: Int = 0
 
     @Relationship(deleteRule: .cascade, inverse: \TimeEntry.project)
     var entries: [TimeEntry] = []
@@ -30,6 +36,20 @@ final class Project {
     }
 
     var color: Color { Color(hex: colorHex) }
+
+    /// Alle Zeiten des Projekts, egal aus welchem Zeitraum.
+    func totalTime(now: Date) -> TimeInterval {
+        entries.reduce(0) { $0 + $1.duration(now: now) }
+    }
+
+    /// 0 unter der Vorwarnung, 1 ab der Vorwarnung, 2 ab dem vereinbarten Budget.
+    func budgetLevel(now: Date) -> Int {
+        guard let budget = budgetHours else { return 0 }
+        let hours = totalTime(now: now) / 3600
+        if hours >= budget { return 2 }
+        if let warn = budgetWarnHours, hours >= warn { return 1 }
+        return 0
+    }
 }
 
 /// Ordner fasst mehrere Projekte zusammen, z. B. „Diplomarbeit“.

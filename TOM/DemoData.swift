@@ -29,6 +29,10 @@ enum DemoData {
            let project = try? container.mainContext.fetch(FetchDescriptor<Project>(sortBy: [SortDescriptor(\.sortIndex)])).first {
             show(ProjectEditor(project: project), title: "Projekt bearbeiten", size: CGSize(width: 480, height: 520))
         }
+        if UserDefaults.standard.string(forKey: "demoPage") == "budget",
+           let project = try? container.mainContext.fetch(FetchDescriptor<Project>()).first(where: { $0.budgetHours != nil }) {
+            show(ProjectEditor(project: project), title: "Projekt bearbeiten", size: CGSize(width: 480, height: 720))
+        }
         if UserDefaults.standard.string(forKey: "demoPage") == "entry",
            let entry = try? container.mainContext.fetch(FetchDescriptor<TimeEntry>(sortBy: [SortDescriptor(\.start, order: .reverse)])).dropFirst().first {
             entry.note = String(localized: "Literaturliste ergänzt") + "\n\n– Kapitel 2: drei neue Quellen\n– Zitate geprüft"
@@ -98,6 +102,12 @@ enum DemoData {
         // `-demoPage resume`: gerade eben versehentlich gestoppt, um „Fortsetzen“ zu zeigen.
         if UserDefaults.standard.string(forKey: "demoPage") == "resume" { current.end = Date.now.addingTimeInterval(-240) }
         context.insert(current)
+        // Budget für „Schreiben“ knapp über den Demo-Zeiten, damit der Balken in der Vorwarnung steht.
+        // Der Hinweis gilt als schon gezeigt, sonst geht beim Start gleich ein Fenster auf.
+        let warn = (projects[1].totalTime(now: .now) / 3600 - 1).rounded(.down)
+        projects[1].budgetHours = warn + 5
+        projects[1].budgetWarnHours = warn
+        projects[1].budgetAlertLevel = projects[1].budgetLevel(now: .now)
         try? context.save()
         return container
     }

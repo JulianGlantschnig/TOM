@@ -157,6 +157,7 @@ struct ContentView: View {
             // Demo-Fenster sollen beim Anschauen keine Tastatureingaben abfangen.
             if DemoData.isEnabled {
                 if UserDefaults.standard.string(forKey: "demoPage") == "folder" { selection = folders.first.map { .folder($0) } }
+                if UserDefaults.standard.string(forKey: "demoPage") == "budget" { selection = projects.first { $0.budgetHours != nil }.map { .project($0) } }
                 // Das echte Einstellungsfenster, nur dort zeigt SwiftUI die Tabs in der Titelleiste.
                 if UserDefaults.standard.string(forKey: "demoSettingsTab") != nil { openSettings() }
                 return

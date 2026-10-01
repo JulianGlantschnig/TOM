@@ -67,6 +67,10 @@ Settings → **Idle**:
   in the sidebar, or right-click the project in the menu bar. You can set the name, color, **symbol**, folder,
   an optional hourly rate and whether TOM asks about idle time. The rainbow circle after the colors opens
   the macOS color wheel for a custom color.
+- **Budget:** in the project settings, enter the hours agreed with a client (e.g. 30) and optionally an early
+  warning (e.g. 25). While the timer runs, TOM alerts you once at the warning and once at the budget, where you
+  can stop the timer right away. A bar in the menu and in the project overview shows where you stand, orange
+  from the warning, red from the budget. All of the project's times count.
 - **Folders** group projects, for example “Thesis”. The folder shows the total time of all its projects.
   Move projects with right-click → “Move to folder”.
 - **Archive** (right-click, or the switch in the project settings) hides a project from the menu and the list

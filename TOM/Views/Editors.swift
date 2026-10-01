@@ -121,6 +121,8 @@ struct ProjectEditor: View {
     @State private var iconName: String?
     @State private var ignoresIdle: Bool
     @State private var hourlyRate: Double?
+    @State private var budgetHours: Double?
+    @State private var budgetWarnHours: Double?
     @State private var folder: Folder?
     @State private var isArchived: Bool
     @State private var triggerApps: [ToolUsage]
@@ -134,6 +136,8 @@ struct ProjectEditor: View {
         _iconName = State(initialValue: project?.iconName)
         _ignoresIdle = State(initialValue: project?.ignoresIdle ?? false)
         _hourlyRate = State(initialValue: project?.hourlyRate)
+        _budgetHours = State(initialValue: project?.budgetHours)
+        _budgetWarnHours = State(initialValue: project?.budgetWarnHours)
         _triggerApps = State(initialValue: project?.triggerApps ?? [])
     }
 
@@ -154,6 +158,23 @@ struct ProjectEditor: View {
                     }
                 }
                 TextField("Stundensatz", value: $hourlyRate, format: .number, prompt: Text("optional, in \(currency)"))
+                TextField(value: $budgetHours, format: .number, prompt: Text("optional, in Stunden")) {
+                    Text("Budget")
+                    Text("Mit dem Kunden vereinbarte Stunden. Ist es erreicht, meldet sich TOM.")
+                }
+                if budgetHours != nil {
+                    TextField(value: $budgetWarnHours, format: .number, prompt: Text("optional, in Stunden")) {
+                        Text("Vorwarnen bei")
+                        if let warn = budgetWarnHours, let budget = budgetHours, warn >= budget {
+                            Text("Muss unter dem Budget liegen.").foregroundStyle(.red)
+                        } else {
+                            Text("Hinweis vorher, z. B. bei 25 von 30 Stunden.")
+                        }
+                    }
+                    if let project {
+                        BudgetBar(project: project, now: timer.now, compact: true)
+                    }
+                }
                 Toggle(isOn: Binding(get: { !ignoresIdle }, set: { ignoresIdle = !$0 })) {
                     Text("Nachfragen, wenn ich weg war")
                     Text("Ausschalten für Arbeit abseits des Macs, z. B. Unterricht oder Dreharbeiten.")
@@ -201,6 +222,9 @@ struct ProjectEditor: View {
         target.ignoresIdle = ignoresIdle
         target.triggerApps = triggerApps.map { ToolUsage(bundleID: $0.bundleID, name: $0.name) }
         target.hourlyRate = hourlyRate.flatMap { $0 > 0 ? $0 : nil }
+        let budget = budgetHours.flatMap { $0 > 0 ? $0 : nil }
+        target.budgetHours = budget
+        target.budgetWarnHours = budgetWarnHours.flatMap { warn in budget.flatMap { warn > 0 && warn < $0 ? warn : nil } }
         target.folder = folder
         folder?.isExpanded = true
         if isArchived, timer.isRunning(target) { timer.stop() }

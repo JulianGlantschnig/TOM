@@ -17,7 +17,7 @@ final class TimerController {
     @ObservationIgnored private var ticker: Timer?
     @ObservationIgnored private var hotKey: HotKey?
     @ObservationIgnored private var idleSince: Date?
-    @ObservationIgnored private var isShowingIdleAlert = false
+    @ObservationIgnored private var isShowingAlert = false
 
     init(context: ModelContext) {
         self.context = context
@@ -165,6 +165,7 @@ final class TimerController {
             now = .now
         }
         checkIdle()
+        checkBudget()
     }
 
     private func save() {
@@ -174,7 +175,7 @@ final class TimerController {
     // MARK: - Leerlauf
 
     private func checkIdle() {
-        guard !isShowingIdleAlert else { return }
+        guard !isShowingAlert else { return }
         let minutes = UserDefaults.standard.integer(forKey: Prefs.idleMinutes)
         guard minutes > 0, let entry = running, Self.asksAboutIdle(for: entry) else {
             idleSince = nil
@@ -200,8 +201,8 @@ final class TimerController {
     }
 
     private func presentIdleAlert(for entry: TimeEntry, since: Date) {
-        isShowingIdleAlert = true
-        defer { isShowingIdleAlert = false }
+        isShowingAlert = true
+        defer { isShowingAlert = false }
 
         let alert = NSAlert()
         alert.messageText = String(localized: "Du warst \(Fmt.hoursMinutes(Date.now.timeIntervalSince(since))) nicht am Mac")
@@ -222,6 +223,50 @@ final class TimerController {
             save()
         default:
             break
+        }
+    }
+}
+
+extension TimerController {
+    // MARK: - Budget
+
+    /// Meldet sich einmal bei der Vorwarnung und einmal, wenn das vereinbarte Budget erreicht ist.
+    private func checkBudget() {
+        guard !isShowingAlert, let project = running?.project, project.budgetHours != nil else { return }
+        let level = project.budgetLevel(now: now)
+        // Zeiten gelöscht oder Budget erhöht: der Hinweis darf später wieder kommen.
+        if level < project.budgetAlertLevel {
+            project.budgetAlertLevel = level
+            try? context.save()
+        }
+        guard level > project.budgetAlertLevel else { return }
+        project.budgetAlertLevel = level
+        try? context.save()
+        presentBudgetAlert(for: project, level: level)
+    }
+
+    private func presentBudgetAlert(for project: Project, level: Int) {
+        guard let budget = project.budgetHours else { return }
+        isShowingAlert = true
+        defer { isShowingAlert = false }
+
+        let total = project.totalTime(now: .now)
+        let alert = NSAlert()
+        if level >= 2 {
+            alert.alertStyle = .critical
+            alert.messageText = String(localized: "„\(project.name)“ hat das Budget von \(Fmt.budgetHours(budget)) erreicht")
+            alert.informativeText = String(localized: "Bisher erfasst: \(Fmt.hoursMinutes(total)). Alles ab jetzt geht über die vereinbarte Zeit hinaus.")
+            alert.addButton(withTitle: String(localized: "Timer stoppen"))
+            alert.addButton(withTitle: String(localized: "Weiterlaufen"))
+        } else {
+            alert.messageText = String(localized: "„\(project.name)“: \(Fmt.hoursMinutes(total)) von \(Fmt.budgetHours(budget))")
+            alert.informativeText = String(localized: "Noch \(Fmt.hoursMinutes(budget * 3600 - total)) bis zum vereinbarten Budget.")
+            alert.addButton(withTitle: String(localized: "OK"))
+        }
+        NSApp.activate(ignoringOtherApps: true)
+
+        if alert.runModal() == .alertFirstButtonReturn, level >= 2 {
+            stop()
         }
     }
 }

@@ -14,6 +14,9 @@ struct ScopeDetailView: View {
     init(scope: EntryScope) {
         self.scope = scope
         if case .folder = scope { _mode = State(initialValue: .chart) } else { _mode = State(initialValue: .list) }
+        #if DEBUG
+        if UserDefaults.standard.string(forKey: "demoPage") == "budget" { _mode = State(initialValue: .chart) }
+        #endif
     }
 
     var body: some View {
@@ -87,6 +90,11 @@ struct OverviewView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     header
                     figures(entries: entries, slices: slices, activeDays: days.count, total: total)
+                    // Das Budget zählt immer alle Zeiten, unabhängig vom gewählten Zeitraum.
+                    if let project = scope.project, project.budgetHours != nil {
+                        BudgetBar(project: project, now: timer.now)
+                            .frame(maxWidth: 520)
+                    }
                     ToolTotalsView(entries: entries, now: timer.now, limit: 5)
                         .frame(maxWidth: 520)
                 }

@@ -67,6 +67,10 @@ Einstellungen → **Leerlauf**:
   „Bearbeiten …“ in der Seitenleiste oder per Rechtsklick auf das Projekt im Menü. Dort gibt es Name, Farbe, **Symbol**,
   Ordner, einen optionalen Stundensatz und ob bei Leerlauf nachgefragt wird. Der bunte Kreis am Ende der Farben
   öffnet den Farbkreis von macOS für eine eigene Farbe.
+- **Budget:** In den Projekteinstellungen trägst du die mit dem Kunden vereinbarten Stunden ein (z. B. 30) und
+  optional eine Vorwarnung (z. B. 25). Läuft der Timer, meldet sich TOM einmal bei der Vorwarnung und einmal beim
+  Budget, dort kannst du den Timer gleich stoppen. Ein Balken im Menü und in der Projekt-Übersicht zeigt den Stand,
+  ab der Vorwarnung orange, ab dem Budget rot. Gezählt werden alle Zeiten des Projekts.
 - **Ordner** fassen Projekte zusammen, z. B. „Diplomarbeit“. Neben dem Ordner steht die Gesamtzeit aller
   Projekte darin. Projekte lassen sich per Rechtsklick → „In Ordner verschieben“ umhängen.
 - **Archivieren** (Rechtsklick oder Schalter in den Projekteinstellungen) blendet ein Projekt aus Menü und Liste

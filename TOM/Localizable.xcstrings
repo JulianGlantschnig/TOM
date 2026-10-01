@@ -14,12 +14,44 @@
         }
       }
     },
+    "„%@“ hat das Budget von %@ erreicht" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "„%1$@“ hat das Budget von %2$@ erreicht"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%1$@” has reached its budget of %2$@"
+          }
+        }
+      }
+    },
     "„%@“ löschen?" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete “%@”?"
+          }
+        }
+      }
+    },
+    "„%@“: %@ von %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "„%1$@“: %2$@ von %3$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%1$@”: %2$@ of %3$@"
           }
         }
       }
@@ -50,6 +82,16 @@
         }
       }
     },
+    "%@ drüber" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ over"
+          }
+        }
+      }
+    },
     "%@ fortsetzen" : {
       "localizations" : {
         "en" : {
@@ -66,6 +108,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Start %@?"
+          }
+        }
+      }
+    },
+    "%@ von %@" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ von %2$@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ of %2$@"
           }
         }
       }
@@ -585,12 +643,32 @@
         }
       }
     },
+    "Bisher erfasst: %@. Alles ab jetzt geht über die vereinbarte Zeit hinaus." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tracked so far: %@. Everything from now on goes beyond the agreed time."
+          }
+        }
+      }
+    },
     "Blendet das Projekt aus Menü und Liste aus. Die Zeiten bleiben erhalten." : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hides the project from the menu and the list. Its times are kept."
+          }
+        }
+      }
+    },
+    "Budget" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget"
           }
         }
       }
@@ -1084,6 +1162,16 @@
         }
       }
     },
+    "Hinweis vorher, z. B. bei 25 von 30 Stunden." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heads-up before the limit, e.g. at 25 of 30 hours."
+          }
+        }
+      }
+    },
     "Im Dock anzeigen" : {
       "localizations" : {
         "en" : {
@@ -1358,6 +1446,26 @@
         }
       }
     },
+    "Mit dem Kunden vereinbarte Stunden. Ist es erreicht, meldet sich TOM." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hours agreed with the client. TOM lets you know when they are used up."
+          }
+        }
+      }
+    },
+    "Muss unter dem Budget liegen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Must be below the budget."
+          }
+        }
+      }
+    },
     "Nachfragen bei diesen Projekten" : {
       "localizations" : {
         "en" : {
@@ -1488,6 +1596,26 @@
         }
       }
     },
+    "noch %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ left"
+          }
+        }
+      }
+    },
+    "Noch %@ bis zum vereinbarten Budget." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ left until the agreed budget."
+          }
+        }
+      }
+    },
     "Noch keine Zeiten" : {
       "localizations" : {
         "en" : {
@@ -1578,12 +1706,32 @@
         }
       }
     },
+    "OK" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
     "optional, in %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "optional, in %@"
+          }
+        }
+      }
+    },
+    "optional, in Stunden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "optional, in hours"
           }
         }
       }
@@ -2202,6 +2350,26 @@
         }
       }
     },
+    "Vorwarnen bei" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warn at"
+          }
+        }
+      }
+    },
+    "Vorwarnung bei %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning at %@"
+          }
+        }
+      }
+    },
     "Wähl oben einen längeren Zeitraum." : {
       "localizations" : {
         "en" : {
@@ -2238,6 +2406,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Switch"
+          }
+        }
+      }
+    },
+    "Weiterlaufen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep running"
           }
         }
       }

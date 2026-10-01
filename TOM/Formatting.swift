@@ -144,6 +144,11 @@ enum Fmt {
         return h == 0 ? "\(m) min" : String(format: "%d h %02d min", h, m)
     }
 
+    /// 30 h, 27,5 h: für Budgets, die in ganzen oder halben Stunden vereinbart werden.
+    static func budgetHours(_ hours: Double) -> String {
+        hours.formatted(.number.precision(.fractionLength(0...1)).locale(locale)) + " h"
+    }
+
     static func decimalHours(_ interval: TimeInterval) -> String {
         (interval / 3600).formatted(.number.precision(.fractionLength(2)).locale(locale))
     }
