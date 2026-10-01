@@ -165,8 +165,13 @@ private struct RunningCard: View {
                 .help("Timer stoppen (⌃⌥T)")
             }
 
-            if let project = entry.project, project.budgetHours != nil {
-                BudgetBar(project: project, now: timer.now, compact: true)
+            if let project = entry.project {
+                if project.budgetHours != nil {
+                    BudgetBar(item: project, now: timer.now, compact: true)
+                }
+                if let folder = project.folder, folder.budgetHours != nil {
+                    BudgetBar(item: folder, now: timer.now, compact: true, showsName: project.budgetHours != nil)
+                }
             }
 
             TextField("Woran arbeitest du gerade?", text: $entry.note, axis: .vertical)

@@ -42,7 +42,7 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
   und einen versehentlich gestoppten Timer **fortsetzen**
 - **Archiv** für alte Projekte und ganze Ordner, damit sie nicht im Weg sind
 - **Leerlauf-Erkennung** (abschaltbar, auch pro Projekt): warst du weg, lässt sich die Zeit abziehen
-- **Budget pro Projekt:** z. B. 30 mit dem Kunden vereinbarte Stunden, mit Vorwarnung bei 25 und Alarm bei 30
+- **Budget pro Projekt oder Ordner:** z. B. 30 mit dem Kunden vereinbarte Stunden, mit Vorwarnung bei 25 und Alarm bei 30
 - **CSV-Export** für Excel und Numbers, optional gerundet, mit Stundensatz und Betrag
 - **Import aus Tim** mit allen Aufgaben, Gruppen und Zeiten
 - Alle Daten bleiben **lokal** auf dem Mac, vor jedem Update mit automatischem Backup

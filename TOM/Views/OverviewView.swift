@@ -91,8 +91,8 @@ struct OverviewView: View {
                     header
                     figures(entries: entries, slices: slices, activeDays: days.count, total: total)
                     // Das Budget zählt immer alle Zeiten, unabhängig vom gewählten Zeitraum.
-                    if let project = scope.project, project.budgetHours != nil {
-                        BudgetBar(project: project, now: timer.now)
+                    if let budgeted, budgeted.budgetHours != nil {
+                        BudgetBar(item: budgeted, now: timer.now)
                             .frame(maxWidth: 520)
                     }
                     ToolTotalsView(entries: entries, now: timer.now, limit: 5)
@@ -128,6 +128,14 @@ struct OverviewView: View {
                 .pickerStyle(.menu)
                 .help("Zeitraum wählen")
             }
+        }
+    }
+
+    private var budgeted: (any Budgeted)? {
+        switch scope {
+        case .project(let project): project
+        case .folder(let folder): folder
+        default: nil
         }
     }
 

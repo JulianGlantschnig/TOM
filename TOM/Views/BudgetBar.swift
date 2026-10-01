@@ -2,21 +2,26 @@ import SwiftUI
 
 /// Wie viel vom vereinbarten Budget schon verbraucht ist. Ab der Vorwarnung orange, ab dem Budget rot.
 struct BudgetBar: View {
-    let project: Project
+    let item: any Budgeted
     let now: Date
     var compact = false
+    /// Name davor, wenn Projekt und Ordner beide ein Budget haben.
+    var showsName = false
 
     var body: some View {
-        if let budget = project.budgetHours, budget > 0 {
-            let total = project.totalTime(now: now)
+        if let budget = item.budgetHours, budget > 0 {
+            let total = item.totalTime(now: now)
             let share = total / (budget * 3600)
-            let color: Color = switch project.budgetLevel(now: now) {
+            let color: Color = switch item.budgetLevel(now: now) {
             case 2: .red
             case 1: .orange
-            default: project.color
+            default: item.color
             }
             VStack(alignment: .leading, spacing: compact ? 4 : 6) {
                 HStack(alignment: .firstTextBaseline) {
+                    if showsName {
+                        Text(item.name).foregroundStyle(.secondary)
+                    }
                     if !compact {
                         Text("Budget")
                             .font(.caption.weight(.medium))
@@ -39,7 +44,7 @@ struct BudgetBar: View {
                         Capsule()
                             .fill(color)
                             .frame(width: geometry.size.width * min(share, 1))
-                        if let warn = project.budgetWarnHours, warn < budget {
+                        if let warn = item.budgetWarnHours, warn < budget {
                             Rectangle()
                                 .fill(.primary.opacity(0.35))
                                 .frame(width: 1.5)

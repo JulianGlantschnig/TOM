@@ -121,8 +121,8 @@ struct ProjectEditor: View {
     @State private var iconName: String?
     @State private var ignoresIdle: Bool
     @State private var hourlyRate: Double?
-    @State private var budgetHours: Double?
-    @State private var budgetWarnHours: Double?
+    @State private var budgetHours: String
+    @State private var budgetWarnHours: String
     @State private var folder: Folder?
     @State private var isArchived: Bool
     @State private var triggerApps: [ToolUsage]
@@ -136,8 +136,8 @@ struct ProjectEditor: View {
         _iconName = State(initialValue: project?.iconName)
         _ignoresIdle = State(initialValue: project?.ignoresIdle ?? false)
         _hourlyRate = State(initialValue: project?.hourlyRate)
-        _budgetHours = State(initialValue: project?.budgetHours)
-        _budgetWarnHours = State(initialValue: project?.budgetWarnHours)
+        _budgetHours = State(initialValue: BudgetFields.text(project?.budgetHours))
+        _budgetWarnHours = State(initialValue: BudgetFields.text(project?.budgetWarnHours))
         _triggerApps = State(initialValue: project?.triggerApps ?? [])
     }
 
@@ -158,23 +158,7 @@ struct ProjectEditor: View {
                     }
                 }
                 TextField("Stundensatz", value: $hourlyRate, format: .number, prompt: Text("optional, in \(currency)"))
-                TextField(value: $budgetHours, format: .number, prompt: Text("optional, in Stunden")) {
-                    Text("Budget")
-                    Text("Mit dem Kunden vereinbarte Stunden. Ist es erreicht, meldet sich TOM.")
-                }
-                if budgetHours != nil {
-                    TextField(value: $budgetWarnHours, format: .number, prompt: Text("optional, in Stunden")) {
-                        Text("Vorwarnen bei")
-                        if let warn = budgetWarnHours, let budget = budgetHours, warn >= budget {
-                            Text("Muss unter dem Budget liegen.").foregroundStyle(.red)
-                        } else {
-                            Text("Hinweis vorher, z. B. bei 25 von 30 Stunden.")
-                        }
-                    }
-                    if let project {
-                        BudgetBar(project: project, now: timer.now, compact: true)
-                    }
-                }
+                BudgetFields(budgetHours: $budgetHours, budgetWarnHours: $budgetWarnHours, item: project)
                 Toggle(isOn: Binding(get: { !ignoresIdle }, set: { ignoresIdle = !$0 })) {
                     Text("Nachfragen, wenn ich weg war")
                     Text("Ausschalten für Arbeit abseits des Macs, z. B. Unterricht oder Dreharbeiten.")
@@ -222,9 +206,7 @@ struct ProjectEditor: View {
         target.ignoresIdle = ignoresIdle
         target.triggerApps = triggerApps.map { ToolUsage(bundleID: $0.bundleID, name: $0.name) }
         target.hourlyRate = hourlyRate.flatMap { $0 > 0 ? $0 : nil }
-        let budget = budgetHours.flatMap { $0 > 0 ? $0 : nil }
-        target.budgetHours = budget
-        target.budgetWarnHours = budgetWarnHours.flatMap { warn in budget.flatMap { warn > 0 && warn < $0 ? warn : nil } }
+        BudgetFields.apply(budgetHours, budgetWarnHours, to: target)
         target.folder = folder
         folder?.isExpanded = true
         if isArchived, timer.isRunning(target) { timer.stop() }
@@ -244,11 +226,15 @@ struct FolderEditor: View {
 
     @State private var name: String
     @State private var colorHex: String
+    @State private var budgetHours: String
+    @State private var budgetWarnHours: String
 
     init(folder: Folder?) {
         self.folder = folder
         _name = State(initialValue: folder?.name ?? "")
         _colorHex = State(initialValue: folder?.colorHex ?? ProjectPalette.colors[2].hex)
+        _budgetHours = State(initialValue: BudgetFields.text(folder?.budgetHours))
+        _budgetWarnHours = State(initialValue: BudgetFields.text(folder?.budgetWarnHours))
     }
 
     var body: some View {
@@ -258,6 +244,7 @@ struct FolderEditor: View {
                 LabeledContent("Farbe") {
                     ColorSwatchPicker(selection: $colorHex)
                 }
+                BudgetFields(budgetHours: $budgetHours, budgetWarnHours: $budgetWarnHours, item: folder, scope: .folder)
             }
             .formStyle(.grouped)
 
@@ -282,8 +269,57 @@ struct FolderEditor: View {
         }()
         target.name = name.trimmingCharacters(in: .whitespaces)
         target.colorHex = colorHex
+        BudgetFields.apply(budgetHours, budgetWarnHours, to: target)
         try? context.save()
         dismiss()
+    }
+}
+
+/// Vereinbarte Stunden und Vorwarnung, für Projekte und Ordner.
+/// Als Text statt Zahl, damit der Wert auch ohne Enter übernommen wird und „27,5“ wie „27.5“ geht.
+private struct BudgetFields: View {
+    enum Scope { case project, folder }
+
+    @Binding var budgetHours: String
+    @Binding var budgetWarnHours: String
+    let item: (any Budgeted)?
+    var scope = Scope.project
+
+    @Environment(TimerController.self) private var timer
+
+    var body: some View {
+        TextField(text: $budgetHours, prompt: Text("optional, in Stunden")) {
+            Text("Budget")
+            Text(scope == .folder
+                ? String(localized: "Mit dem Kunden vereinbarte Stunden für alle Projekte im Ordner zusammen.")
+                : String(localized: "Mit dem Kunden vereinbarte Stunden. Ist es erreicht, meldet sich TOM."))
+        }
+        TextField(text: $budgetWarnHours, prompt: Text("optional, in Stunden")) {
+            Text("Vorwarnen bei")
+            if let warn = Self.number(budgetWarnHours), let budget = Self.number(budgetHours), warn >= budget {
+                Text("Muss unter dem Budget liegen.").foregroundStyle(.red)
+            } else {
+                Text("Hinweis vorher, z. B. bei 25 von 30 Stunden.")
+            }
+        }
+        if let item, item.budgetHours != nil {
+            BudgetBar(item: item, now: timer.now, compact: true)
+        }
+    }
+
+    /// Leere oder unsinnige Werte nicht speichern: kein Budget ohne Stunden, keine Vorwarnung über dem Budget.
+    static func apply(_ hours: String, _ warn: String, to target: some Budgeted) {
+        let budget = number(hours).flatMap { $0 > 0 ? $0 : nil }
+        target.budgetHours = budget
+        target.budgetWarnHours = number(warn).flatMap { warn in budget.flatMap { warn > 0 && warn < $0 ? warn : nil } }
+    }
+
+    static func number(_ text: String) -> Double? {
+        Double(text.trimmingCharacters(in: .whitespaces).replacingOccurrences(of: ",", with: "."))
+    }
+
+    static func text(_ hours: Double?) -> String {
+        hours.map { $0.formatted(.number.precision(.fractionLength(0...2)).grouping(.never).locale(Fmt.locale)) } ?? ""
     }
 }
 

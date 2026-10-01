@@ -230,22 +230,28 @@ final class TimerController {
 extension TimerController {
     // MARK: - Budget
 
-    /// Meldet sich einmal bei der Vorwarnung und einmal, wenn das vereinbarte Budget erreicht ist.
+    /// Meldet sich einmal bei der Vorwarnung und einmal, wenn das vereinbarte Budget erreicht ist,
+    /// für das laufende Projekt und für seinen Ordner.
     private func checkBudget() {
-        guard !isShowingAlert, let project = running?.project, project.budgetHours != nil else { return }
-        let level = project.budgetLevel(now: now)
-        // Zeiten gelöscht oder Budget erhöht: der Hinweis darf später wieder kommen.
-        if level < project.budgetAlertLevel {
-            project.budgetAlertLevel = level
+        guard let project = running?.project else { return }
+        var candidates: [any Budgeted] = [project]
+        if let folder = project.folder { candidates.append(folder) }
+        for item in candidates where item.budgetHours != nil {
+            guard !isShowingAlert else { return }
+            let level = item.budgetLevel(now: now)
+            // Zeiten gelöscht oder Budget erhöht: der Hinweis darf später wieder kommen.
+            if level < item.budgetAlertLevel {
+                item.budgetAlertLevel = level
+                try? context.save()
+            }
+            guard level > item.budgetAlertLevel else { continue }
+            item.budgetAlertLevel = level
             try? context.save()
+            presentBudgetAlert(for: item, level: level)
         }
-        guard level > project.budgetAlertLevel else { return }
-        project.budgetAlertLevel = level
-        try? context.save()
-        presentBudgetAlert(for: project, level: level)
     }
 
-    private func presentBudgetAlert(for project: Project, level: Int) {
+    private func presentBudgetAlert(for project: any Budgeted, level: Int) {
         guard let budget = project.budgetHours else { return }
         isShowingAlert = true
         defer { isShowingAlert = false }

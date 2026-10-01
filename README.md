@@ -40,7 +40,7 @@ Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks Englis
   and **continue** a timer you stopped by accident
 - **Archive** old projects and whole folders to hide them
 - **Idle detection** (optional, per project too): subtract time you were away
-- **Budget per project:** e.g. 30 hours agreed with a client, with a heads-up at 25 and an alert at 30
+- **Budget per project or folder:** e.g. 30 hours agreed with a client, with a heads-up at 25 and an alert at 30
 - **CSV export** for Excel and Numbers, optionally rounded, with hourly rate and amount
 - **Import from Tim** with all tasks, groups and times
 - All data stays **on your Mac**, with an automatic backup before every update

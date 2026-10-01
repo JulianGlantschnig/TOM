@@ -32,6 +32,9 @@ enum DemoData {
         if UserDefaults.standard.string(forKey: "demoPage") == "budget",
            let project = try? container.mainContext.fetch(FetchDescriptor<Project>()).first(where: { $0.budgetHours != nil }) {
             show(ProjectEditor(project: project), title: "Projekt bearbeiten", size: CGSize(width: 480, height: 720))
+            if let folder = project.folder {
+                show(FolderEditor(folder: folder), title: "Ordner bearbeiten", size: CGSize(width: 440, height: 420))
+            }
         }
         if UserDefaults.standard.string(forKey: "demoPage") == "entry",
            let entry = try? container.mainContext.fetch(FetchDescriptor<TimeEntry>(sortBy: [SortDescriptor(\.start, order: .reverse)])).dropFirst().first {
@@ -108,6 +111,9 @@ enum DemoData {
         projects[1].budgetHours = warn + 5
         projects[1].budgetWarnHours = warn
         projects[1].budgetAlertLevel = projects[1].budgetLevel(now: .now)
+        // Der Ordner bekommt ein großzügiges Budget, damit beide Balken zu sehen sind.
+        thesis.budgetHours = ((thesis.totalTime(now: .now) / 3600 + 20) / 10).rounded(.up) * 10
+        thesis.budgetWarnHours = thesis.budgetHours! - 10
         try? context.save()
         return container
     }

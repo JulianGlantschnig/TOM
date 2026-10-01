@@ -41,15 +41,6 @@ final class Project {
     func totalTime(now: Date) -> TimeInterval {
         entries.reduce(0) { $0 + $1.duration(now: now) }
     }
-
-    /// 0 unter der Vorwarnung, 1 ab der Vorwarnung, 2 ab dem vereinbarten Budget.
-    func budgetLevel(now: Date) -> Int {
-        guard let budget = budgetHours else { return 0 }
-        let hours = totalTime(now: now) / 3600
-        if hours >= budget { return 2 }
-        if let warn = budgetWarnHours, hours >= warn { return 1 }
-        return 0
-    }
 }
 
 /// Ordner fasst mehrere Projekte zusammen, z. B. „Diplomarbeit“.
@@ -60,6 +51,10 @@ final class Folder {
     var sortIndex: Int = 0
     var isExpanded: Bool = true
     var createdAt: Date = Date()
+    /// Budget für alle Projekte im Ordner zusammen, siehe `Project.budgetHours`.
+    var budgetHours: Double?
+    var budgetWarnHours: Double?
+    var budgetAlertLevel: Int = 0
 
     /// Beim Löschen des Ordners bleiben die Projekte erhalten.
     @Relationship(deleteRule: .nullify, inverse: \Project.folder)
@@ -75,7 +70,36 @@ final class Folder {
 
     /// Ein Ordner gilt als archiviert, wenn alle seine Projekte im Archiv sind.
     var isArchived: Bool { !projects.isEmpty && projects.allSatisfy(\.isArchived) }
+
+    /// Alle Zeiten aller Projekte im Ordner.
+    func totalTime(now: Date) -> TimeInterval {
+        projects.reduce(0) { $0 + $1.totalTime(now: now) }
+    }
 }
+
+/// Projekt oder Ordner mit vereinbarten Stunden, z. B. 30 h für einen Kunden mit Vorwarnung bei 25 h.
+protocol Budgeted: AnyObject {
+    var name: String { get }
+    var color: Color { get }
+    var budgetHours: Double? { get set }
+    var budgetWarnHours: Double? { get set }
+    var budgetAlertLevel: Int { get set }
+    func totalTime(now: Date) -> TimeInterval
+}
+
+extension Budgeted {
+    /// 0 unter der Vorwarnung, 1 ab der Vorwarnung, 2 ab dem vereinbarten Budget.
+    func budgetLevel(now: Date) -> Int {
+        guard let budget = budgetHours else { return 0 }
+        let hours = totalTime(now: now) / 3600
+        if hours >= budget { return 2 }
+        if let warn = budgetWarnHours, hours >= warn { return 1 }
+        return 0
+    }
+}
+
+extension Project: Budgeted {}
+extension Folder: Budgeted {}
 
 @Model
 final class TimeEntry {

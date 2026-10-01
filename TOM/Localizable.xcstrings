@@ -1446,6 +1446,16 @@
         }
       }
     },
+    "Mit dem Kunden vereinbarte Stunden für alle Projekte im Ordner zusammen." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hours agreed with the client for all projects in this folder combined."
+          }
+        }
+      }
+    },
     "Mit dem Kunden vereinbarte Stunden. Ist es erreicht, meldet sich TOM." : {
       "localizations" : {
         "en" : {
