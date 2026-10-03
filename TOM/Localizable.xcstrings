@@ -1,9 +1,7 @@
 {
   "sourceLanguage" : "de",
   "strings" : {
-    "" : {
-
-    },
+    "" : {},
     ", %lld schon vorhanden oder noch laufend" : {
       "localizations" : {
         "en" : {
@@ -1426,12 +1424,18 @@
         }
       }
     },
-    "Macht den Eintrag wieder auf. Die %@ seit dem Stoppen zählen mit. Für eine echte Pause stattdessen das Projekt unten neu starten." : {
+    "Macht den Eintrag wieder auf und läuft bei %@ weiter. Die %@ seit dem Stoppen zählen als Pause nicht mit." : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Macht den Eintrag wieder auf und läuft bei %1$@ weiter. Die %2$@ seit dem Stoppen zählen als Pause nicht mit."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reopens the entry. The %@ since you stopped are counted. For a real break, start the project below again instead."
+            "value" : "Reopens the entry and continues at %1$@. The %2$@ since you stopped count as a break and are not added."
           }
         }
       }
@@ -2586,6 +2590,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Switch between chart and entries"
+          }
+        }
+      }
+    },
+    "Pause" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Break"
           }
         }
       }

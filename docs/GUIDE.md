@@ -36,8 +36,9 @@ In Settings (gear icon in the menu or at the bottom left of the main window), TO
 - You can write a note in the menu while you work (“What are you working on?”). When you edit an entry, the note
   is a text block of its own where Return starts a new paragraph.
 - Entries shorter than 3 seconds are discarded, so accidental clicks don't count.
-- **Stopped by accident?** For an hour after stopping, the menu shows “Continue …”. It reopens the
-  entry, and the time since stopping counts too. For a real break, just start the project again.
+- **Taking a break:** just stop. For an hour after stopping, the menu shows “Continue …”. It reopens the
+  entry and picks up where you stopped (e.g. at 20 minutes). The time in between counts as a break and is
+  not added.
 
 <br clear="right">
 

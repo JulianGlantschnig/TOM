@@ -37,7 +37,7 @@ Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks Englis
 - **Automatic detection**: notes the frontmost app while a timer runs and adds up time per tool
 - **Suggested notes** from the detected apps, always editable
 - **Merge entries** into one row per day, **move** them to another project by drag and drop,
-  and **continue** a timer you stopped by accident
+  and **pause** a timer, then continue where you stopped without counting the break
 - **Archive** old projects and whole folders to hide them
 - **Idle detection** (optional, per project too): subtract time you were away
 - **Budget per project or folder:** e.g. 30 hours agreed with a client, with a heads-up at 25 and an alert at 30
@@ -53,12 +53,12 @@ Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks Englis
 
 <table>
   <tr>
-    <td width="33%"><img src="docs/screenshots/en/continue.png" alt="Menu with the option to continue a timer stopped by accident"></td>
+    <td width="33%"><img src="docs/screenshots/en/continue.png" alt="Menu with the option to continue a paused timer"></td>
     <td width="33%"><img src="docs/screenshots/en/project.png" alt="Project settings with color, symbol, folder, hourly rate and archive"></td>
     <td width="33%"><img src="docs/screenshots/en/settings.png" alt="General settings with menu bar display and Dock icon"></td>
   </tr>
   <tr>
-    <td>Continue a timer you stopped by accident</td>
+    <td>Continue after a break</td>
     <td>Color, symbol, folder and hourly rate per project</td>
     <td>Choose what the menu bar shows, hide the Dock icon</td>
   </tr>

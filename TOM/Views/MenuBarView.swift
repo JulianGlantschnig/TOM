@@ -238,7 +238,7 @@ private struct IdleCard: View {
     }
 }
 
-/// Nach versehentlichem Stoppen einfach weiterlaufen lassen, statt später zusammenzuführen.
+/// Nach einer Pause beim bisherigen Stand weiterlaufen lassen, statt später zusammenzuführen.
 private struct ResumeButton: View {
     @Environment(TimerController.self) private var timer
     let entry: TimeEntry
@@ -266,7 +266,7 @@ private struct ResumeButton: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .help(String(localized: "Macht den Eintrag wieder auf. Die \(Fmt.hoursMinutes(pause)) seit dem Stoppen zählen mit. Für eine echte Pause stattdessen das Projekt unten neu starten."))
+        .help(String(localized: "Macht den Eintrag wieder auf und läuft bei \(Fmt.hoursMinutes(entry.duration())) weiter. Die \(Fmt.hoursMinutes(pause)) seit dem Stoppen zählen als Pause nicht mit."))
     }
 }
 

@@ -36,8 +36,9 @@ In den Einstellungen (Zahnrad im Menü oder unten links im Hauptfenster) lässt 
 - Im Menü kannst du während der Arbeit eine Notiz schreiben („Woran arbeitest du gerade?“). Beim Bearbeiten eines
   Eintrags ist die Notiz ein eigener Textblock, dort macht Enter einen neuen Absatz.
 - Einträge unter 3 Sekunden werden verworfen, damit versehentliche Klicks nicht zählen.
-- **Versehentlich gestoppt?** Eine Stunde lang zeigt das Menü danach „… fortsetzen“. Das macht den Eintrag
-  wieder auf, die Zeit seit dem Stoppen zählt mit. Für eine echte Pause einfach das Projekt neu starten.
+- **Pause machen:** Einfach stoppen. Eine Stunde lang zeigt das Menü danach „… fortsetzen“. Das macht den
+  Eintrag wieder auf und zählt dort weiter, wo du gestoppt hast (z. B. bei 20 Minuten). Die Zeit dazwischen
+  wird als Pause nicht mitgerechnet.
 
 <br clear="right">
 

@@ -159,7 +159,7 @@ struct EntriesView: View {
         try? context.save()
     }
 
-    /// Nur der zuletzt beendete Eintrag von heute lässt sich fortsetzen, die Zeit seit dem Stoppen zählt dann mit.
+    /// Nur der zuletzt beendete Eintrag von heute lässt sich fortsetzen, die Zeit seit dem Stoppen zählt als Pause nicht mit.
     private func canResume(_ entry: TimeEntry) -> Bool {
         guard let end = entry.end, Calendar.current.isDateInToday(end), timer.running == nil else { return false }
         return !allEntries.contains { ($0.end ?? .distantFuture) > end }
@@ -220,6 +220,7 @@ struct EntriesView: View {
                 .filter { !$0.isEmpty && seen.insert($0).inserted }
 
             first.end = includeBreaks ? lastEnd : first.start.addingTimeInterval(worked)
+            first.pause = 0
             first.note = notes.joined(separator: "\n")
             first.tools = TimerController.combine(group.flatMap(\.tools))
             group.dropFirst().forEach(context.delete)

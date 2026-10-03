@@ -110,6 +110,8 @@ final class TimeEntry {
     var project: Project?
     /// Verwendete Programme als JSON, siehe `tools`.
     var toolsJSON: String = ""
+    /// Sekunden zwischen Stoppen und Fortsetzen, zählen nicht zur Dauer.
+    var pause: TimeInterval = 0
 
     init(start: Date, end: Date? = nil, note: String = "", project: Project?) {
         self.start = start
@@ -121,7 +123,7 @@ final class TimeEntry {
     var isRunning: Bool { end == nil }
 
     func duration(now: Date = .now) -> TimeInterval {
-        max(0, (end ?? now).timeIntervalSince(start))
+        max(0, (end ?? now).timeIntervalSince(start) - pause)
     }
 }
 

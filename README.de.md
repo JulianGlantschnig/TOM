@@ -39,7 +39,7 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 - **Automatische Erkennung**: merkt sich während des Timers die App im Vordergrund und rechnet die Zeit pro Tool
 - **Notizvorschlag** aus den erkannten Apps, jederzeit selbst änderbar
 - **Einträge zusammenführen** zu einer Zeile pro Tag, per Drag & Drop in ein anderes Projekt **verschieben**
-  und einen versehentlich gestoppten Timer **fortsetzen**
+  einen Timer **pausieren** und dort fortsetzen, wo du gestoppt hast, ohne die Pause mitzuzählen
 - **Archiv** für alte Projekte und ganze Ordner, damit sie nicht im Weg sind
 - **Leerlauf-Erkennung** (abschaltbar, auch pro Projekt): warst du weg, lässt sich die Zeit abziehen
 - **Budget pro Projekt oder Ordner:** z. B. 30 mit dem Kunden vereinbarte Stunden, mit Vorwarnung bei 25 und Alarm bei 30
@@ -55,12 +55,12 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 
 <table>
   <tr>
-    <td width="33%"><img src="docs/screenshots/fortsetzen.png" alt="Menü mit der Möglichkeit, einen versehentlich gestoppten Timer fortzusetzen"></td>
+    <td width="33%"><img src="docs/screenshots/fortsetzen.png" alt="Menü mit der Möglichkeit, einen pausierten Timer fortzusetzen"></td>
     <td width="33%"><img src="docs/screenshots/projekt.png" alt="Projekteinstellungen mit Farbe, Symbol, Ordner, Stundensatz und Archiv"></td>
     <td width="33%"><img src="docs/screenshots/einstellungen.png" alt="Allgemeine Einstellungen mit Menüleisten-Anzeige und Dock-Symbol"></td>
   </tr>
   <tr>
-    <td>Versehentlich gestoppten Timer fortsetzen</td>
+    <td>Nach einer Pause fortsetzen</td>
     <td>Farbe, Symbol, Ordner und Stundensatz pro Projekt</td>
     <td>Menüleisten-Anzeige wählen, Dock-Symbol ausblenden</td>
   </tr>

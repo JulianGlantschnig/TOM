@@ -29,6 +29,8 @@ struct EntryEditor: View {
 
     private var isRunning: Bool { entry?.isRunning ?? false }
     private var isValid: Bool { project != nil && (isRunning || end > start) }
+    /// Pausen aus „Fortsetzen“, höchstens so lang wie der Eintrag selbst.
+    private var pause: TimeInterval { min(entry?.pause ?? 0, max(0, end.timeIntervalSince(start))) }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -48,8 +50,11 @@ struct EntryEditor: View {
                     LabeledContent("Ende") { Text("Timer läuft noch") }
                 } else {
                     DatePicker("Ende", selection: $end)
+                    if pause > 0 {
+                        LabeledContent("Pause") { Text(Fmt.hoursMinutes(pause)) }
+                    }
                     LabeledContent("Dauer") {
-                        Text(end > start ? Fmt.hoursMinutes(end.timeIntervalSince(start)) : String(localized: "Ende liegt vor dem Beginn"))
+                        Text(end > start ? Fmt.hoursMinutes(end.timeIntervalSince(start) - pause) : String(localized: "Ende liegt vor dem Beginn"))
                             .foregroundStyle(end > start ? Color.primary : Color.red)
                     }
                 }
@@ -96,7 +101,10 @@ struct EntryEditor: View {
         }()
         target.project = project
         target.start = start
-        if !isRunning { target.end = end }
+        if !isRunning {
+            target.end = end
+            target.pause = pause
+        }
         target.note = note.trimmingCharacters(in: .whitespacesAndNewlines)
         target.tools = tools
         try? context.save()
