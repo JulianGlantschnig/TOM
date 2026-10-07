@@ -159,7 +159,7 @@ struct EntriesView: View {
         try? context.save()
     }
 
-    /// Nur der zuletzt beendete Eintrag von heute lässt sich fortsetzen, die Zeit seit dem Stoppen zählt als Pause nicht mit.
+    /// Nur der zuletzt beendete Eintrag von heute lässt sich fortsetzen, das Projekt startet dann ab jetzt neu.
     private func canResume(_ entry: TimeEntry) -> Bool {
         guard let end = entry.end, Calendar.current.isDateInToday(end), timer.running == nil else { return false }
         return !allEntries.contains { ($0.end ?? .distantFuture) > end }

@@ -39,7 +39,7 @@ Voraussetzung: macOS 15 Sequoia oder neuer, Apple Silicon oder Intel.
 - **Automatische Erkennung**: merkt sich während des Timers die App im Vordergrund und rechnet die Zeit pro Tool
 - **Notizvorschlag** aus den erkannten Apps, jederzeit selbst änderbar
 - **Einträge zusammenführen** zu einer Zeile pro Tag, per Drag & Drop in ein anderes Projekt **verschieben**
-  einen Timer **pausieren** und dort fortsetzen, wo du gestoppt hast, ohne die Pause mitzuzählen
+  einen Timer **pausieren** und mit einem Klick fortsetzen, ohne die Pause mitzuzählen
 - **Archiv** für alte Projekte und ganze Ordner, damit sie nicht im Weg sind
 - **Leerlauf-Erkennung** (abschaltbar, auch pro Projekt): warst du weg, lässt sich die Zeit abziehen
 - **Budget pro Projekt oder Ordner:** z. B. 30 mit dem Kunden vereinbarte Stunden, mit Vorwarnung bei 25 und Alarm bei 30

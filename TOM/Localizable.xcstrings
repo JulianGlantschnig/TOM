@@ -1424,18 +1424,12 @@
         }
       }
     },
-    "Macht den Eintrag wieder auf und läuft bei %@ weiter. Die %@ seit dem Stoppen zählen als Pause nicht mit." : {
+    "Startet das Projekt ab jetzt neu. Die Pause seit %@ zählt nicht mit." : {
       "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Macht den Eintrag wieder auf und läuft bei %1$@ weiter. Die %2$@ seit dem Stoppen zählen als Pause nicht mit."
-          }
-        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reopens the entry and continues at %1$@. The %2$@ since you stopped count as a break and are not added."
+            "value" : "Starts the project again from now. The break since %@ is not counted."
           }
         }
       }

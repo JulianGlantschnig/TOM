@@ -72,19 +72,11 @@ final class TimerController {
         save()
     }
 
-    /// Pausierten Eintrag wieder aufmachen. Er läuft bei seiner bisherigen Dauer weiter,
-    /// die Zeit seit dem Stoppen zählt als Pause nicht mit.
+    /// Nach einer Pause weitermachen: startet das Projekt ab jetzt als neuen Eintrag.
+    /// Die Pause bleibt als Lücke sichtbar und zählt nicht mit.
     func resume(_ entry: TimeEntry) {
-        guard let end = entry.end else { return }
-        let resumeDate = Date.now
-        if let current = running { finish(current, at: resumeDate) }
-        entry.pause += max(0, resumeDate.timeIntervalSince(end))
-        entry.end = nil
-        save()
-        running = entry
-        now = resumeDate
-        idleSince = nil
-        activity.reset()
+        guard !entry.isRunning, let project = entry.project else { return }
+        start(project)
     }
 
     func toggle() {

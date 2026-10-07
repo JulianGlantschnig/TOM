@@ -238,14 +238,13 @@ private struct IdleCard: View {
     }
 }
 
-/// Nach einer Pause beim bisherigen Stand weiterlaufen lassen, statt später zusammenzuführen.
+/// Nach einer Pause dasselbe Projekt mit einem Klick ab jetzt neu starten.
 private struct ResumeButton: View {
     @Environment(TimerController.self) private var timer
     let entry: TimeEntry
 
     var body: some View {
         let color = entry.project?.color ?? .secondary
-        let pause = timer.now.timeIntervalSince(entry.end ?? timer.now)
         Button {
             timer.resume(entry)
         } label: {
@@ -266,7 +265,7 @@ private struct ResumeButton: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .help(String(localized: "Macht den Eintrag wieder auf und läuft bei \(Fmt.hoursMinutes(entry.duration())) weiter. Die \(Fmt.hoursMinutes(pause)) seit dem Stoppen zählen als Pause nicht mit."))
+        .help(String(localized: "Startet das Projekt ab jetzt neu. Die Pause seit \(Fmt.time(entry.end ?? entry.start)) zählt nicht mit."))
     }
 }
 

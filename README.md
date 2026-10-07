@@ -37,7 +37,7 @@ Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks Englis
 - **Automatic detection**: notes the frontmost app while a timer runs and adds up time per tool
 - **Suggested notes** from the detected apps, always editable
 - **Merge entries** into one row per day, **move** them to another project by drag and drop,
-  and **pause** a timer, then continue where you stopped without counting the break
+  and **pause** a timer, then continue with one click without counting the break
 - **Archive** old projects and whole folders to hide them
 - **Idle detection** (optional, per project too): subtract time you were away
 - **Budget per project or folder:** e.g. 30 hours agreed with a client, with a heads-up at 25 and an alert at 30
