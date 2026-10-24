@@ -1,5 +1,6 @@
 import SwiftData
 import SwiftUI
+import UniformTypeIdentifiers
 
 enum SidebarItem: Hashable {
     case today, week, all, stats
@@ -64,6 +65,7 @@ struct ContentView: View {
                                 projectRow(project)
                             }
                             .onMove { reorder(children, from: $0, to: $1) }
+                            .onInsert(of: [.plainText]) { insert($1, into: folder, at: $0, among: children) }
                         } label: {
                             folderRow(folder)
                         }
@@ -72,6 +74,7 @@ struct ContentView: View {
                         projectRow(project)
                     }
                     .onMove { reorder(looseProjects, from: $0, to: $1) }
+                    .onInsert(of: [.plainText]) { insert($1, into: nil, at: $0, among: looseProjects) }
                 }
                 if !archivedProjects.isEmpty || !archivedFolders.isEmpty {
                     // Standardmäßig zugeklappt, damit alte Projekte nicht im Weg sind.
@@ -187,7 +190,27 @@ struct ContentView: View {
                 .monospacedDigit()
                 .foregroundStyle(.secondary)
         }
+        .overlay {
+            if dropTarget == folder.persistentModelID {
+                RoundedRectangle(cornerRadius: 5)
+                    .strokeBorder(folder.color, lineWidth: 1.5)
+                    .padding(-3)
+            }
+        }
         .tag(SidebarItem.folder(folder))
+        // Projekte aus der Liste auf den Ordner ziehen, um sie hineinzulegen.
+        .dropDestination(for: String.self) { items, _ in
+            let dragged = ProjectDrag.projects(from: items, in: context)
+            guard !dragged.isEmpty, !folder.isArchived else { return false }
+            for project in dragged { move(project, to: folder) }
+            return true
+        } isTargeted: { targeted in
+            if targeted {
+                dropTarget = folder.persistentModelID
+            } else if dropTarget == folder.persistentModelID {
+                dropTarget = nil
+            }
+        }
         .contextMenu {
             Button("Neues Projekt in diesem Ordner …") { newProjectFolder = .some(folder) }
             Button("Ordner bearbeiten …") { editingFolder = folder }
@@ -218,6 +241,7 @@ struct ContentView: View {
             }
         }
         .tag(SidebarItem.project(project))
+        .itemProvider { NSItemProvider(object: ProjectDrag.payload(for: project) as NSString) }
         // Einträge aus der Tabelle hierher ziehen, um sie in dieses Projekt zu verschieben.
         .dropDestination(for: String.self) { items, _ in
             let moved = EntryDrag.entries(from: items, in: context)
@@ -264,6 +288,23 @@ struct ContentView: View {
         try? context.save()
     }
 
+    /// Ein Projekt aus einem anderen Ordner (oder von ohne Ordner) an diese Stelle ziehen.
+    private func insert(_ providers: [NSItemProvider], into folder: Folder?, at index: Int, among list: [Project]) {
+        for provider in providers {
+            _ = provider.loadObject(ofClass: NSString.self) { item, _ in
+                guard let payload = item as? String else { return }
+                Task { @MainActor in
+                    guard let project = ProjectDrag.projects(from: [payload], in: context).first,
+                          !project.isArchived else { return }
+                    var ordered = list.filter { $0.persistentModelID != project.persistentModelID }
+                    ordered.insert(project, at: min(index, ordered.count))
+                    for (position, item) in ordered.enumerated() { item.sortIndex = position }
+                    move(project, to: folder)
+                }
+            }
+        }
+    }
+
     private func setArchived(_ list: [Project], _ archived: Bool) {
         for project in list {
             if archived, timer.isRunning(project) { timer.stop() }
@@ -290,5 +331,24 @@ struct ContentView: View {
         for project in folder.projects { project.folder = nil }
         context.delete(folder)
         try? context.save()
+    }
+}
+
+enum ProjectDrag {
+    private static let prefix = "tom-project:"
+
+    static func payload(for project: Project) -> String {
+        let data = (try? JSONEncoder().encode(project.persistentModelID)) ?? Data()
+        return prefix + data.base64EncodedString()
+    }
+
+    static func projects(from items: [String], in context: ModelContext) -> [Project] {
+        items.compactMap { item in
+            guard item.hasPrefix(prefix),
+                  let data = Data(base64Encoded: String(item.dropFirst(prefix.count))),
+                  let id = try? JSONDecoder().decode(PersistentIdentifier.self, from: data)
+            else { return nil }
+            return context.model(for: id) as? Project
+        }
     }
 }

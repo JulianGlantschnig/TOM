@@ -131,7 +131,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld entries will be lost. To keep the times, archive the project instead."
+            "value" : "%lld entries will be lost. To keep the times, archive the task instead."
           }
         }
       }
@@ -147,7 +147,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Imported %1$lld entries, created %2$lld projects and %3$lld folders"
+            "value" : "Imported %1$lld entries, created %2$lld tasks and %3$lld folders"
           }
         }
       }
@@ -293,7 +293,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Active projects"
+            "value" : "Active tasks"
           }
         }
       }
@@ -656,7 +656,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hides the project from the menu and the list. Its times are kept."
+            "value" : "Hides the task from the menu and the list. Its times are kept."
           }
         }
       }
@@ -726,7 +726,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The import turns every Tim task into a project and is safe to repeat. All times stay on this Mac. Copy the data folder to make a backup."
+            "value" : "The import turns every Tim task into a TOM task and is safe to repeat. All times stay on this Mac. Copy the data folder to make a backup."
           }
         }
       }
@@ -773,7 +773,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The projects inside and their times are kept. They will appear without a folder."
+            "value" : "The tasks inside and their times are kept. They will appear without a folder."
           }
         }
       }
@@ -793,7 +793,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The merged row begins at the first start. One row remains per day and project, and the notes are combined."
+            "value" : "The merged row begins at the first start. One row remains per day and task, and the notes are combined."
           }
         }
       }
@@ -1215,7 +1215,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Move to project"
+            "value" : "Move to task"
           }
         }
       }
@@ -1318,7 +1318,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Click a project to start the timer. ⌃⌥T works from anywhere."
+            "value" : "Click a task to start the timer. ⌃⌥T works from anywhere."
           }
         }
       }
@@ -1328,7 +1328,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "When one of these apps comes to the front, TOM starts this project."
+            "value" : "When one of these apps comes to the front, TOM starts this task."
           }
         }
       }
@@ -1378,7 +1378,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Create a project in this folder and start the timer, or choose a longer period above."
+            "value" : "Create a task in this folder and start the timer, or choose a longer period above."
           }
         }
       }
@@ -1429,7 +1429,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Starts the project again from now. The break since %@ is not counted."
+            "value" : "Starts the task again from now. The break since %@ is not counted."
           }
         }
       }
@@ -1449,7 +1449,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hours agreed with the client for all projects in this folder combined."
+            "value" : "Hours agreed with the client for all tasks in this folder combined."
           }
         }
       }
@@ -1479,7 +1479,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ask for these projects"
+            "value" : "Ask for these tasks"
           }
         }
       }
@@ -1569,7 +1569,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New project"
+            "value" : "New task"
           }
         }
       }
@@ -1579,7 +1579,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New project …"
+            "value" : "New task …"
           }
         }
       }
@@ -1589,7 +1589,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New project in this folder …"
+            "value" : "New task in this folder …"
           }
         }
       }
@@ -1709,7 +1709,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No project"
+            "value" : "No task"
           }
         }
       }
@@ -1859,7 +1859,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Project"
+            "value" : "Task"
           }
         }
       }
@@ -1869,7 +1869,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Create project"
+            "value" : "Create task"
           }
         }
       }
@@ -1889,7 +1889,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit project"
+            "value" : "Edit task"
           }
         }
       }
@@ -1899,7 +1899,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit project …"
+            "value" : "Edit task …"
           }
         }
       }
@@ -1909,7 +1909,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete project and all entries"
+            "value" : "Delete task and all entries"
           }
         }
       }
@@ -1919,7 +1919,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose project"
+            "value" : "Choose task"
           }
         }
       }
@@ -1929,7 +1929,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Projects"
+            "value" : "Tasks"
           }
         }
       }
@@ -1939,7 +1939,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Project settings"
+            "value" : "Task settings"
           }
         }
       }
@@ -1971,7 +1971,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Turn off projects where you’re away from the Mac but the time still counts, like teaching or filming. Their timer keeps running even with the laptop closed."
+            "value" : "Turn off tasks where you’re away from the Mac but the time still counts, like teaching or filming. Their timer keeps running even with the laptop closed."
           }
         }
       }
@@ -2033,7 +2033,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start the timer for this project, or choose a longer period above."
+            "value" : "Start the timer for this task, or choose a longer period above."
           }
         }
       }
@@ -2153,7 +2153,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start the timer for this project"
+            "value" : "Start the timer for this task"
           }
         }
       }
@@ -2433,7 +2433,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Choose which apps belong to a project under “Starts with” in the project settings. If another project is already running, TOM always asks before switching."
+            "value" : "Choose which apps belong to a task under “Starts with” in the task settings. If another task is already running, TOM always asks before switching."
           }
         }
       }

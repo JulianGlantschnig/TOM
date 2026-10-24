@@ -75,7 +75,8 @@ Einstellungen → **Leerlauf**:
   Kunden in mehreren Projekten, gib das Budget stattdessen dem **Ordner** („Ordner bearbeiten“), dann zählen alle
   Projekte darin zusammen.
 - **Ordner** fassen Projekte zusammen, z. B. „Diplomarbeit“. Neben dem Ordner steht die Gesamtzeit aller
-  Projekte darin. Projekte lassen sich per Rechtsklick → „In Ordner verschieben“ umhängen.
+  Projekte darin. Projekte ziehst du in der Seitenleiste einfach auf einen Ordner (oder aus ihm heraus in die
+  Liste darunter), alternativ per Rechtsklick → „In Ordner verschieben“.
 - **Archivieren** (Rechtsklick oder Schalter in den Projekteinstellungen) blendet ein Projekt aus Menü und Liste
   aus, die Zeiten bleiben erhalten. Rechtsklick auf einen Ordner → „Ordner archivieren“ archiviert alle Projekte
   darin auf einmal. Archiviertes steht im zugeklappten Bereich „Archiv“ unten in der Seitenleiste.

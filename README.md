@@ -7,7 +7,7 @@
 A free, lightweight time tracker for the macOS menu bar, inspired by [Tim](https://tim.neat.software/).
 Built to track the hours spent on a master's thesis, and useful for any project work: design, film, writing, study.
 
-![Folder overview with key figures, tools, project shares and hours per day](docs/screenshots/en/overview.png)
+![Folder overview with key figures, tools, task shares and hours per day](docs/screenshots/en/overview.png)
 
 ## Install
 
@@ -30,36 +30,36 @@ Requires macOS 15 Sequoia or later, on Apple silicon or Intel. TOM speaks Englis
 
 <img src="docs/screenshots/en/menubar.png" alt="Running timer in the menu bar popover" width="320" align="right">
 
-- **Menu bar timer**: click a project to start, or press **⌃⌥T** from anywhere
-- **Projects and folders**: each project with a color and symbol, folders add up their projects
-- **Overview** per folder and project: key figures, a ring with percentage shares, hours per day
+- **Menu bar timer**: click a task to start, or press **⌃⌥T** from anywhere
+- **Tasks and folders**: each task with a color and symbol, folders add up their tasks
+- **Overview** per folder and task: key figures, a ring with percentage shares, hours per day
 - **Tools**: see which apps you used for each entry (Figma, DaVinci Resolve, InDesign …), with their real icons
 - **Automatic detection**: notes the frontmost app while a timer runs and adds up time per tool
 - **Suggested notes** from the detected apps, always editable
-- **Merge entries** into one row per day, **move** them to another project by drag and drop,
+- **Merge entries** into one row per day, **move** them to another task by drag and drop,
   and **pause** a timer, then continue with one click without counting the break
-- **Archive** old projects and whole folders to hide them
-- **Idle detection** (optional, per project too): subtract time you were away
-- **Budget per project or folder:** e.g. 30 hours agreed with a client, with a heads-up at 25 and an alert at 30
+- **Archive** old tasks and whole folders to hide them
+- **Idle detection** (optional, per task too): subtract time you were away
+- **Budget per task or folder:** e.g. 30 hours agreed with a client, with a heads-up at 25 and an alert at 30
 - **CSV export** for Excel and Numbers, optionally rounded, with hourly rate and amount
 - **Import from Tim** with all tasks, groups and times
 - All data stays **on your Mac**, with an automatic backup before every update
 
 <br clear="right">
 
-![Table of all entries with project, times, duration, tools and note](docs/screenshots/en/entries.png)
+![Table of all entries with task, times, duration, tools and note](docs/screenshots/en/entries.png)
 
-![Statistics with hours per day, share per project, amount and tools](docs/screenshots/en/statistics.png)
+![Statistics with hours per day, share per task, amount and tools](docs/screenshots/en/statistics.png)
 
 <table>
   <tr>
     <td width="33%"><img src="docs/screenshots/en/continue.png" alt="Menu with the option to continue a paused timer"></td>
-    <td width="33%"><img src="docs/screenshots/en/project.png" alt="Project settings with color, symbol, folder, hourly rate and archive"></td>
+    <td width="33%"><img src="docs/screenshots/en/project.png" alt="Task settings with color, symbol, folder, hourly rate and archive"></td>
     <td width="33%"><img src="docs/screenshots/en/settings.png" alt="General settings with menu bar display and Dock icon"></td>
   </tr>
   <tr>
     <td>Continue after a break</td>
-    <td>Color, symbol, folder and hourly rate per project</td>
+    <td>Color, symbol, folder and hourly rate per task</td>
     <td>Choose what the menu bar shows, hide the Dock icon</td>
   </tr>
 </table>
